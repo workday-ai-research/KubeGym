@@ -1,0 +1,5590 @@
+{
+ "family": "azure_replay",
+ "n_dev_tuning_episodes": 12,
+ "dev_tuning_episodes": [
+  0,
+  1,
+  3,
+  4,
+  15,
+  16,
+  21,
+  22,
+  23,
+  31,
+  32,
+  33
+ ],
+ "dev_tuning_regimes": [
+  "sparse",
+  "sparse",
+  "intermittent",
+  "intermittent",
+  "steady",
+  "steady",
+  "bursty",
+  "bursty",
+  "bursty",
+  "diurnal",
+  "diurnal",
+  "diurnal"
+ ],
+ "methods": {
+  "static": {
+   "selected_params": {
+    "k": 1
+   },
+   "selected_objective_dev": 14.15835770002352,
+   "selected_mean_terms_dev": {
+    "cost_total": 14.15835770002352,
+    "cost_slo": 2.1416666666666653,
+    "cost_resource": 12.000000000000034,
+    "cost_churn": 0.0,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.012524366690146156,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3603.7573100070435,
+    "scale_events": 0.0,
+    "slo_attainment": 0.7256646958795344,
+    "latency_p95_s": 13.168265913750659
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "k": 1
+    },
+    "w_slo_x1.0": {
+     "k": 1
+    },
+    "w_slo_x4.0": {
+     "k": 1
+    }
+   },
+   "n_configs_in_full_grid": 20,
+   "n_configs_evaluated": 20,
+   "grid_exhaustive": true,
+   "subsample_seed": null,
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "learned_component": null,
+   "ledger": {
+    "method": "static",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 57600,
+    "by_phase": {
+     "sweep_dev": 57600
+    },
+    "n_trials": 20,
+    "wall_s": 26.98,
+    "headroom_env_steps": 1142400
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "k": 1
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 1,
+     "params": {
+      "k": 2
+     },
+     "objective": 26.116715400047017,
+     "mean_cost_total": 26.116715400047017,
+     "mean_replica_seconds": 7207.514620014087,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 2,
+     "params": {
+      "k": 3
+     },
+     "objective": 38.17923976673698,
+     "mean_cost_total": 38.17923976673698,
+     "mean_replica_seconds": 10811.271930021128,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 3,
+     "params": {
+      "k": 4
+     },
+     "objective": 50.24176413342738,
+     "mean_cost_total": 50.24176413342738,
+     "mean_replica_seconds": 14415.029240028174,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 4,
+     "params": {
+      "k": 5
+     },
+     "objective": 62.30428850011739,
+     "mean_cost_total": 62.30428850011739,
+     "mean_replica_seconds": 18018.786550035216,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 5,
+     "params": {
+      "k": 6
+     },
+     "objective": 74.3668128668073,
+     "mean_cost_total": 74.3668128668073,
+     "mean_replica_seconds": 21622.543860042257,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 6,
+     "params": {
+      "k": 7
+     },
+     "objective": 86.42933723349763,
+     "mean_cost_total": 86.42933723349763,
+     "mean_replica_seconds": 25226.301170049323,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 7,
+     "params": {
+      "k": 8
+     },
+     "objective": 98.49186160018814,
+     "mean_cost_total": 98.49186160018814,
+     "mean_replica_seconds": 28830.05848005635,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 8,
+     "params": {
+      "k": 9
+     },
+     "objective": 110.55438596687831,
+     "mean_cost_total": 110.55438596687831,
+     "mean_replica_seconds": 32433.815790063392,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 9,
+     "params": {
+      "k": 10
+     },
+     "objective": 122.61691033356813,
+     "mean_cost_total": 122.61691033356813,
+     "mean_replica_seconds": 36037.57310007043,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 10,
+     "params": {
+      "k": 11
+     },
+     "objective": 134.67943470025804,
+     "mean_cost_total": 134.67943470025804,
+     "mean_replica_seconds": 39641.3304100775,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 11,
+     "params": {
+      "k": 12
+     },
+     "objective": 146.74195906694794,
+     "mean_cost_total": 146.74195906694794,
+     "mean_replica_seconds": 43245.08772008451,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 12,
+     "params": {
+      "k": 13
+     },
+     "objective": 158.80448343363923,
+     "mean_cost_total": 158.80448343363923,
+     "mean_replica_seconds": 46848.845030091616,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 13,
+     "params": {
+      "k": 14
+     },
+     "objective": 170.86700780032865,
+     "mean_cost_total": 170.86700780032865,
+     "mean_replica_seconds": 50452.602340098645,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 14,
+     "params": {
+      "k": 15
+     },
+     "objective": 182.9295321670189,
+     "mean_cost_total": 182.9295321670189,
+     "mean_replica_seconds": 54056.35965010567,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 15,
+     "params": {
+      "k": 16
+     },
+     "objective": 194.99205653370947,
+     "mean_cost_total": 194.99205653370947,
+     "mean_replica_seconds": 57660.1169601127,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 16,
+     "params": {
+      "k": 17
+     },
+     "objective": 207.0545809003986,
+     "mean_cost_total": 207.0545809003986,
+     "mean_replica_seconds": 61263.87427011974,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 17,
+     "params": {
+      "k": 18
+     },
+     "objective": 219.11710526709,
+     "mean_cost_total": 219.11710526709,
+     "mean_replica_seconds": 64867.631580126785,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 18,
+     "params": {
+      "k": 19
+     },
+     "objective": 231.1796296337785,
+     "mean_cost_total": 231.1796296337785,
+     "mean_replica_seconds": 68471.38889013372,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 19,
+     "params": {
+      "k": 20
+     },
+     "objective": 243.24215400046958,
+     "mean_cost_total": 243.24215400046958,
+     "mean_replica_seconds": 72075.14620014087,
+     "mean_slo_attainment": 0.726083794311183
+    }
+   ]
+  },
+  "hpa": {
+   "selected_params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "selected_objective_dev": 14.15835770002352,
+   "selected_mean_terms_dev": {
+    "cost_total": 14.15835770002352,
+    "cost_slo": 2.1416666666666653,
+    "cost_resource": 12.000000000000034,
+    "cost_churn": 0.0,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.012524366690146156,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3603.7573100070435,
+    "scale_events": 0.0,
+    "slo_attainment": 0.7256646958795344,
+    "latency_p95_s": 13.168265913750659
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "metric": "running",
+     "target": 4.0,
+     "tolerance": 0.1,
+     "down_stabilization_s": 300.0
+    },
+    "w_slo_x1.0": {
+     "metric": "running",
+     "target": 4.0,
+     "tolerance": 0.1,
+     "down_stabilization_s": 300.0
+    },
+    "w_slo_x4.0": {
+     "metric": "running",
+     "target": 4.0,
+     "tolerance": 0.1,
+     "down_stabilization_s": 300.0
+    }
+   },
+   "n_configs_in_full_grid": 48,
+   "n_configs_evaluated": 48,
+   "grid_exhaustive": true,
+   "subsample_seed": null,
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "learned_component": null,
+   "ledger": {
+    "method": "hpa",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 138240,
+    "by_phase": {
+     "sweep_dev": 138240
+    },
+    "n_trials": 48,
+    "wall_s": 50.04,
+    "headroom_env_steps": 1061760
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "metric": "kv",
+      "target": 0.2,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 22.16202878578318,
+     "mean_cost_total": 22.16202878578318,
+     "mean_replica_seconds": 5722.358635734939,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 1,
+     "params": {
+      "metric": "kv",
+      "target": 0.2,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 24.831611739714933,
+     "mean_cost_total": 24.831611739714933,
+     "mean_replica_seconds": 6734.483521914469,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 2,
+     "params": {
+      "metric": "kv",
+      "target": 0.3,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 16.99823560650695,
+     "mean_cost_total": 16.99823560650695,
+     "mean_replica_seconds": 4321.970681952072,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 3,
+     "params": {
+      "metric": "kv",
+      "target": 0.3,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 18.935987405370987,
+     "mean_cost_total": 18.935987405370987,
+     "mean_replica_seconds": 4990.796221611282,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 4,
+     "params": {
+      "metric": "kv",
+      "target": 0.4,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 16.393723053151366,
+     "mean_cost_total": 16.393723053151366,
+     "mean_replica_seconds": 4181.8669159453975,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 5,
+     "params": {
+      "metric": "kv",
+      "target": 0.4,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 17.77591544332491,
+     "mean_cost_total": 17.77591544332491,
+     "mean_replica_seconds": 4659.024632997461,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 6,
+     "params": {
+      "metric": "kv",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.81615235103579,
+     "mean_cost_total": 14.81615235103579,
+     "mean_replica_seconds": 3759.8457053107254,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 7,
+     "params": {
+      "metric": "kv",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.43730751042969,
+     "mean_cost_total": 15.43730751042969,
+     "mean_replica_seconds": 3986.192253128896,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 8,
+     "params": {
+      "metric": "kv",
+      "target": 0.6,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.770301689804365,
+     "mean_cost_total": 14.770301689804365,
+     "mean_replica_seconds": 3748.5905069412984,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 9,
+     "params": {
+      "metric": "kv",
+      "target": 0.6,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.341472738149958,
+     "mean_cost_total": 15.341472738149958,
+     "mean_replica_seconds": 3959.941821444976,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 10,
+     "params": {
+      "metric": "kv",
+      "target": 0.7,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.501073899575792,
+     "mean_cost_total": 14.501073899575792,
+     "mean_replica_seconds": 3689.0721698727248,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 11,
+     "params": {
+      "metric": "kv",
+      "target": 0.7,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.979593599914454,
+     "mean_cost_total": 14.979593599914454,
+     "mean_replica_seconds": 3860.128079974325,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 12,
+     "params": {
+      "metric": "kv",
+      "target": 0.8,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.446417957945883,
+     "mean_cost_total": 14.446417957945883,
+     "mean_replica_seconds": 3670.175387383753,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 13,
+     "params": {
+      "metric": "kv",
+      "target": 0.8,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.843702181331793,
+     "mean_cost_total": 14.843702181331793,
+     "mean_replica_seconds": 3813.1106543995265,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 14,
+     "params": {
+      "metric": "kv",
+      "target": 0.9,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.446417957945883,
+     "mean_cost_total": 14.446417957945883,
+     "mean_replica_seconds": 3670.175387383753,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 15,
+     "params": {
+      "metric": "kv",
+      "target": 0.9,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.843702181331793,
+     "mean_cost_total": 14.843702181331793,
+     "mean_replica_seconds": 3813.1106543995265,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 16,
+     "params": {
+      "metric": "conc",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 24.85109525847339,
+     "mean_cost_total": 24.85109525847339,
+     "mean_replica_seconds": 6391.578577542001,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 17,
+     "params": {
+      "metric": "conc",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 29.617576217342165,
+     "mean_cost_total": 29.617576217342165,
+     "mean_replica_seconds": 8102.772865202627,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 18,
+     "params": {
+      "metric": "conc",
+      "target": 1.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 17.236122745299852,
+     "mean_cost_total": 17.236122745299852,
+     "mean_replica_seconds": 4369.5868235899425,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 19,
+     "params": {
+      "metric": "conc",
+      "target": 1.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 19.876135100849215,
+     "mean_cost_total": 19.876135100849215,
+     "mean_replica_seconds": 5246.59053025475,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 20,
+     "params": {
+      "metric": "conc",
+      "target": 1.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 16.552104052730247,
+     "mean_cost_total": 16.552104052730247,
+     "mean_replica_seconds": 4214.381215819061,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 21,
+     "params": {
+      "metric": "conc",
+      "target": 1.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 18.434415071453895,
+     "mean_cost_total": 18.434415071453895,
+     "mean_replica_seconds": 4839.074521436157,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 22,
+     "params": {
+      "metric": "conc",
+      "target": 2.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.945352479872923,
+     "mean_cost_total": 14.945352479872923,
+     "mean_replica_seconds": 3786.1057439618653,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 23,
+     "params": {
+      "metric": "conc",
+      "target": 2.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.911750445859631,
+     "mean_cost_total": 15.911750445859631,
+     "mean_replica_seconds": 4116.025133757878,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 24,
+     "params": {
+      "metric": "conc",
+      "target": 2.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.912052782378984,
+     "mean_cost_total": 14.912052782378984,
+     "mean_replica_seconds": 3778.6158347136825,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 25,
+     "params": {
+      "metric": "conc",
+      "target": 2.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.723527086493908,
+     "mean_cost_total": 15.723527086493908,
+     "mean_replica_seconds": 4064.558125948162,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 26,
+     "params": {
+      "metric": "conc",
+      "target": 3.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.533941791068656,
+     "mean_cost_total": 14.533941791068656,
+     "mean_replica_seconds": 3688.9325373205843,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 27,
+     "params": {
+      "metric": "conc",
+      "target": 3.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.133367942589762,
+     "mean_cost_total": 15.133367942589762,
+     "mean_replica_seconds": 3892.5103827769176,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 28,
+     "params": {
+      "metric": "conc",
+      "target": 3.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.504767180027732,
+     "mean_cost_total": 14.504767180027732,
+     "mean_replica_seconds": 3682.680154008307,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 29,
+     "params": {
+      "metric": "conc",
+      "target": 3.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.036812688837104,
+     "mean_cost_total": 15.036812688837104,
+     "mean_replica_seconds": 3866.0438066511197,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 30,
+     "params": {
+      "metric": "conc",
+      "target": 4.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.296208240768133,
+     "mean_cost_total": 14.296208240768133,
+     "mean_replica_seconds": 3637.612472230428,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 31,
+     "params": {
+      "metric": "conc",
+      "target": 4.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.54000720631913,
+     "mean_cost_total": 14.54000720631913,
+     "mean_replica_seconds": 3718.2521618957257,
+     "mean_slo_attainment": 0.7258552446600223
+    },
+    {
+     "trial": 32,
+     "params": {
+      "metric": "running",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 24.85109525847339,
+     "mean_cost_total": 24.85109525847339,
+     "mean_replica_seconds": 6391.578577542001,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 33,
+     "params": {
+      "metric": "running",
+      "target": 0.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 29.617576217342165,
+     "mean_cost_total": 29.617576217342165,
+     "mean_replica_seconds": 8102.772865202627,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 34,
+     "params": {
+      "metric": "running",
+      "target": 1.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 17.006884579264863,
+     "mean_cost_total": 17.006884579264863,
+     "mean_replica_seconds": 4323.315373779446,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 35,
+     "params": {
+      "metric": "running",
+      "target": 1.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 19.040471150408635,
+     "mean_cost_total": 19.040471150408635,
+     "mean_replica_seconds": 5018.391345122576,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 36,
+     "params": {
+      "metric": "running",
+      "target": 1.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 16.393723053151366,
+     "mean_cost_total": 16.393723053151366,
+     "mean_replica_seconds": 4181.8669159453975,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 37,
+     "params": {
+      "metric": "running",
+      "target": 1.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 17.87175021560463,
+     "mean_cost_total": 17.87175021560463,
+     "mean_replica_seconds": 4685.275064681377,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 38,
+     "params": {
+      "metric": "running",
+      "target": 2.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.799479424668293,
+     "mean_cost_total": 14.799479424668293,
+     "mean_replica_seconds": 3754.8438274004766,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 39,
+     "params": {
+      "metric": "running",
+      "target": 2.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.43730751042969,
+     "mean_cost_total": 15.43730751042969,
+     "mean_replica_seconds": 3986.192253128896,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 40,
+     "params": {
+      "metric": "running",
+      "target": 2.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.770301689804365,
+     "mean_cost_total": 14.770301689804365,
+     "mean_replica_seconds": 3748.5905069412984,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 41,
+     "params": {
+      "metric": "running",
+      "target": 2.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 15.341472738149958,
+     "mean_cost_total": 15.341472738149958,
+     "mean_replica_seconds": 3959.941821444976,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 42,
+     "params": {
+      "metric": "running",
+      "target": 3.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.446417957945883,
+     "mean_cost_total": 14.446417957945883,
+     "mean_replica_seconds": 3670.175387383753,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 43,
+     "params": {
+      "metric": "running",
+      "target": 3.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.843702181331793,
+     "mean_cost_total": 14.843702181331793,
+     "mean_replica_seconds": 3813.1106543995265,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 44,
+     "params": {
+      "metric": "running",
+      "target": 3.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.446417957945883,
+     "mean_cost_total": 14.446417957945883,
+     "mean_replica_seconds": 3670.175387383753,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 45,
+     "params": {
+      "metric": "running",
+      "target": 3.5,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.843702181331793,
+     "mean_cost_total": 14.843702181331793,
+     "mean_replica_seconds": 3813.1106543995265,
+     "mean_slo_attainment": 0.7258692686466489
+    },
+    {
+     "trial": 46,
+     "params": {
+      "metric": "running",
+      "target": 4.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 60.0
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 47,
+     "params": {
+      "metric": "running",
+      "target": 4.0,
+      "tolerance": 0.1,
+      "down_stabilization_s": 300.0
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    }
+   ]
+  },
+  "queue": {
+   "selected_params": {
+    "cooldown_s": 0.0,
+    "hyst": 0.0,
+    "target_concurrency": 8.0
+   },
+   "selected_objective_dev": 14.17118583141648,
+   "selected_mean_terms_dev": {
+    "cost_total": 14.17118583141648,
+    "cost_slo": 2.1291666666666655,
+    "cost_resource": 12.008661464726325,
+    "cost_churn": 0.016666666666666666,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.012524366690146156,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3606.355749424932,
+    "scale_events": 0.3333333333333333,
+    "slo_attainment": 0.7257282121396971,
+    "latency_p95_s": 13.168236571640124
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "cooldown_s": 0.0,
+     "hyst": 0.0,
+     "target_concurrency": 8.0
+    },
+    "w_slo_x1.0": {
+     "cooldown_s": 0.0,
+     "hyst": 0.0,
+     "target_concurrency": 8.0
+    },
+    "w_slo_x4.0": {
+     "cooldown_s": 0.0,
+     "hyst": 0.0,
+     "target_concurrency": 8.0
+    }
+   },
+   "n_configs_in_full_grid": 48,
+   "n_configs_evaluated": 48,
+   "grid_exhaustive": true,
+   "subsample_seed": null,
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "learned_component": null,
+   "ledger": {
+    "method": "queue",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 138240,
+    "by_phase": {
+     "sweep_dev": 138240
+    },
+    "n_trials": 48,
+    "wall_s": 49.21,
+    "headroom_env_steps": 1061760
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 0.5
+     },
+     "objective": 20.86288841919017,
+     "mean_cost_total": 20.86288841919017,
+     "mean_replica_seconds": 4755.11652575704,
+     "mean_slo_attainment": 0.7260697703245563
+    },
+    {
+     "trial": 1,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.0
+     },
+     "objective": 15.702502488298284,
+     "mean_cost_total": 15.702502488298284,
+     "mean_replica_seconds": 3803.250746489472,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 2,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.5
+     },
+     "objective": 15.32440505770692,
+     "mean_cost_total": 15.32440505770692,
+     "mean_replica_seconds": 3757.3215173120643,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 3,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.57081307445692,
+     "mean_cost_total": 14.57081307445692,
+     "mean_replica_seconds": 3654.9939223370625,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 4,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.3687974370508,
+     "mean_cost_total": 14.3687974370508,
+     "mean_replica_seconds": 3628.139231115227,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 5,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.24302116059833,
+     "mean_cost_total": 14.24302116059833,
+     "mean_replica_seconds": 3614.156348179486,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 6,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.192650019406964,
+     "mean_cost_total": 14.192650019406964,
+     "mean_replica_seconds": 3609.045005822077,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 7,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.0,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.17118583141648,
+     "mean_cost_total": 14.17118583141648,
+     "mean_replica_seconds": 3606.355749424932,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 8,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 0.5
+     },
+     "objective": 20.86288841919017,
+     "mean_cost_total": 20.86288841919017,
+     "mean_replica_seconds": 4755.11652575704,
+     "mean_slo_attainment": 0.7260697703245563
+    },
+    {
+     "trial": 9,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.0
+     },
+     "objective": 15.702502488298284,
+     "mean_cost_total": 15.702502488298284,
+     "mean_replica_seconds": 3803.250746489472,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 10,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.5
+     },
+     "objective": 15.32440505770692,
+     "mean_cost_total": 15.32440505770692,
+     "mean_replica_seconds": 3757.3215173120643,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 11,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.57081307445692,
+     "mean_cost_total": 14.57081307445692,
+     "mean_replica_seconds": 3654.9939223370625,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 12,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.3687974370508,
+     "mean_cost_total": 14.3687974370508,
+     "mean_replica_seconds": 3628.139231115227,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 13,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.24302116059833,
+     "mean_cost_total": 14.24302116059833,
+     "mean_replica_seconds": 3614.156348179486,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 14,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.192650019406964,
+     "mean_cost_total": 14.192650019406964,
+     "mean_replica_seconds": 3609.045005822077,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 15,
+     "params": {
+      "cooldown_s": 0.0,
+      "hyst": 0.15,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.17118583141648,
+     "mean_cost_total": 14.17118583141648,
+     "mean_replica_seconds": 3606.355749424932,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 16,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 0.5
+     },
+     "objective": 20.585855283550767,
+     "mean_cost_total": 20.585855283550767,
+     "mean_replica_seconds": 4900.756585065219,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 17,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.0
+     },
+     "objective": 15.780401374919634,
+     "mean_cost_total": 15.780401374919634,
+     "mean_replica_seconds": 3880.3704124758774,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 18,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.5
+     },
+     "objective": 15.365395455987487,
+     "mean_cost_total": 15.365395455987487,
+     "mean_replica_seconds": 3810.868636796234,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 19,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.612244217949423,
+     "mean_cost_total": 14.612244217949423,
+     "mean_replica_seconds": 3677.4232653848135,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 20,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.38609960909465,
+     "mean_cost_total": 14.38609960909465,
+     "mean_replica_seconds": 3640.8298827283816,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 21,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.243547041885373,
+     "mean_cost_total": 14.243547041885373,
+     "mean_replica_seconds": 3619.314112565599,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 22,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.205529957060472,
+     "mean_cost_total": 14.205529957060472,
+     "mean_replica_seconds": 3612.90898711813,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 23,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.0,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.179706836233045,
+     "mean_cost_total": 14.179706836233045,
+     "mean_replica_seconds": 3608.912050869901,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 24,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 0.5
+     },
+     "objective": 20.585855283550767,
+     "mean_cost_total": 20.585855283550767,
+     "mean_replica_seconds": 4900.756585065219,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 25,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.0
+     },
+     "objective": 15.780401374919634,
+     "mean_cost_total": 15.780401374919634,
+     "mean_replica_seconds": 3880.3704124758774,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 26,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.5
+     },
+     "objective": 15.365395455987487,
+     "mean_cost_total": 15.365395455987487,
+     "mean_replica_seconds": 3810.868636796234,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 27,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.612244217949423,
+     "mean_cost_total": 14.612244217949423,
+     "mean_replica_seconds": 3677.4232653848135,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 28,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.38609960909465,
+     "mean_cost_total": 14.38609960909465,
+     "mean_replica_seconds": 3640.8298827283816,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 29,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.243547041885373,
+     "mean_cost_total": 14.243547041885373,
+     "mean_replica_seconds": 3619.314112565599,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 30,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.205529957060472,
+     "mean_cost_total": 14.205529957060472,
+     "mean_replica_seconds": 3612.90898711813,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 31,
+     "params": {
+      "cooldown_s": 30.0,
+      "hyst": 0.15,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.179706836233045,
+     "mean_cost_total": 14.179706836233045,
+     "mean_replica_seconds": 3608.912050869901,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 32,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 0.5
+     },
+     "objective": 21.677732200888872,
+     "mean_cost_total": 21.677732200888872,
+     "mean_replica_seconds": 5368.319660266647,
+     "mean_slo_attainment": 0.725942737804231
+    },
+    {
+     "trial": 33,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.0
+     },
+     "objective": 16.64857039324046,
+     "mean_cost_total": 16.64857039324046,
+     "mean_replica_seconds": 4177.071117972125,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 34,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 1.5
+     },
+     "objective": 16.112081583633934,
+     "mean_cost_total": 16.112081583633934,
+     "mean_replica_seconds": 4063.6244750901665,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 35,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.741189907106987,
+     "mean_cost_total": 14.741189907106987,
+     "mean_replica_seconds": 3724.856972132084,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 36,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.475198964835016,
+     "mean_cost_total": 14.475198964835016,
+     "mean_replica_seconds": 3671.3096894504924,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 37,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.274123919033748,
+     "mean_cost_total": 14.274123919033748,
+     "mean_replica_seconds": 3630.9871757101123,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 38,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.231471579863902,
+     "mean_cost_total": 14.231471579863902,
+     "mean_replica_seconds": 3620.691473959158,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 39,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.0,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.196841854401887,
+     "mean_cost_total": 14.196841854401887,
+     "mean_replica_seconds": 3614.0525563205542,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 40,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 0.5
+     },
+     "objective": 21.677732200888872,
+     "mean_cost_total": 21.677732200888872,
+     "mean_replica_seconds": 5368.319660266647,
+     "mean_slo_attainment": 0.725942737804231
+    },
+    {
+     "trial": 41,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.0
+     },
+     "objective": 16.64857039324046,
+     "mean_cost_total": 16.64857039324046,
+     "mean_replica_seconds": 4177.071117972125,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 42,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 1.5
+     },
+     "objective": 16.112081583633934,
+     "mean_cost_total": 16.112081583633934,
+     "mean_replica_seconds": 4063.6244750901665,
+     "mean_slo_attainment": 0.7258580494573477
+    },
+    {
+     "trial": 43,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 2.0
+     },
+     "objective": 14.741189907106987,
+     "mean_cost_total": 14.741189907106987,
+     "mean_replica_seconds": 3724.856972132084,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 44,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 3.0
+     },
+     "objective": 14.475198964835016,
+     "mean_cost_total": 14.475198964835016,
+     "mean_replica_seconds": 3671.3096894504924,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 45,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 4.0
+     },
+     "objective": 14.274123919033748,
+     "mean_cost_total": 14.274123919033748,
+     "mean_replica_seconds": 3630.9871757101123,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 46,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 6.0
+     },
+     "objective": 14.231471579863902,
+     "mean_cost_total": 14.231471579863902,
+     "mean_replica_seconds": 3620.691473959158,
+     "mean_slo_attainment": 0.7257282121396971
+    },
+    {
+     "trial": 47,
+     "params": {
+      "cooldown_s": 60.0,
+      "hyst": 0.15,
+      "target_concurrency": 8.0
+     },
+     "objective": 14.196841854401887,
+     "mean_cost_total": 14.196841854401887,
+     "mean_replica_seconds": 3614.0525563205542,
+     "mean_slo_attainment": 0.7257282121396971
+    }
+   ]
+  },
+  "leading": {
+   "selected_params": {
+    "backlog_target": 4.0,
+    "kappa": 0.0,
+    "per_replica_rps": 8.0,
+    "window_s": 45.0
+   },
+   "selected_objective_dev": 15.335934823358533,
+   "selected_mean_terms_dev": {
+    "cost_total": 15.335934823358533,
+    "cost_slo": 2.104166666666665,
+    "cost_resource": 12.989445844485893,
+    "cost_churn": 0.22499999999999995,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.013155645539301306,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3900.7804470075484,
+    "scale_events": 4.166666666666667,
+    "slo_attainment": 0.7257450409236491,
+    "latency_p95_s": 13.167892911743088
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "backlog_target": 4.0,
+     "kappa": 0.0,
+     "per_replica_rps": 8.0,
+     "window_s": 45.0
+    },
+    "w_slo_x1.0": {
+     "backlog_target": 4.0,
+     "kappa": 0.0,
+     "per_replica_rps": 8.0,
+     "window_s": 45.0
+    },
+    "w_slo_x4.0": {
+     "backlog_target": 4.0,
+     "kappa": 0.0,
+     "per_replica_rps": 8.0,
+     "window_s": 45.0
+    }
+   },
+   "n_configs_in_full_grid": 144,
+   "n_configs_evaluated": 120,
+   "grid_exhaustive": false,
+   "subsample_seed": 1234,
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "learned_component": null,
+   "ledger": {
+    "method": "leading",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 345600,
+    "by_phase": {
+     "sweep_dev": 345600
+    },
+    "n_trials": 120,
+    "wall_s": 147.84,
+    "headroom_env_steps": 854400
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 35.98595049662807,
+     "mean_cost_total": 35.98595049662807,
+     "mean_replica_seconds": 9392.035148988414,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 1,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 31.549561922544612,
+     "mean_cost_total": 31.549561922544612,
+     "mean_replica_seconds": 8242.368576763378,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 2,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 30.06037997187185,
+     "mean_cost_total": 30.06037997187185,
+     "mean_replica_seconds": 7853.113991561552,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 3,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 26.766854888942277,
+     "mean_cost_total": 26.766854888942277,
+     "mean_replica_seconds": 6748.806466682673,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 4,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 22.944372609249953,
+     "mean_cost_total": 22.944372609249953,
+     "mean_replica_seconds": 5794.56178277497,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 5,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.65606170231165,
+     "mean_cost_total": 21.65606170231165,
+     "mean_replica_seconds": 5476.818510693483,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 6,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 19.537596620322727,
+     "mean_cost_total": 19.537596620322727,
+     "mean_replica_seconds": 4882.528986096805,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 7,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.089593457878816,
+     "mean_cost_total": 18.089593457878816,
+     "mean_replica_seconds": 4535.628037363632,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 8,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.68203584435123,
+     "mean_cost_total": 17.68203584435123,
+     "mean_replica_seconds": 4430.860753305357,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 9,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.979424827146563,
+     "mean_cost_total": 16.979424827146563,
+     "mean_replica_seconds": 4230.077448143956,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 10,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 16.276913153837302,
+     "mean_cost_total": 16.276913153837302,
+     "mean_replica_seconds": 4046.8239461511785,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 11,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 16.130874045946356,
+     "mean_cost_total": 16.130874045946356,
+     "mean_replica_seconds": 4005.512213783895,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 12,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 32.708812072314124,
+     "mean_cost_total": 32.708812072314124,
+     "mean_replica_seconds": 8457.64362169423,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 13,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 30.3715893257268,
+     "mean_cost_total": 30.3715893257268,
+     "mean_replica_seconds": 7876.476797718034,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 14,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 27.325092489839623,
+     "mean_cost_total": 27.325092489839623,
+     "mean_replica_seconds": 6778.777746951877,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 15,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 23.381475793292825,
+     "mean_cost_total": 23.381475793292825,
+     "mean_replica_seconds": 5836.942737987835,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 16,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.896544888514313,
+     "mean_cost_total": 21.896544888514313,
+     "mean_replica_seconds": 5508.96346655428,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 17,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 19.747367903778542,
+     "mean_cost_total": 19.747367903778542,
+     "mean_replica_seconds": 4897.960371133548,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 18,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.185215659064003,
+     "mean_cost_total": 18.185215659064003,
+     "mean_replica_seconds": 4549.314697719188,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 19,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.755547789823627,
+     "mean_cost_total": 17.755547789823627,
+     "mean_replica_seconds": 4435.414336947076,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 20,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 17.04627924877951,
+     "mean_cost_total": 17.04627924877951,
+     "mean_replica_seconds": 4232.633774633839,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 21,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 16.30627778020178,
+     "mean_cost_total": 16.30627778020178,
+     "mean_replica_seconds": 4050.6333340605215,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 22,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 16.139249216687986,
+     "mean_cost_total": 16.139249216687986,
+     "mean_replica_seconds": 4003.0247650063834,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 23,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 37.85261054534752,
+     "mean_cost_total": 37.85261054534752,
+     "mean_replica_seconds": 9359.533163604245,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 24,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 33.838902081441155,
+     "mean_cost_total": 33.838902081441155,
+     "mean_replica_seconds": 8515.420624432338,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 25,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 28.330410049118356,
+     "mean_cost_total": 28.330410049118356,
+     "mean_replica_seconds": 6807.873014735494,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 26,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 24.405830412928367,
+     "mean_cost_total": 24.405830412928367,
+     "mean_replica_seconds": 5956.749123878497,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 27,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 22.394649167889103,
+     "mean_cost_total": 22.394649167889103,
+     "mean_replica_seconds": 5593.394750366716,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 28,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 20.281837783299622,
+     "mean_cost_total": 20.281837783299622,
+     "mean_replica_seconds": 4930.801334989872,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 29,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.581703841416303,
+     "mean_cost_total": 18.581703841416303,
+     "mean_replica_seconds": 4600.761152424877,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 30,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 17.29979346428711,
+     "mean_cost_total": 17.29979346428711,
+     "mean_replica_seconds": 4248.688039286121,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 31,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 16.56753158108366,
+     "mean_cost_total": 16.56753158108366,
+     "mean_replica_seconds": 4091.509474325085,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 32,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 16.250588904281756,
+     "mean_cost_total": 16.250588904281756,
+     "mean_replica_seconds": 4028.9266712845133,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 33,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 39.55162252838576,
+     "mean_cost_total": 39.55162252838576,
+     "mean_replica_seconds": 9399.236758515717,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 34,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 35.6871058877959,
+     "mean_cost_total": 35.6871058877959,
+     "mean_replica_seconds": 8779.881766338762,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 35,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 32.54364427979706,
+     "mean_cost_total": 32.54364427979706,
+     "mean_replica_seconds": 8196.843283939104,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 36,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 29.990620133672028,
+     "mean_cost_total": 29.990620133672028,
+     "mean_replica_seconds": 6964.686040101599,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 37,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 26.081874372467116,
+     "mean_cost_total": 26.081874372467116,
+     "mean_replica_seconds": 6258.31231174013,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 38,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 21.438746796678952,
+     "mean_cost_total": 21.438746796678952,
+     "mean_replica_seconds": 5069.12403900367,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 39,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 18.174357428536613,
+     "mean_cost_total": 18.174357428536613,
+     "mean_replica_seconds": 4503.55722856097,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 40,
+     "params": {
+      "backlog_target": 1.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 17.61684854824502,
+     "mean_cost_total": 17.61684854824502,
+     "mean_replica_seconds": 4281.304564473493,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 41,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 35.916453479266615,
+     "mean_cost_total": 35.916453479266615,
+     "mean_replica_seconds": 9381.186043779973,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 42,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 31.47421253346866,
+     "mean_cost_total": 31.47421253346866,
+     "mean_replica_seconds": 8229.763760040592,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 43,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 26.5615415889132,
+     "mean_cost_total": 26.5615415889132,
+     "mean_replica_seconds": 6719.71247667395,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 44,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 22.544704707525344,
+     "mean_cost_total": 22.544704707525344,
+     "mean_replica_seconds": 5739.661412257589,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 45,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.16882798045749,
+     "mean_cost_total": 21.16882798045749,
+     "mean_replica_seconds": 5408.148394137237,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 46,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 19.050213548309568,
+     "mean_cost_total": 19.050213548309568,
+     "mean_replica_seconds": 4816.314064492858,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 47,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.432679325669657,
+     "mean_cost_total": 16.432679325669657,
+     "mean_replica_seconds": 4153.553797700885,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 48,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 15.625567369202395,
+     "mean_cost_total": 15.625567369202395,
+     "mean_replica_seconds": 3960.1702107607075,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 49,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.433671006135484,
+     "mean_cost_total": 15.433671006135484,
+     "mean_replica_seconds": 3912.601301840634,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 50,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 36.63613173947072,
+     "mean_cost_total": 36.63613173947072,
+     "mean_replica_seconds": 9413.339521841204,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 51,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 32.63346268323817,
+     "mean_cost_total": 32.63346268323817,
+     "mean_replica_seconds": 8445.03880497144,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 52,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 30.221653222720196,
+     "mean_cost_total": 30.221653222720196,
+     "mean_replica_seconds": 7853.9959668160545,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 53,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 27.13696364442583,
+     "mean_cost_total": 27.13696364442583,
+     "mean_replica_seconds": 6749.83909332774,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 54,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 23.025149352360117,
+     "mean_cost_total": 23.025149352360117,
+     "mean_replica_seconds": 5785.044805708024,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 55,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.43031005910562,
+     "mean_cost_total": 21.43031005910562,
+     "mean_replica_seconds": 5444.093017731672,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 56,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 19.259984831765383,
+     "mean_cost_total": 19.259984831765383,
+     "mean_replica_seconds": 4831.745449529601,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 57,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 17.689499253717514,
+     "mean_cost_total": 17.689499253717514,
+     "mean_replica_seconds": 4480.599776115242,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 58,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.226140507317208,
+     "mean_cost_total": 17.226140507317208,
+     "mean_replica_seconds": 4364.09215219515,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 59,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.507869258374,
+     "mean_cost_total": 16.507869258374,
+     "mean_replica_seconds": 4156.110777512186,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 60,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.446212843543778,
+     "mean_cost_total": 15.446212843543778,
+     "mean_replica_seconds": 3911.3638530631215,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 61,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 37.80056631757649,
+     "mean_cost_total": 37.80056631757649,
+     "mean_replica_seconds": 9348.919895272937,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 62,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 33.75948416913573,
+     "mean_cost_total": 33.75948416913573,
+     "mean_replica_seconds": 8501.595250740711,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 63,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 30.957667585621717,
+     "mean_cost_total": 30.957667585621717,
+     "mean_replica_seconds": 7958.550275686509,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 64,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 28.150872945120728,
+     "mean_cost_total": 28.150872945120728,
+     "mean_replica_seconds": 6779.0118835362055,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 65,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 24.062003971995654,
+     "mean_cost_total": 24.062003971995654,
+     "mean_replica_seconds": 5906.101191598683,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 66,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.094320769403144,
+     "mean_cost_total": 18.094320769403144,
+     "mean_replica_seconds": 4534.54623082093,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 67,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.451517210980658,
+     "mean_cost_total": 17.451517210980658,
+     "mean_replica_seconds": 4406.705163294185,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 68,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 15.95373677892323,
+     "mean_cost_total": 15.95373677892323,
+     "mean_replica_seconds": 4008.621033676956,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 69,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.59927140780423,
+     "mean_cost_total": 15.59927140780423,
+     "mean_replica_seconds": 3942.281422341257,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 70,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 39.53433885818565,
+     "mean_cost_total": 39.53433885818565,
+     "mean_replica_seconds": 9386.55165745568,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 71,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 35.630578197298234,
+     "mean_cost_total": 35.630578197298234,
+     "mean_replica_seconds": 8765.423459189464,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 72,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 32.43406986945054,
+     "mean_cost_total": 32.43406986945054,
+     "mean_replica_seconds": 8178.970960835149,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 73,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 29.829024492674723,
+     "mean_cost_total": 29.829024492674723,
+     "mean_replica_seconds": 6938.707347802408,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 74,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 25.77266214569073,
+     "mean_cost_total": 25.77266214569073,
+     "mean_replica_seconds": 6213.048643707215,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 75,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 22.7989410256156,
+     "mean_cost_total": 22.7989410256156,
+     "mean_replica_seconds": 5639.682307684666,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 76,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 21.035898133459003,
+     "mean_cost_total": 21.035898133459003,
+     "mean_replica_seconds": 5013.269440037687,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 77,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.98942479245313,
+     "mean_cost_total": 18.98942479245313,
+     "mean_replica_seconds": 4729.327437735927,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 78,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.682807689856787,
+     "mean_cost_total": 17.682807689856787,
+     "mean_replica_seconds": 4436.092306957023,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 79,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 17.120788158634046,
+     "mean_cost_total": 17.120788158634046,
+     "mean_replica_seconds": 4211.2364475902,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 80,
+     "params": {
+      "backlog_target": 2.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 16.128960046333688,
+     "mean_cost_total": 16.128960046333688,
+     "mean_replica_seconds": 4028.688013900093,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 81,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 35.916453479266615,
+     "mean_cost_total": 35.916453479266615,
+     "mean_replica_seconds": 9381.186043779973,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 82,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 31.47421253346866,
+     "mean_cost_total": 31.47421253346866,
+     "mean_replica_seconds": 8229.763760040592,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 83,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 22.492073356779798,
+     "mean_cost_total": 22.492073356779798,
+     "mean_replica_seconds": 5733.872007033926,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 84,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.075258464347208,
+     "mean_cost_total": 21.075258464347208,
+     "mean_replica_seconds": 5397.577539304152,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 85,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 18.956644032199282,
+     "mean_cost_total": 18.956644032199282,
+     "mean_replica_seconds": 4805.743209659772,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 86,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.05905904573453,
+     "mean_cost_total": 17.05905904573453,
+     "mean_replica_seconds": 4348.967713720346,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 87,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.33910980955937,
+     "mean_cost_total": 16.33910980955937,
+     "mean_replica_seconds": 4142.9829428677995,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 88,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 15.527831186425445,
+     "mean_cost_total": 15.527831186425445,
+     "mean_replica_seconds": 3948.3493559276226,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 89,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 0.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.335934823358533,
+     "mean_cost_total": 15.335934823358533,
+     "mean_replica_seconds": 3900.7804470075484,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 90,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 36.63613173947072,
+     "mean_cost_total": 36.63613173947072,
+     "mean_replica_seconds": 9413.339521841204,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 91,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 32.63346268323817,
+     "mean_cost_total": 32.63346268323817,
+     "mean_replica_seconds": 8445.03880497144,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 92,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 30.221653222720196,
+     "mean_cost_total": 30.221653222720196,
+     "mean_replica_seconds": 7853.9959668160545,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 93,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 27.13696364442583,
+     "mean_cost_total": 27.13696364442583,
+     "mean_replica_seconds": 6749.83909332774,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 94,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 22.97251800161457,
+     "mean_cost_total": 22.97251800161457,
+     "mean_replica_seconds": 5779.255400484358,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 95,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.336740542995333,
+     "mean_cost_total": 21.336740542995333,
+     "mean_replica_seconds": 5433.522162898588,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 96,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 19.166415315655097,
+     "mean_cost_total": 19.166415315655097,
+     "mean_replica_seconds": 4821.174594696516,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 97,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.132570991206922,
+     "mean_cost_total": 17.132570991206922,
+     "mean_replica_seconds": 4353.5212973620655,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 98,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.414299742263715,
+     "mean_cost_total": 16.414299742263715,
+     "mean_replica_seconds": 4145.539922679101,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 99,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 15.590578928985956,
+     "mean_cost_total": 15.590578928985956,
+     "mean_replica_seconds": 3957.1736786957754,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 100,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 5.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.348476660766826,
+     "mean_cost_total": 15.348476660766826,
+     "mean_replica_seconds": 3899.5429982300357,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 101,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 15.0
+     },
+     "objective": 37.80056631757649,
+     "mean_cost_total": 37.80056631757649,
+     "mean_replica_seconds": 9348.919895272937,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 102,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 33.75948416913573,
+     "mean_cost_total": 33.75948416913573,
+     "mean_replica_seconds": 8501.595250740711,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 103,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 28.15920627845406,
+     "mean_cost_total": 28.15920627845406,
+     "mean_replica_seconds": 6779.0118835362055,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 104,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 30.0
+     },
+     "objective": 24.009372621250105,
+     "mean_cost_total": 24.009372621250105,
+     "mean_replica_seconds": 5900.311786375019,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 105,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 21.855769322204946,
+     "mean_cost_total": 21.855769322204946,
+     "mean_replica_seconds": 5519.230796661471,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 106,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.000751253292858,
+     "mean_cost_total": 18.000751253292858,
+     "mean_replica_seconds": 4523.975375987845,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 107,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.357947694870376,
+     "mean_cost_total": 17.357947694870376,
+     "mean_replica_seconds": 4396.134308461099,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 108,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 16.680313957771308,
+     "mean_cost_total": 16.680313957771308,
+     "mean_replica_seconds": 4165.34418733138,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 109,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 15.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 15.860167262812942,
+     "mean_cost_total": 15.860167262812942,
+     "mean_replica_seconds": 3998.0501788438705,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 110,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 30.0
+     },
+     "objective": 35.630578197298234,
+     "mean_cost_total": 35.630578197298234,
+     "mean_replica_seconds": 8765.423459189464,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 111,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 1.0,
+      "window_s": 45.0
+     },
+     "objective": 32.43406986945054,
+     "mean_cost_total": 32.43406986945054,
+     "mean_replica_seconds": 8178.970960835149,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 112,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 15.0
+     },
+     "objective": 29.830319529699548,
+     "mean_cost_total": 29.830319529699548,
+     "mean_replica_seconds": 6936.5958589098545,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 113,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 2.0,
+      "window_s": 45.0
+     },
+     "objective": 22.722387057855826,
+     "mean_cost_total": 22.722387057855826,
+     "mean_replica_seconds": 5631.716117356734,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 114,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 15.0
+     },
+     "objective": 20.95164269552925,
+     "mean_cost_total": 20.95164269552925,
+     "mean_replica_seconds": 5002.9928086587615,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 115,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 30.0
+     },
+     "objective": 18.895855276342843,
+     "mean_cost_total": 18.895855276342843,
+     "mean_replica_seconds": 4718.756582902842,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 116,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 4.0,
+      "window_s": 45.0
+     },
+     "objective": 17.5892381737465,
+     "mean_cost_total": 17.5892381737465,
+     "mean_replica_seconds": 4425.521452123938,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 117,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 15.0
+     },
+     "objective": 17.027218642523756,
+     "mean_cost_total": 17.027218642523756,
+     "mean_replica_seconds": 4200.6655927571155,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 118,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 30.0
+     },
+     "objective": 16.0353905302234,
+     "mean_cost_total": 16.0353905302234,
+     "mean_replica_seconds": 4018.117159067008,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 119,
+     "params": {
+      "backlog_target": 4.0,
+      "kappa": 30.0,
+      "per_replica_rps": 8.0,
+      "window_s": 45.0
+     },
+     "objective": 15.637408337590351,
+     "mean_cost_total": 15.637408337590351,
+     "mean_replica_seconds": 3948.7225012770937,
+     "mean_slo_attainment": 0.7257450409236491
+    }
+   ]
+  },
+  "forecast": {
+   "selected_params": {
+    "H_s": 0.0,
+    "alpha": 0.2,
+    "backlog_target": 4.0,
+    "beta": 0.1,
+    "forecaster": "ewma",
+    "per_replica_rps": 8.0,
+    "safety": 1.0
+   },
+   "selected_objective_dev": 15.381176621449015,
+   "selected_mean_terms_dev": {
+    "cost_total": 15.381176621449015,
+    "cost_slo": 2.104166666666665,
+    "cost_resource": 13.118020975909708,
+    "cost_churn": 0.14166666666666672,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.013155645539301306,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3939.352986434693,
+    "scale_events": 2.5,
+    "slo_attainment": 0.7257450409236491,
+    "latency_p95_s": 13.167878333374524
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "H_s": 0.0,
+     "alpha": 0.2,
+     "backlog_target": 4.0,
+     "beta": 0.1,
+     "forecaster": "ewma",
+     "per_replica_rps": 8.0,
+     "safety": 1.0
+    },
+    "w_slo_x1.0": {
+     "H_s": 0.0,
+     "alpha": 0.2,
+     "backlog_target": 4.0,
+     "beta": 0.1,
+     "forecaster": "ewma",
+     "per_replica_rps": 8.0,
+     "safety": 1.0
+    },
+    "w_slo_x4.0": {
+     "H_s": 0.0,
+     "alpha": 0.2,
+     "backlog_target": 4.0,
+     "beta": 0.1,
+     "forecaster": "ewma",
+     "per_replica_rps": 8.0,
+     "safety": 1.0
+    }
+   },
+   "n_configs_in_full_grid": 1728,
+   "n_configs_evaluated": 120,
+   "grid_exhaustive": false,
+   "subsample_seed": 1234,
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "learned_component": {
+    "ar_coef": [
+     1.7294399767124553,
+     -0.7481499017295736,
+     -0.34915235222925234,
+     0.35453552734387705,
+     0.023676987635795673
+    ],
+    "r2": 0.9816565208919922,
+    "n_obs": 2832,
+    "n_lags": 4,
+    "ridge_lambda": 1.0,
+    "note": "fit on dev tuning episodes only; layout is [c_1..c_L, intercept]"
+   },
+   "ledger": {
+    "method": "forecast",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 348480,
+    "by_phase": {
+     "ridge_fit_dev": 2880,
+     "sweep_dev": 345600
+    },
+    "n_trials": 120,
+    "wall_s": 148.04,
+    "headroom_env_steps": 851520
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.19246196003728,
+     "mean_cost_total": 16.19246196003728,
+     "mean_replica_seconds": 4152.738588011173,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 1,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 21.08672047532642,
+     "mean_cost_total": 21.08672047532642,
+     "mean_replica_seconds": 5501.016142597912,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 2,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 28.904939298168397,
+     "mean_cost_total": 28.904939298168397,
+     "mean_replica_seconds": 7313.981789450513,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 3,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 20.319061359439043,
+     "mean_cost_total": 20.319061359439043,
+     "mean_replica_seconds": 5129.4684078317,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 4,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.79088628064052,
+     "mean_cost_total": 16.79088628064052,
+     "mean_replica_seconds": 4231.015884192143,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 5,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 20.45355353321875,
+     "mean_cost_total": 20.45355353321875,
+     "mean_replica_seconds": 5339.816059965612,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 6,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.20109232066087,
+     "mean_cost_total": 18.20109232066087,
+     "mean_replica_seconds": 4652.827696198248,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 7,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 23.336329521888498,
+     "mean_cost_total": 23.336329521888498,
+     "mean_replica_seconds": 5798.398856566536,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 8,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.79088628064052,
+     "mean_cost_total": 16.79088628064052,
+     "mean_replica_seconds": 4231.015884192143,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 9,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.381176621449015,
+     "mean_cost_total": 15.381176621449015,
+     "mean_replica_seconds": 3939.352986434693,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 10,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.665481201193046,
+     "mean_cost_total": 15.665481201193046,
+     "mean_replica_seconds": 4025.8943603579023,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 11,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 29.9839971451111,
+     "mean_cost_total": 29.9839971451111,
+     "mean_replica_seconds": 8077.6991435333175,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 12,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 18.932899683627298,
+     "mean_cost_total": 18.932899683627298,
+     "mean_replica_seconds": 4913.619905088177,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 13,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.78653465954415,
+     "mean_cost_total": 15.78653465954415,
+     "mean_replica_seconds": 4049.710397863233,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 14,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 35.00602840025124,
+     "mean_cost_total": 35.00602840025124,
+     "mean_replica_seconds": 9645.55852007537,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 15,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.511161011303043,
+     "mean_cost_total": 15.511161011303043,
+     "mean_replica_seconds": 3958.348303390901,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 16,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 33.17822822654949,
+     "mean_cost_total": 33.17822822654949,
+     "mean_replica_seconds": 8488.468467964838,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 17,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 20.22549184332876,
+     "mean_cost_total": 20.22549184332876,
+     "mean_replica_seconds": 5118.8975529986155,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 18,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 30.67393833975298,
+     "mean_cost_total": 30.67393833975298,
+     "mean_replica_seconds": 8184.681501925887,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 19,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.86778612356766,
+     "mean_cost_total": 15.86778612356766,
+     "mean_replica_seconds": 4044.0858370702863,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 20,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 31.072530171982958,
+     "mean_cost_total": 31.072530171982958,
+     "mean_replica_seconds": 8216.759051594878,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 21,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 23.336329521888498,
+     "mean_cost_total": 23.336329521888498,
+     "mean_replica_seconds": 5798.398856566536,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 22,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 36.078939476793664,
+     "mean_cost_total": 36.078939476793664,
+     "mean_replica_seconds": 9802.43184303809,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 23,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 26.905882255365864,
+     "mean_cost_total": 26.905882255365864,
+     "mean_replica_seconds": 7074.264676609743,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 24,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.365032660595876,
+     "mean_cost_total": 17.365032660595876,
+     "mean_replica_seconds": 4440.759798178751,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 25,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.704906128907714,
+     "mean_cost_total": 15.704906128907714,
+     "mean_replica_seconds": 3973.971838672303,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 26,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.451092438386024,
+     "mean_cost_total": 16.451092438386024,
+     "mean_replica_seconds": 4212.827731515795,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 27,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.416785775702834,
+     "mean_cost_total": 17.416785775702834,
+     "mean_replica_seconds": 4456.285732710839,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 28,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.4876118823977,
+     "mean_cost_total": 16.4876118823977,
+     "mean_replica_seconds": 4211.283564719299,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 29,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 33.64760223895585,
+     "mean_cost_total": 33.64760223895585,
+     "mean_replica_seconds": 8879.28067168675,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 30,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.543554851642156,
+     "mean_cost_total": 17.543554851642156,
+     "mean_replica_seconds": 4459.316455492634,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 31,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.267184097467894,
+     "mean_cost_total": 18.267184097467894,
+     "mean_replica_seconds": 4650.155229240356,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 32,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.00157169344556,
+     "mean_cost_total": 25.00157169344556,
+     "mean_replica_seconds": 6381.721508033656,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 33,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.579132728181293,
+     "mean_cost_total": 25.579132728181293,
+     "mean_replica_seconds": 6368.739818454375,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 34,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.623047402010684,
+     "mean_cost_total": 16.623047402010684,
+     "mean_replica_seconds": 4229.414220603193,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 35,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.89574235923648,
+     "mean_cost_total": 17.89574235923648,
+     "mean_replica_seconds": 4519.972707770931,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 36,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 33.17822822654949,
+     "mean_cost_total": 33.17822822654949,
+     "mean_replica_seconds": 8488.468467964838,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 37,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 22.208729627986305,
+     "mean_cost_total": 22.208729627986305,
+     "mean_replica_seconds": 5683.8688883958785,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 38,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 37.50080850599648,
+     "mean_cost_total": 37.50080850599648,
+     "mean_replica_seconds": 9992.742551798934,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 39,
+     "params": {
+      "H_s": 0.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 34.50332736585266,
+     "mean_cost_total": 34.50332736585266,
+     "mean_replica_seconds": 8990.998209755784,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 40,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 18.727427984764137,
+     "mean_cost_total": 18.727427984764137,
+     "mean_replica_seconds": 4860.72839542923,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 41,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 24.117700248370124,
+     "mean_cost_total": 24.117700248370124,
+     "mean_replica_seconds": 6265.310074511024,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 42,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 16.94944359526174,
+     "mean_cost_total": 16.94944359526174,
+     "mean_replica_seconds": 4373.58307857851,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 43,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 17.683200966854386,
+     "mean_cost_total": 17.683200966854386,
+     "mean_replica_seconds": 4583.710290056304,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 44,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 25.996795695807123,
+     "mean_cost_total": 25.996795695807123,
+     "mean_replica_seconds": 6939.038708742122,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 45,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 30.742536557505247,
+     "mean_cost_total": 30.742536557505247,
+     "mean_replica_seconds": 8155.2609672515655,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 46,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 24.113533581703454,
+     "mean_cost_total": 24.113533581703454,
+     "mean_replica_seconds": 6264.060074511024,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 47,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 38.76435127162392,
+     "mean_cost_total": 38.76435127162392,
+     "mean_replica_seconds": 10065.555381487166,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 48,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 36.078939476793664,
+     "mean_cost_total": 36.078939476793664,
+     "mean_replica_seconds": 9802.43184303809,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 49,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.067581692626312,
+     "mean_cost_total": 18.067581692626312,
+     "mean_replica_seconds": 4635.274507787881,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 50,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 33.9835943307083,
+     "mean_cost_total": 33.9835943307083,
+     "mean_replica_seconds": 8930.078299212479,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 51,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.697316764530235,
+     "mean_cost_total": 16.697316764530235,
+     "mean_replica_seconds": 4220.445029359058,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 52,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 22.71591328087288,
+     "mean_cost_total": 22.71591328087288,
+     "mean_replica_seconds": 5778.523984261853,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 53,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 33.17822822654949,
+     "mean_cost_total": 33.17822822654949,
+     "mean_replica_seconds": 8488.468467964838,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 54,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 35.35818516369071,
+     "mean_cost_total": 35.35818516369071,
+     "mean_replica_seconds": 9082.455549107204,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 55,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.517848040612076,
+     "mean_cost_total": 18.517848040612076,
+     "mean_replica_seconds": 4675.35441218361,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 56,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.543554851642156,
+     "mean_cost_total": 17.543554851642156,
+     "mean_replica_seconds": 4459.316455492634,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 57,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.267184097467894,
+     "mean_cost_total": 18.267184097467894,
+     "mean_replica_seconds": 4650.155229240356,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 58,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.52753328186076,
+     "mean_cost_total": 25.52753328186076,
+     "mean_replica_seconds": 6434.509984558215,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 59,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 16.20926617502018,
+     "mean_cost_total": 16.20926617502018,
+     "mean_replica_seconds": 4084.0298525060407,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 60,
+     "params": {
+      "H_s": 15.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 33.17822822654949,
+     "mean_cost_total": 33.17822822654949,
+     "mean_replica_seconds": 8488.468467964838,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 61,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 29.270978207318432,
+     "mean_cost_total": 29.270978207318432,
+     "mean_replica_seconds": 7916.293462195517,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 62,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 35.00602840025124,
+     "mean_cost_total": 35.00602840025124,
+     "mean_replica_seconds": 9645.55852007537,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 63,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.866303996114326,
+     "mean_cost_total": 25.866303996114326,
+     "mean_replica_seconds": 6312.391198834285,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 64,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.78643493910377,
+     "mean_cost_total": 17.78643493910377,
+     "mean_replica_seconds": 4459.680481731119,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 65,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 32.71109350537092,
+     "mean_cost_total": 32.71109350537092,
+     "mean_replica_seconds": 8863.328051611268,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 66,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 21.106441513418602,
+     "mean_cost_total": 21.106441513418602,
+     "mean_replica_seconds": 5511.932454025568,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 67,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.224627248825982,
+     "mean_cost_total": 17.224627248825982,
+     "mean_replica_seconds": 4439.888174647783,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 68,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.799123389765583,
+     "mean_cost_total": 15.799123389765583,
+     "mean_replica_seconds": 4053.4870169296632,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 69,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.866303996114326,
+     "mean_cost_total": 25.866303996114326,
+     "mean_replica_seconds": 6312.391198834285,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 70,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 20.39063642770329,
+     "mean_cost_total": 20.39063642770329,
+     "mean_replica_seconds": 5108.4409283109735,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 71,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 35.00602840025124,
+     "mean_cost_total": 35.00602840025124,
+     "mean_replica_seconds": 9645.55852007537,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 72,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 33.73302850868898,
+     "mean_cost_total": 33.73302850868898,
+     "mean_replica_seconds": 8972.408552606685,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 73,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.349453333449087,
+     "mean_cost_total": 18.349453333449087,
+     "mean_replica_seconds": 4688.586000034714,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 74,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 34.03693426586872,
+     "mean_cost_total": 34.03693426586872,
+     "mean_replica_seconds": 8481.080279760608,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 75,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.067581692626312,
+     "mean_cost_total": 18.067581692626312,
+     "mean_replica_seconds": 4635.274507787881,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 76,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 19.220433318460756,
+     "mean_cost_total": 19.220433318460756,
+     "mean_replica_seconds": 4931.129995538214,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 77,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 16.11941882909986,
+     "mean_cost_total": 16.11941882909986,
+     "mean_replica_seconds": 4087.0756487299464,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 78,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 20.484205943813574,
+     "mean_cost_total": 20.484205943813574,
+     "mean_replica_seconds": 5119.011783144059,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 79,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.86778612356766,
+     "mean_cost_total": 15.86778612356766,
+     "mean_replica_seconds": 4044.0858370702863,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 80,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 23.979812361915567,
+     "mean_cost_total": 23.979812361915567,
+     "mean_replica_seconds": 6225.19370857466,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 81,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 26.905882255365864,
+     "mean_cost_total": 26.905882255365864,
+     "mean_replica_seconds": 7074.264676609743,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 82,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 25.866303996114326,
+     "mean_cost_total": 25.866303996114326,
+     "mean_replica_seconds": 6312.391198834285,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 83,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.84866618259911,
+     "mean_cost_total": 16.84866618259911,
+     "mean_replica_seconds": 4264.599854779722,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 84,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 36.18189369703122,
+     "mean_cost_total": 36.18189369703122,
+     "mean_replica_seconds": 9097.068109109356,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 85,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 33.64760223895585,
+     "mean_cost_total": 33.64760223895585,
+     "mean_replica_seconds": 8879.28067168675,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 86,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.754935456863207,
+     "mean_cost_total": 15.754935456863207,
+     "mean_replica_seconds": 3956.480637058949,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 87,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 24.75326954682747,
+     "mean_cost_total": 24.75326954682747,
+     "mean_replica_seconds": 6322.230864048231,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 88,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 27.44615246593545,
+     "mean_cost_total": 27.44615246593545,
+     "mean_replica_seconds": 7121.345739780617,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 89,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 23.69326928364096,
+     "mean_cost_total": 23.69326928364096,
+     "mean_replica_seconds": 5922.980785092274,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 90,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.78643493910377,
+     "mean_cost_total": 17.78643493910377,
+     "mean_replica_seconds": 4459.680481731119,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 91,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.173614581357608,
+     "mean_cost_total": 18.173614581357608,
+     "mean_replica_seconds": 4639.584374407271,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 92,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 1.0,
+      "safety": 1.2
+     },
+     "objective": 33.64760223895585,
+     "mean_cost_total": 33.64760223895585,
+     "mean_replica_seconds": 8879.28067168675,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 93,
+     "params": {
+      "H_s": 30.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 26.512432665831174,
+     "mean_cost_total": 26.512432665831174,
+     "mean_replica_seconds": 6661.229799749345,
+     "mean_slo_attainment": 0.7258720734439743
+    },
+    {
+     "trial": 94,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 32.87920387036205,
+     "mean_cost_total": 32.87920387036205,
+     "mean_replica_seconds": 8153.7611611086095,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 95,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.235420777287974,
+     "mean_cost_total": 18.235420777287974,
+     "mean_replica_seconds": 4565.626233186379,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 96,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.775719561708064,
+     "mean_cost_total": 15.775719561708064,
+     "mean_replica_seconds": 4038.965868512407,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 97,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 37.16593846940652,
+     "mean_cost_total": 37.16593846940652,
+     "mean_replica_seconds": 9902.281540821949,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 98,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 1.0,
+      "safety": 1.0
+     },
+     "objective": 32.87920387036205,
+     "mean_cost_total": 32.87920387036205,
+     "mean_replica_seconds": 8153.7611611086095,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 99,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.452299957547563,
+     "mean_cost_total": 17.452299957547563,
+     "mean_replica_seconds": 4381.939987264256,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 100,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 8.0,
+      "safety": 1.2
+     },
+     "objective": 15.951332404249163,
+     "mean_cost_total": 15.951332404249163,
+     "mean_replica_seconds": 4014.149721274736,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 101,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 25.996795695807123,
+     "mean_cost_total": 25.996795695807123,
+     "mean_replica_seconds": 6939.038708742122,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 102,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 17.683200966854386,
+     "mean_cost_total": 17.683200966854386,
+     "mean_replica_seconds": 4583.710290056304,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 103,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 36.34479587515459,
+     "mean_cost_total": 36.34479587515459,
+     "mean_replica_seconds": 9910.93876254637,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 104,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.2,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 23.377019258157432,
+     "mean_cost_total": 23.377019258157432,
+     "mean_replica_seconds": 5983.105777447215,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 105,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 1.0,
+      "safety": 1.5
+     },
+     "objective": 37.297361025423356,
+     "mean_cost_total": 37.297361025423356,
+     "mean_replica_seconds": 9972.958307627001,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 106,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.4,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.734966681756832,
+     "mean_cost_total": 15.734966681756832,
+     "mean_replica_seconds": 3990.4900045270383,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 107,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 30.005024051516177,
+     "mean_cost_total": 30.005024051516177,
+     "mean_replica_seconds": 7655.2572154548425,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 108,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 16.020240196613994,
+     "mean_cost_total": 16.020240196613994,
+     "mean_replica_seconds": 4048.5720589841862,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 109,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.4,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.0
+     },
+     "objective": 17.358730441437277,
+     "mean_cost_total": 17.358730441437277,
+     "mean_replica_seconds": 4371.36913243117,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 110,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.0
+     },
+     "objective": 15.638783063422053,
+     "mean_cost_total": 15.638783063422053,
+     "mean_replica_seconds": 3964.1349190266046,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 111,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ewma",
+      "per_replica_rps": 8.0,
+      "safety": 1.5
+     },
+     "objective": 16.623047402010684,
+     "mean_cost_total": 16.623047402010684,
+     "mean_replica_seconds": 4229.414220603193,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 112,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 19.339518544569657,
+     "mean_cost_total": 19.339518544569657,
+     "mean_replica_seconds": 4901.855563370886,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 113,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.235420777287974,
+     "mean_cost_total": 18.235420777287974,
+     "mean_replica_seconds": 4565.626233186379,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 114,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.2
+     },
+     "objective": 18.235420777287974,
+     "mean_cost_total": 18.235420777287974,
+     "mean_replica_seconds": 4565.626233186379,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 115,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 2.0,
+      "beta": 0.3,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 19.373906568180335,
+     "mean_cost_total": 19.373906568180335,
+     "mean_replica_seconds": 4820.921970454089,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 116,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.2
+     },
+     "objective": 26.2728632705352,
+     "mean_cost_total": 26.2728632705352,
+     "mean_replica_seconds": 6670.608981160556,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 117,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.5
+     },
+     "objective": 28.902477924246128,
+     "mean_cost_total": 28.902477924246128,
+     "mean_replica_seconds": 7398.243377273833,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 118,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.1,
+      "forecaster": "ridge",
+      "per_replica_rps": 4.0,
+      "safety": 1.5
+     },
+     "objective": 19.280337052070053,
+     "mean_cost_total": 19.280337052070053,
+     "mean_replica_seconds": 4810.351115621005,
+     "mean_slo_attainment": 0.7257450409236491
+    },
+    {
+     "trial": 119,
+     "params": {
+      "H_s": 60.0,
+      "alpha": 0.7,
+      "backlog_target": 4.0,
+      "beta": 0.3,
+      "forecaster": "holt",
+      "per_replica_rps": 2.0,
+      "safety": 1.0
+     },
+     "objective": 25.276483708384646,
+     "mean_cost_total": 25.276483708384646,
+     "mean_replica_seconds": 6290.445112515387,
+     "mean_slo_attainment": 0.7258720734439743
+    }
+   ]
+  },
+  "oracle": {
+   "selected_params": {
+    "H_s": 30.0,
+    "mode": "rate",
+    "safety": 1.0
+   },
+   "selected_objective_dev": 14.142495138514029,
+   "selected_mean_terms_dev": {
+    "cost_total": 14.142495138514029,
+    "cost_slo": 2.087499999999999,
+    "cost_resource": 12.021637438490544,
+    "cost_churn": 0.016666666666666666,
+    "cost_slo_drain": 0.004166666666666667,
+    "cost_resource_drain": 0.012524366690146156,
+    "cost_slo_unfinished": 0.0,
+    "replica_seconds": 3610.248541554196,
+    "scale_events": 0.3333333333333333,
+    "slo_attainment": 0.7259399330069057,
+    "latency_p95_s": 13.16818465676228
+   },
+   "selected_by_w_slo_multiplier": {
+    "w_slo_x0.25": {
+     "H_s": 15.0,
+     "mode": "rate",
+     "safety": 0.5
+    },
+    "w_slo_x1.0": {
+     "H_s": 30.0,
+     "mode": "rate",
+     "safety": 1.0
+    },
+    "w_slo_x4.0": {
+     "H_s": 30.0,
+     "mode": "rate",
+     "safety": 1.0
+    }
+   },
+   "n_configs_in_full_grid": 24,
+   "n_configs_evaluated": 24,
+   "grid_exhaustive": true,
+   "subsample_seed": null,
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "learned_component": null,
+   "ledger": {
+    "method": "oracle",
+    "family": "azure_replay",
+    "cap_env_steps": 1200000,
+    "spent_env_steps": 69120,
+    "by_phase": {
+     "sweep_dev": 69120
+    },
+    "n_trials": 24,
+    "wall_s": 31.02,
+    "headroom_env_steps": 1130880
+   },
+   "trials": [
+    {
+     "trial": 0,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate",
+      "safety": 0.5
+     },
+     "objective": 14.144274903581561,
+     "mean_cost_total": 14.144274903581561,
+     "mean_replica_seconds": 3610.7824710744558,
+     "mean_slo_attainment": 0.7259399330069057
+    },
+    {
+     "trial": 1,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate",
+      "safety": 1.0
+     },
+     "objective": 14.594358922912564,
+     "mean_cost_total": 14.594358922912564,
+     "mean_replica_seconds": 3723.3076768737574,
+     "mean_slo_attainment": 0.7260669655272309
+    },
+    {
+     "trial": 2,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate",
+      "safety": 1.5
+     },
+     "objective": 15.510008677606374,
+     "mean_cost_total": 15.510008677606374,
+     "mean_replica_seconds": 3939.252603281899,
+     "mean_slo_attainment": 0.7260669655272309
+    },
+    {
+     "trial": 3,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate+residency",
+      "safety": 0.5
+     },
+     "objective": 35.71641123249724,
+     "mean_cost_total": 35.71641123249724,
+     "mean_replica_seconds": 9012.423369749167,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 4,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate+residency",
+      "safety": 1.0
+     },
+     "objective": 48.3442520800482,
+     "mean_cost_total": 48.3442520800482,
+     "mean_replica_seconds": 12295.775624014457,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 5,
+     "params": {
+      "H_s": 0.0,
+      "mode": "rate+residency",
+      "safety": 1.5
+     },
+     "objective": 59.542744842130105,
+     "mean_cost_total": 59.542744842130105,
+     "mean_replica_seconds": 15187.823452639024,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 6,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate",
+      "safety": 0.5
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 7,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate",
+      "safety": 1.0
+     },
+     "objective": 14.528043548925744,
+     "mean_cost_total": 14.528043548925744,
+     "mean_replica_seconds": 3715.9130646777116,
+     "mean_slo_attainment": 0.7260669655272309
+    },
+    {
+     "trial": 8,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate",
+      "safety": 1.5
+     },
+     "objective": 15.376988562536575,
+     "mean_cost_total": 15.376988562536575,
+     "mean_replica_seconds": 3916.8465687609587,
+     "mean_slo_attainment": 0.7260669655272309
+    },
+    {
+     "trial": 9,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate+residency",
+      "safety": 0.5
+     },
+     "objective": 36.7088120771274,
+     "mean_cost_total": 36.7088120771274,
+     "mean_replica_seconds": 9370.143623138216,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 10,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate+residency",
+      "safety": 1.0
+     },
+     "objective": 49.91611587572956,
+     "mean_cost_total": 49.91611587572956,
+     "mean_replica_seconds": 12867.334762718869,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 11,
+     "params": {
+      "H_s": 15.0,
+      "mode": "rate+residency",
+      "safety": 1.5
+     },
+     "objective": 61.96686603134675,
+     "mean_cost_total": 61.96686603134675,
+     "mean_replica_seconds": 15932.55980940401,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 12,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate",
+      "safety": 0.5
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 13,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate",
+      "safety": 1.0
+     },
+     "objective": 14.142495138514029,
+     "mean_cost_total": 14.142495138514029,
+     "mean_replica_seconds": 3610.248541554196,
+     "mean_slo_attainment": 0.7259399330069057
+    },
+    {
+     "trial": 14,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate",
+      "safety": 1.5
+     },
+     "objective": 14.529771361859524,
+     "mean_cost_total": 14.529771361859524,
+     "mean_replica_seconds": 3708.9314085578458,
+     "mean_slo_attainment": 0.7259399330069057
+    },
+    {
+     "trial": 15,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate+residency",
+      "safety": 0.5
+     },
+     "objective": 44.320369664013704,
+     "mean_cost_total": 44.320369664013704,
+     "mean_replica_seconds": 11686.11089920411,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 16,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate+residency",
+      "safety": 1.0
+     },
+     "objective": 62.00386879337859,
+     "mean_cost_total": 62.00386879337859,
+     "mean_replica_seconds": 16436.16063801358,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 17,
+     "params": {
+      "H_s": 30.0,
+      "mode": "rate+residency",
+      "safety": 1.5
+     },
+     "objective": 79.16727756932974,
+     "mean_cost_total": 79.16727756932974,
+     "mean_replica_seconds": 20957.683270798916,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 18,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate",
+      "safety": 0.5
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 19,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate",
+      "safety": 1.0
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 20,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate",
+      "safety": 1.5
+     },
+     "objective": 14.15835770002352,
+     "mean_cost_total": 14.15835770002352,
+     "mean_replica_seconds": 3603.7573100070435,
+     "mean_slo_attainment": 0.7256646958795344
+    },
+    {
+     "trial": 21,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate+residency",
+      "safety": 0.5
+     },
+     "objective": 56.75872166756571,
+     "mean_cost_total": 56.75872166756571,
+     "mean_replica_seconds": 15390.116500269707,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 22,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate+residency",
+      "safety": 1.0
+     },
+     "objective": 84.17743749338614,
+     "mean_cost_total": 84.17743749338614,
+     "mean_replica_seconds": 23110.731248015847,
+     "mean_slo_attainment": 0.726083794311183
+    },
+    {
+     "trial": 23,
+     "params": {
+      "H_s": 60.0,
+      "mode": "rate+residency",
+      "safety": 1.5
+     },
+     "objective": 96.26710043917194,
+     "mean_cost_total": 96.26710043917194,
+     "mean_replica_seconds": 27062.630131751575,
+     "mean_slo_attainment": 0.726083794311183
+    }
+   ]
+  }
+ },
+ "wall_s": 453.3,
+ "cap_env_steps_per_method_family": 1200000,
+ "max_configs_per_method": 120,
+ "subsample_seed": 1234
+}

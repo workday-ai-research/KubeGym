@@ -1,0 +1,3521 @@
+{
+ "schema": "kubegym-baselines-regression/1",
+ "generated_from": [
+  "results_summary.csv",
+  "tuning_budget.csv",
+  "port_parity.json"
+ ],
+ "calibration": {
+  "calibrated": false,
+  "uncalibrated_required_fields": "replica_cold_start_s;rs_max_concurrency;rs_service_time_distribution;slo",
+  "statement": "these are in-simulator numbers from an uncalibrated configuration; reproducing them verifies the pipeline, not any empirical performance claim"
+ },
+ "tolerance_policy": {
+  "exact": "integer protocol quantities; any deviation fails",
+  "deterministic": "analytic rollouts are pure functions; rtol = 1e-09",
+  "stochastic": "learned policies; rtol = max(3.0 x sd_across_seeds / |value|, 0.05)"
+ },
+ "port_parity": {
+  "source_controllers_sha256": {
+   "value": null,
+   "tolerance_class": "exact",
+   "rtol": 0.0,
+   "note": "8b0357b051537a5d49d2972de777b9fc64909ab20829a2546bd03c8fb98841ec"
+  },
+  "total_shadowed_steps": {
+   "value": 60640.0,
+   "tolerance_class": "exact",
+   "rtol": 0.0
+  },
+  "total_disagreements": {
+   "value": 0.0,
+   "tolerance_class": "exact",
+   "rtol": 0.0,
+   "note": "must stay 0: the ported controllers are decision-identical to the source implementation on every shadowed control step"
+  },
+  "per_controller": {
+   "llm_serving/hpa": {
+    "n_runs": 8,
+    "n_steps": 160,
+    "n_disagree": 0,
+    "kind": "port",
+    "tolerance_class": "exact"
+   },
+   "request_service/forecast": {
+    "n_runs": 48,
+    "n_steps": 11520,
+    "n_disagree": 0,
+    "kind": "port",
+    "tolerance_class": "exact"
+   },
+   "request_service/hpa": {
+    "n_runs": 72,
+    "n_steps": 17280,
+    "n_disagree": 0,
+    "kind": "port",
+    "tolerance_class": "exact"
+   },
+   "request_service/leading": {
+    "n_runs": 36,
+    "n_steps": 8640,
+    "n_disagree": 0,
+    "kind": "adaptation",
+    "tolerance_class": "exact"
+   },
+   "request_service/queue": {
+    "n_runs": 72,
+    "n_steps": 17280,
+    "n_disagree": 0,
+    "kind": "port",
+    "tolerance_class": "exact"
+   },
+   "request_service/static": {
+    "n_runs": 24,
+    "n_steps": 5760,
+    "n_disagree": 0,
+    "kind": "port",
+    "tolerance_class": "exact"
+   }
+  }
+ },
+ "oracle_property_checks": [
+  {
+   "family": "burst",
+   "P1a_demand_is_read": true,
+   "P1b_future_arrivals_are_read": true,
+   "P2_privilege_buys_anticipation": true,
+   "tolerance_class": "exact",
+   "note": "booleans must all stay True"
+  },
+  {
+   "family": "azure_replay",
+   "P1a_demand_is_read": true,
+   "P1b_future_arrivals_are_read": true,
+   "P2_privilege_buys_anticipation": true,
+   "tolerance_class": "exact",
+   "note": "booleans must all stay True"
+  },
+  {
+   "family": "variable",
+   "P1a_demand_is_read": true,
+   "P1b_future_arrivals_are_read": true,
+   "P2_privilege_buys_anticipation": true,
+   "tolerance_class": "exact",
+   "note": "booleans must all stay True"
+  }
+ ],
+ "budget": {
+  "azure_replay/static": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 57600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 20.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/hpa": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/queue": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/leading": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 345600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/forecast": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 348480.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/oracle": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 69120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/static": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 57600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 20.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/hpa": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/queue": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/leading": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 345600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/forecast": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 348480.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/oracle": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 69120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/static": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 48000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 20.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/hpa": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 115200.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/queue": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 115200.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/leading": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 288000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/forecast": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 290400.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/oracle": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 57600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/static": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 57600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 20.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/hpa": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/queue": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/leading": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 345600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/forecast": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 348480.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/oracle": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 69120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/static": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 57600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 20.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/hpa": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/queue": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 138240.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/leading": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 345600.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/forecast": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 348480.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/oracle": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 69120.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/dqn": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/dqn": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/dqn": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1129200.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/dqn": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/dqn": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "azure_replay/ppo": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "burst/ppo": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "constant/ppo": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1129200.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "diurnal/ppo": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  },
+  "variable/ppo": {
+   "cap_env_steps": {
+    "value": 1200000.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "spent_env_steps": {
+    "value": 1133040.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_configs_evaluated": {
+    "value": 3.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   }
+  }
+ },
+ "results": {
+  "azure_replay/dqn": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0001}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 112.78813765122192,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 1.7380834732022978
+   },
+   "cost_total_sd_episodes": {
+    "value": 316.23453375178775,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.7151043744677321,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0003000423811492
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.3630644122173633,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 4606.546558524468,
+    "tolerance_class": "stochastic",
+    "rtol": 0.3470109879419764,
+    "sd_across_seeds": 532.8407574247624
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3971.0892819925,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 0.0421052631578947,
+    "tolerance_class": "stochastic",
+    "rtol": 6.7082039324993685,
+    "sd_across_seeds": 0.09415023063157
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.1562246719108315,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 761.5371410052874,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 3.291228114331015
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 2618.554215170682,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "azure_replay/forecast": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 0.0, \"alpha\": 0.2, \"backlog_target\": 4.0, \"beta\": 0.1, \"forecaster\": \"ewma\", \"per_replica_rps\": 8.0, \"safety\": 1.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 64.18861927958295,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 159.89655266964846,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.8039598222214375,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.2397976997375528,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 5637.90157334856,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 6119.13213507423,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 20.05263157894737,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 51.32075812234701,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 8.460069314220187,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 16.350342799568534,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "azure_replay/hpa": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"down_stabilization_s\": 300.0, \"metric\": \"running\", \"target\": 4.0, \"tolerance\": 0.1}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 112.01084309189208,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 313.69990017156545,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.7149701914356561,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.3632572287092256,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 4368.25292756762,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2727.184668213109,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 763.0090229639079,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 2625.1172514284926,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "azure_replay/leading": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"backlog_target\": 4.0, \"kappa\": 0.0, \"per_replica_rps\": 8.0, \"window_s\": 45.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 64.1567639717004,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 159.55180747790237,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.8039501803262304,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.2397708317194294,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 5632.950244141687,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 6088.494198028776,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 20.035087719298247,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 51.35542122240156,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 8.477125215114718,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 16.34906236759897,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "azure_replay/oracle": {
+   "method_class": "analytic",
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"mode\": \"rate\", \"safety\": 1.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 49.965375463615715,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 119.32806400272206,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.8222675202696795,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.2282327819041707,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 5338.296849611023,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 5261.2024415080205,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 15.421052631578949,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 40.906085995222426,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 7.408523792805011,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 15.294085159621266,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "azure_replay/ppo": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0003}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 105.59363652601026,
+    "tolerance_class": "stochastic",
+    "rtol": 0.5623144986921077,
+    "sd_across_seeds": 19.792277596066697
+   },
+   "cost_total_sd_episodes": {
+    "value": 295.74822612751007,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.7315134090517018,
+    "tolerance_class": "stochastic",
+    "rtol": 0.11755579348090892,
+    "sd_across_seeds": 0.0286645464143325
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.3335210733863399,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 5876.512010434649,
+    "tolerance_class": "stochastic",
+    "rtol": 0.4835190248043315,
+    "sd_across_seeds": 947.1351188454344
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 8135.686218395997,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 4.129824561403509,
+    "tolerance_class": "stochastic",
+    "rtol": 4.444822577600552,
+    "sd_across_seeds": 6.118779150685205
+   },
+   "scale_events_sd_episodes": {
+    "value": 13.122863449022558,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 395.6688245813396,
+    "tolerance_class": "stochastic",
+    "rtol": 2.2309738654912286,
+    "sd_across_seeds": 294.2422690102007
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 1429.3763004370635,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "azure_replay/queue": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"cooldown_s\": 0.0, \"hyst\": 0.0, \"target_concurrency\": 8.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 76.39846418174069,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 201.06895092490925,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.7829210654442798,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.2623352531351005,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 5248.618201890619,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 5050.140708472461,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 20.535087719298247,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 55.50255990661087,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 9.31802476567057,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 17.21314858072087,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "azure_replay/static": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 114.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"k\": 1}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 112.01084309189208,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 313.69990017156545,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.7149701914356561,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.3632572287092256,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 4368.25292756762,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2727.184668213109,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 763.0090229639079,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 2625.1172514284926,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/dqn": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0001}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 83.978544721667,
+    "tolerance_class": "stochastic",
+    "rtol": 0.2861919136904489,
+    "sd_across_seeds": 8.011326807610942
+   },
+   "cost_total_sd_episodes": {
+    "value": 68.007281851704,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.919443732803646,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0105203694383731
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0462583333981187,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 7768.250916500096,
+    "tolerance_class": "stochastic",
+    "rtol": 0.21596182687460277,
+    "sd_across_seeds": 559.2152198492226
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 4706.850862685322,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 58.45000000000001,
+    "tolerance_class": "stochastic",
+    "rtol": 0.34990511525615303,
+    "sd_across_seeds": 6.81731799557405
+   },
+   "scale_events_sd_episodes": {
+    "value": 33.94113803430624,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 10.894765077146388,
+    "tolerance_class": "stochastic",
+    "rtol": 1.489905431752504,
+    "sd_across_seeds": 5.410723222035964
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 19.406057001535352,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "burst/forecast": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 60.0, \"alpha\": 0.2, \"ar_coef\": [1.684562452519736, -0.6870964386846894, -0.36413132147549915, 0.3404388971057876, 0.09890424900584273], \"backlog_target\": 2.0, \"beta\": 0.3, \"forecaster\": \"ridge\", \"per_replica_rps\": 4.0, \"safety\": 1.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 59.20752295308847,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 40.571226818984954,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9656066157317388,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0187517336674864,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 9343.819385926536,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 5369.182900689022,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 75.60416666666667,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 40.535111957640375,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 1.2158772847741877,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 3.412779811890406,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/hpa": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"down_stabilization_s\": 60.0, \"metric\": \"running\", \"target\": 2.5, \"tolerance\": 0.1}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 53.88535453146775,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 36.12092235896757,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9632742979067412,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0234159652999224,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8478.106359440317,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 4184.944631153159,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 29.0625,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 12.097839177553876,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 1.4200054447569144,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 3.7843630186430817,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/leading": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"backlog_target\": 2.0, \"kappa\": 5.0, \"per_replica_rps\": 4.0, \"window_s\": 45.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 60.56372577984226,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 43.9332814896939,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9628762580229188,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0192698073306992,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 9195.680233952671,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 5465.969341417804,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 56.083333333333336,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 24.934666403472946,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 1.3478196872181882,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 3.4959481568975193,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/oracle": {
+   "method_class": "analytic",
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"mode\": \"rate\", \"safety\": 0.5}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 45.97523431605138,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 24.58149201078725,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9766597490172776,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0056875138763652,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8792.257794815408,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 4463.5561607126865,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 44.6875,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 20.661564944540064,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4572517265890471,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0785068483702864,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/ppo": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0003}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 58.95102806451862,
+    "tolerance_class": "stochastic",
+    "rtol": 0.1779731575681573,
+    "sd_across_seeds": 3.497233535510478
+   },
+   "cost_total_sd_episodes": {
+    "value": 41.79013714209563,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.9658373288779012,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0028629730535684
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0195657105735465,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 9459.870919355575,
+    "tolerance_class": "stochastic",
+    "rtol": 0.14999293749164683,
+    "sd_across_seeds": 472.9712758286494
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 4241.409786320958,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 56.4875,
+    "tolerance_class": "stochastic",
+    "rtol": 2.4970394702111105,
+    "sd_across_seeds": 47.01717235785003
+   },
+   "scale_events_sd_episodes": {
+    "value": 19.12342470219248,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 1.4053261563518504,
+    "tolerance_class": "stochastic",
+    "rtol": 0.5941358475240698,
+    "sd_across_seeds": 0.2783182156506167
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 3.552198307404804,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "burst/queue": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"cooldown_s\": 0.0, \"hyst\": 0.0, \"target_concurrency\": 2.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 63.57223448430273,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 43.07152434778562,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9584697804340072,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0208784891366236,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 9073.545345290811,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 5131.99656389177,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 57.604166666666664,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 26.560040040450893,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 1.463368097333274,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 3.50084375326561,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "burst/static": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 48.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"k\": 4}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 146.62716796706687,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 289.31104577413095,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9242521589509872,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.1444812285210797,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 14979.712890120034,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 455.36317053686895,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 1.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 25.087762289964704,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 73.1594128364987,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/dqn": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"absolute\", \"learning_rate\": 0.0005}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 51.948159977461195,
+    "tolerance_class": "stochastic",
+    "rtol": 0.49002481295101324,
+    "sd_across_seeds": 8.485295792034911
+   },
+   "cost_total_sd_episodes": {
+    "value": 27.320396090958123,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.972413999038336,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.007879047477488
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0066162667585193,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 9439.547993238351,
+    "tolerance_class": "stochastic",
+    "rtol": 0.6956842529196335,
+    "sd_across_seeds": 2188.981631191683
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 4355.200695137317,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 20.299999999999997,
+    "tolerance_class": "stochastic",
+    "rtol": 0.7456100745468717,
+    "sd_across_seeds": 5.045294837767164
+   },
+   "scale_events_sd_episodes": {
+    "value": 5.073022329495067,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.6100905197489784,
+    "tolerance_class": "stochastic",
+    "rtol": 1.1401801966588063,
+    "sd_across_seeds": 0.2318710429290212
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.2733298748382038,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "constant/forecast": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 0.0, \"alpha\": 0.4, \"backlog_target\": 4.0, \"beta\": 0.1, \"forecaster\": \"holt\", \"per_replica_rps\": 4.0, \"safety\": 1.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 45.29489449374065,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 20.940667569000347,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9710048471461198,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.006935579028519,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 7529.968348122187,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3127.543467372758,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 13.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 10.424330514074594,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5356664031355154,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0865344022954641,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/hpa": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"down_stabilization_s\": 300.0, \"metric\": \"running\", \"target\": 3.5, \"tolerance\": 0.1}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 44.53744223947748,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 19.23935419090577,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9711417291768634,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0048769065785094,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 7676.232671843236,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2667.469841354973,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 7.2,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 2.898275349237887,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5307339605616305,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.05295918897076,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/leading": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"backlog_target\": 2.0, \"kappa\": 5.0, \"per_replica_rps\": 4.0, \"window_s\": 45.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 44.72336426319915,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 21.25025090722426,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9789605481155972,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0019636423080667,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8539.009278959744,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3936.366221435915,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 54.4,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 25.842256523419582,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4268584193626041,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0238805834760021,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/oracle": {
+   "method_class": "analytic",
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"mode\": \"rate\", \"safety\": 0.5}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 47.13994506510233,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 23.252268318094288,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9767838480628964,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0056221832670325,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8747.983519530699,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3480.393194421891,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 46.8,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 26.25007936495939,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4565702566767049,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0668270204470318,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/ppo": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0003}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 42.94630108233199,
+    "tolerance_class": "stochastic",
+    "rtol": 0.13113615863566525,
+    "sd_across_seeds": 1.8772709838492432
+   },
+   "cost_total_sd_episodes": {
+    "value": 18.576093357438683,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.9779448537760932,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0012190708965423
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0019757327149167,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 8545.890324699592,
+    "tolerance_class": "stochastic",
+    "rtol": 0.26781606444484995,
+    "sd_across_seeds": 762.9089046461219
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3329.502764229845,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 9.32,
+    "tolerance_class": "stochastic",
+    "rtol": 1.748508994509631,
+    "sd_across_seeds": 5.432034609609921
+   },
+   "scale_events_sd_episodes": {
+    "value": 3.6952822775954632,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4424539763817782,
+    "tolerance_class": "stochastic",
+    "rtol": 0.11521281407840228,
+    "sd_across_seeds": 0.0169921225730412
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.022158841937501,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "constant/queue": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"cooldown_s\": 0.0, \"hyst\": 0.15, \"target_concurrency\": 2.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 52.30368352084537,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 28.442887683311273,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9730595423411892,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0055178230542537,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8324.605056253607,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3757.213821653166,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 75.2,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 45.98743789823961,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5049335981609192,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0594148424836176,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "constant/static": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 10.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"k\": 3}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 53.486046687550946,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 15.280676530132151,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9772913830663932,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0077535389741384,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 11152.814006265284,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 189.0871836727033,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 1.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4547177484131278,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.1145341057950899,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/dqn": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"absolute\", \"learning_rate\": 0.0005}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 52.51034330119723,
+    "tolerance_class": "stochastic",
+    "rtol": 0.12377222271353741,
+    "sd_across_seeds": 2.1664406352800305
+   },
+   "cost_total_sd_episodes": {
+    "value": 14.739772020869152,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.9750048747647654,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0108941775487937
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.003226565440206,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 10276.227990359172,
+    "tolerance_class": "stochastic",
+    "rtol": 0.5050894390497183,
+    "sd_across_seeds": 1730.1380770658425
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2779.6457944797844,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 20.2,
+    "tolerance_class": "stochastic",
+    "rtol": 1.5554560123268348,
+    "sd_across_seeds": 10.47340381633402
+   },
+   "scale_events_sd_episodes": {
+    "value": 5.912698199637792,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5052010573323883,
+    "tolerance_class": "stochastic",
+    "rtol": 1.1536621816962092,
+    "sd_across_seeds": 0.1942771179991049
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.081862772051908,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "diurnal/forecast": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"alpha\": 0.7, \"backlog_target\": 4.0, \"beta\": 0.1, \"forecaster\": \"ewma\", \"per_replica_rps\": 4.0, \"safety\": 1.2}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 43.78760279118967,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 14.061488959650402,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9781679447397144,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0025258758197602,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8505.030837356899,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2537.507420472672,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 15.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 5.853278531320493,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4415921625344181,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0370861304660964,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/hpa": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"down_stabilization_s\": 60.0, \"metric\": \"running\", \"target\": 2.5, \"tolerance\": 0.1}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 44.88067742301647,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 14.954886409970213,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9790164610741234,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0028063223394713,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8748.578226904936,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2602.341400305108,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 26.791666666666668,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 8.177270548489172,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4290617777547017,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0426948015786812,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/leading": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"backlog_target\": 4.0, \"kappa\": 5.0, \"per_replica_rps\": 4.0, \"window_s\": 45.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 49.96095531968194,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 13.822932329018084,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9676698037470898,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0070644314496673,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 7792.036595904574,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2124.6218479217905,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 34.583333333333336,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 12.81614697123928,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5832010637495436,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.1101667998644718,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/oracle": {
+   "method_class": "analytic",
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"mode\": \"rate\", \"safety\": 0.5}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 49.49724294655997,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 18.619118656703083,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9761612710257024,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.004948377906562,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 9038.547883967987,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2723.814535657279,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 52.666666666666664,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 20.183218743316928,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4686412756368158,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0657796212957989,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/ppo": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0003}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 48.18099091248365,
+    "tolerance_class": "stochastic",
+    "rtol": 0.39290820788330566,
+    "sd_across_seeds": 6.310235597821929
+   },
+   "cost_total_sd_episodes": {
+    "value": 16.444650727378278,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.9756524543596564,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0020027716719641
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0032294294079368,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 8560.54727374509,
+    "tolerance_class": "stochastic",
+    "rtol": 0.15990681858839037,
+    "sd_across_seeds": 456.29662664003183
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2836.917201452281,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 64.31666666666666,
+    "tolerance_class": "stochastic",
+    "rtol": 3.3867777673880197,
+    "sd_across_seeds": 72.60875224639092
+   },
+   "scale_events_sd_episodes": {
+    "value": 18.527152029355204,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4736082570779354,
+    "tolerance_class": "stochastic",
+    "rtol": 0.1668519472391245,
+    "sd_across_seeds": 0.0263408199739938
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.047653709216747,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "diurnal/queue": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"cooldown_s\": 0.0, \"hyst\": 0.15, \"target_concurrency\": 2.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 55.209007261868486,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 22.26701224746095,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9728583462100624,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0055403477127714,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8981.452178560541,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 3272.3951804507383,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 76.25,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 29.25041805721312,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5110342895527955,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0760646822035325,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "diurnal/static": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 24.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"k\": 3}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 54.8163686928822,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 18.52080624876673,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9766669337342628,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0126044792101449,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 11184.285607864667,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 253.09731796062536,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 1.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.9540023391901916,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 2.574500131871161,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/dqn": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"absolute\", \"learning_rate\": 0.0005}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 45.43131929713652,
+    "tolerance_class": "stochastic",
+    "rtol": 0.12306624421780389,
+    "sd_across_seeds": 1.8636872785861431
+   },
+   "cost_total_sd_episodes": {
+    "value": 16.922078548656955,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.9745837425222484,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0042367645298059
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0054639242940708,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 8532.09578914095,
+    "tolerance_class": "stochastic",
+    "rtol": 0.19669769381902505,
+    "sd_across_seeds": 559.4145217223465
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2398.029668265501,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 28.42,
+    "tolerance_class": "stochastic",
+    "rtol": 1.4810833727877222,
+    "sd_across_seeds": 14.030796484875689
+   },
+   "scale_events_sd_episodes": {
+    "value": 6.5501301611651295,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.499977705152529,
+    "tolerance_class": "stochastic",
+    "rtol": 0.40677813968847204,
+    "sd_across_seeds": 0.0677933335958857
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0930424372794856,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "variable/forecast": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 0.0, \"alpha\": 0.4, \"backlog_target\": 2.0, \"beta\": 0.3, \"forecaster\": \"ewma\", \"per_replica_rps\": 4.0, \"safety\": 1.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 42.55282741476945,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 16.98202566870674,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9780602444451052,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0043211440728267,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8051.723224430834,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2843.987616645843,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 48.45,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 19.692442908189623,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4384620067429987,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0546102259118004,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/hpa": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"down_stabilization_s\": 60.0, \"metric\": \"running\", \"target\": 2.5, \"tolerance\": 0.1}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 41.81730968008215,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 16.08075098592903,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9747587031338014,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0100909241414387,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 7713.692904024638,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2442.1436054929695,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 24.875,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 8.685937647744936,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.514023664662696,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.312157330481781,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/leading": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": true,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"backlog_target\": 2.0, \"kappa\": 5.0, \"per_replica_rps\": 4.0, \"window_s\": 30.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 42.28975306162679,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 15.855617017923151,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.978881891869928,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0028071878380386,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8111.550918488033,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2843.329703787569,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 54.45,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 21.534647098130623,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4285258022352461,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0403524488914599,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/oracle": {
+   "method_class": "analytic",
+   "uses_privileged_info": true,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"H_s\": 30.0, \"mode\": \"rate\", \"safety\": 0.5}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 42.98112556620938,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 15.983263035299812,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.976384436530216,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0042846245930185,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8020.08766986281,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2425.2968444431904,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 43.65,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 19.897880314888845,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.4636743741198753,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.0532663308619735,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/ppo": {
+   "method_class": "learned",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 5.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"action_mode\": \"delta\", \"learning_rate\": 0.0003}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 45.45563371439022,
+    "tolerance_class": "stochastic",
+    "rtol": 0.2535179182794355,
+    "sd_across_seeds": 3.841272544448244
+   },
+   "cost_total_sd_episodes": {
+    "value": 19.53313858327984,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "slo_attainment_mean": {
+    "value": 0.971879457272608,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05,
+    "sd_across_seeds": 0.0020059306344506
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0087336529415621,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "replica_seconds_mean": {
+    "value": 7575.94011431706,
+    "tolerance_class": "stochastic",
+    "rtol": 0.11379921706276785,
+    "sd_across_seeds": 287.37868450789915
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2761.8032075806796,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "scale_events_mean": {
+    "value": 65.47999999999999,
+    "tolerance_class": "stochastic",
+    "rtol": 2.0916456932510705,
+    "sd_across_seeds": 45.653653331360026
+   },
+   "scale_events_sd_episodes": {
+    "value": 29.14437272508128,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5513781075240274,
+    "tolerance_class": "stochastic",
+    "rtol": 0.2486702490124322,
+    "sd_across_seeds": 0.0457037770993345
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.2473150121619459,
+    "tolerance_class": "stochastic",
+    "rtol": 0.05
+   }
+  },
+  "variable/queue": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"cooldown_s\": 30.0, \"hyst\": 0.15, \"target_concurrency\": 2.0}",
+   "is_constant_target": false,
+   "cost_total_mean": {
+    "value": 49.99700409156712,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 21.706294158486592,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9690357254923618,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0099942268077782,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 8013.9762274701325,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 2804.6802546192557,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 53.675,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 23.506013960424944,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 0.5959327195669198,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 0.3102984439900776,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  },
+  "variable/static": {
+   "method_class": "analytic",
+   "uses_privileged_info": false,
+   "is_adaptation": false,
+   "n_episodes": {
+    "value": 40.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "n_policy_seeds": {
+    "value": 0.0,
+    "tolerance_class": "exact",
+    "rtol": 0.0
+   },
+   "params": "{\"k\": 4}",
+   "is_constant_target": true,
+   "cost_total_mean": {
+    "value": 72.05370172447573,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "cost_total_sd_episodes": {
+    "value": 56.76758696529502,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_mean": {
+    "value": 0.9704943315482714,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "slo_attainment_sd_episodes": {
+    "value": 0.0416184059929422,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_mean": {
+    "value": 14779.8605173427,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "replica_seconds_sd_episodes": {
+    "value": 346.9380325642009,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_mean": {
+    "value": 1.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "scale_events_sd_episodes": {
+    "value": 0.0,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_mean": {
+    "value": 1.9625079999006696,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   },
+   "latency_p95_s_sd_episodes": {
+    "value": 8.364769898428595,
+    "tolerance_class": "deterministic",
+    "rtol": 1e-09
+   }
+  }
+ }
+}

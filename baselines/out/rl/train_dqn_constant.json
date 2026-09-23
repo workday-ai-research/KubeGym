@@ -1,0 +1,743 @@
+{
+ "algo": "dqn",
+ "family": "constant",
+ "action_mode_selected": "absolute",
+ "hp_selected": {
+  "action_mode": "absolute",
+  "learning_rate": 0.0005
+ },
+ "hp_grid": [
+  {
+   "action_mode": "absolute",
+   "learning_rate": 0.0001
+  },
+  {
+   "action_mode": "absolute",
+   "learning_rate": 0.0005
+  },
+  {
+   "action_mode": "delta",
+   "learning_rate": 0.0001
+  }
+ ],
+ "net_arch": [
+  64,
+  64
+ ],
+ "n_envs": 4,
+ "n_seeds": 5,
+ "search_steps_per_config": 100000,
+ "final_steps_per_seed": 150000,
+ "eval_every": 15000,
+ "dev_episodes_selection": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+ ],
+ "dev_episodes_curve": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "algo_kwargs": {
+  "learning_rate": 0.0005,
+  "gamma": 0.99,
+  "seed": 0,
+  "verbose": 0,
+  "device": "cpu",
+  "policy_kwargs": {
+   "net_arch": [
+    64,
+    64
+   ]
+  },
+  "buffer_size": 100000,
+  "learning_starts": 2000,
+  "batch_size": 64,
+  "tau": 1.0,
+  "train_freq": 4,
+  "gradient_steps": 1,
+  "target_update_interval": 1000,
+  "exploration_fraction": 0.2,
+  "exploration_initial_eps": 1.0,
+  "exploration_final_eps": 0.05
+ },
+ "search": [
+  {
+   "config": 0,
+   "hp": {
+    "action_mode": "absolute",
+    "learning_rate": 0.0001
+   },
+   "steps": 100000,
+   "wall_s": 198.2,
+   "dev": {
+    "objective": 50.85352126375901,
+    "mean_cost_total": 50.85352126375901,
+    "mean_return": -50.85352126375901,
+    "mean_slo_attainment": 0.9776191545489041,
+    "mean_replica_seconds": 9868.056379127698,
+    "mean_scale_events": 35.8,
+    "n_episodes": 10
+   }
+  },
+  {
+   "config": 1,
+   "hp": {
+    "action_mode": "absolute",
+    "learning_rate": 0.0005
+   },
+   "steps": 100000,
+   "wall_s": 199.7,
+   "dev": {
+    "objective": 48.442881204823365,
+    "mean_cost_total": 48.442881204823365,
+    "mean_return": -48.442881204823365,
+    "mean_slo_attainment": 0.9782182368058722,
+    "mean_replica_seconds": 9582.86436144701,
+    "mean_scale_events": 18.4,
+    "n_episodes": 10
+   }
+  },
+  {
+   "config": 2,
+   "hp": {
+    "action_mode": "delta",
+    "learning_rate": 0.0001
+   },
+   "steps": 100000,
+   "wall_s": 197.5,
+   "dev": {
+    "objective": 55.515093792408265,
+    "mean_cost_total": 55.515093792408265,
+    "mean_return": -55.515093792408265,
+    "mean_slo_attainment": 0.9676399962413363,
+    "mean_replica_seconds": 7896.028137722477,
+    "mean_scale_events": 130.2,
+    "n_episodes": 10
+   }
+  }
+ ],
+ "seeds": [
+  {
+   "seed": 0,
+   "steps": 150000,
+   "wall_s": 272.6,
+   "curve": [
+    {
+     "steps": 15000,
+     "objective": 38.97656467836684,
+     "mean_cost_total": 38.97656467836684,
+     "mean_return": -38.97656467836684,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 8950.969403510047,
+     "mean_scale_events": 48.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 30000,
+     "objective": 38.498319845602765,
+     "mean_cost_total": 38.498319845602765,
+     "mean_return": -38.498319845602765,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 9011.495953680827,
+     "mean_scale_events": 30.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 45000,
+     "objective": 35.802194097722484,
+     "mean_cost_total": 35.802194097722484,
+     "mean_return": -35.802194097722484,
+     "mean_slo_attainment": 0.9814373869278183,
+     "mean_replica_seconds": 7836.658229316739,
+     "mean_scale_events": 49.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 60000,
+     "objective": 34.56738055950889,
+     "mean_cost_total": 34.56738055950889,
+     "mean_return": -34.56738055950889,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 8042.214167852656,
+     "mean_scale_events": 20.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 75000,
+     "objective": 30.93199371249181,
+     "mean_cost_total": 30.93199371249181,
+     "mean_return": -30.93199371249181,
+     "mean_slo_attainment": 0.9811544342030223,
+     "mean_replica_seconds": 6657.598113747541,
+     "mean_scale_events": 35.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 90000,
+     "objective": 35.78877780379016,
+     "mean_cost_total": 35.78877780379016,
+     "mean_return": -35.78877780379016,
+     "mean_slo_attainment": 0.9803763014797628,
+     "mean_replica_seconds": 7415.633341137049,
+     "mean_scale_events": 59.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 105000,
+     "objective": 32.455814868059335,
+     "mean_cost_total": 32.455814868059335,
+     "mean_return": -32.455814868059335,
+     "mean_slo_attainment": 0.9795094719000751,
+     "mean_replica_seconds": 6964.7444604177945,
+     "mean_scale_events": 27.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 120000,
+     "objective": 33.716326800915695,
+     "mean_cost_total": 33.716326800915695,
+     "mean_return": -33.716326800915695,
+     "mean_slo_attainment": 0.9797836322838996,
+     "mean_replica_seconds": 7255.898040274698,
+     "mean_scale_events": 29.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 135000,
+     "objective": 30.27064962962673,
+     "mean_cost_total": 30.27064962962673,
+     "mean_return": -30.27064962962673,
+     "mean_slo_attainment": 0.9761231301435436,
+     "mean_replica_seconds": 5460.194888888014,
+     "mean_scale_events": 48.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 150000,
+     "objective": 34.144523834087856,
+     "mean_cost_total": 34.144523834087856,
+     "mean_return": -34.144523834087856,
+     "mean_slo_attainment": 0.9760481970542904,
+     "mean_replica_seconds": 6523.35715022635,
+     "mean_scale_events": 42.6,
+     "n_episodes": 5
+    }
+   ],
+   "dev": {
+    "objective": 55.491682186727985,
+    "mean_cost_total": 55.491682186727985,
+    "mean_return": -55.491682186727985,
+    "mean_slo_attainment": 0.9698115079804861,
+    "mean_replica_seconds": 9611.004656018387,
+    "mean_scale_events": 28.2,
+    "n_episodes": 10
+   },
+   "model_path": "out/rl/dqn_constant_seed0.zip",
+   "model_sha256": "9b78b0e272a596e97ae19f88a793bb882b68a3dd687258cbe9be51bcd7870885"
+  },
+  {
+   "seed": 1,
+   "steps": 150000,
+   "wall_s": 250.0,
+   "curve": [
+    {
+     "steps": 15000,
+     "objective": 37.1544081655725,
+     "mean_cost_total": 37.1544081655725,
+     "mean_return": -37.1544081655725,
+     "mean_slo_attainment": 0.9808768773736783,
+     "mean_replica_seconds": 7504.322449671747,
+     "mean_scale_events": 56.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 30000,
+     "objective": 40.566374256316124,
+     "mean_cost_total": 40.566374256316124,
+     "mean_return": -40.566374256316124,
+     "mean_slo_attainment": 0.9803649699015293,
+     "mean_replica_seconds": 8488.912276894825,
+     "mean_scale_events": 54.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 45000,
+     "objective": 32.320367064913945,
+     "mean_cost_total": 32.320367064913945,
+     "mean_return": -32.320367064913945,
+     "mean_slo_attainment": 0.9760158775723179,
+     "mean_replica_seconds": 5946.110119474177,
+     "mean_scale_events": 58.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 60000,
+     "objective": 30.70816272674922,
+     "mean_cost_total": 30.70816272674922,
+     "mean_return": -30.70816272674922,
+     "mean_slo_attainment": 0.980438902790224,
+     "mean_replica_seconds": 6275.448818024759,
+     "mean_scale_events": 46.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 75000,
+     "objective": 32.86428344619405,
+     "mean_cost_total": 32.86428344619405,
+     "mean_return": -32.86428344619405,
+     "mean_slo_attainment": 0.9774009700370458,
+     "mean_replica_seconds": 6154.285033858208,
+     "mean_scale_events": 50.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 90000,
+     "objective": 33.55463771723895,
+     "mean_cost_total": 33.55463771723895,
+     "mean_return": -33.55463771723895,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7438.391315171679,
+     "mean_scale_events": 41.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 105000,
+     "objective": 28.087257841936285,
+     "mean_cost_total": 28.087257841936285,
+     "mean_return": -28.087257841936285,
+     "mean_slo_attainment": 0.9811345450729846,
+     "mean_replica_seconds": 5954.1773525808785,
+     "mean_scale_events": 29.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 120000,
+     "objective": 29.270766795311754,
+     "mean_cost_total": 29.270766795311754,
+     "mean_return": -29.270766795311754,
+     "mean_slo_attainment": 0.9813086494189236,
+     "mean_replica_seconds": 6339.230038593522,
+     "mean_scale_events": 26.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 135000,
+     "objective": 31.734188758555792,
+     "mean_cost_total": 31.734188758555792,
+     "mean_return": -31.734188758555792,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7090.256627566731,
+     "mean_scale_events": 28.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 150000,
+     "objective": 34.105346087683884,
+     "mean_cost_total": 34.105346087683884,
+     "mean_return": -34.105346087683884,
+     "mean_slo_attainment": 0.9761760667145758,
+     "mean_replica_seconds": 6958.603826305158,
+     "mean_scale_events": 22.2,
+     "n_episodes": 5
+    }
+   ],
+   "dev": {
+    "objective": 56.014768700693686,
+    "mean_cost_total": 56.014768700693686,
+    "mean_return": -56.014768700693686,
+    "mean_slo_attainment": 0.9659293364498163,
+    "mean_replica_seconds": 8467.4306102081,
+    "mean_scale_events": 20.4,
+    "n_episodes": 10
+   },
+   "model_path": "out/rl/dqn_constant_seed1.zip",
+   "model_sha256": "faca6c1d44e34e389604bab03a5ec6501d9937d46bb2840f29cf4d17451f9db0"
+  },
+  {
+   "seed": 2,
+   "steps": 150000,
+   "wall_s": 250.5,
+   "curve": [
+    {
+     "steps": 15000,
+     "objective": 32.72041572940377,
+     "mean_cost_total": 32.72041572940377,
+     "mean_return": -32.72041572940377,
+     "mean_slo_attainment": 0.9813679789832529,
+     "mean_replica_seconds": 7614.124718821118,
+     "mean_scale_events": 11.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 30000,
+     "objective": 32.17184564099166,
+     "mean_cost_total": 32.17184564099166,
+     "mean_return": -32.17184564099166,
+     "mean_slo_attainment": 0.9812308987913406,
+     "mean_replica_seconds": 7479.553692297491,
+     "mean_scale_events": 7.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 45000,
+     "objective": 33.84479257153774,
+     "mean_cost_total": 33.84479257153774,
+     "mean_return": -33.84479257153774,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7873.437771461307,
+     "mean_scale_events": 18.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 60000,
+     "objective": 32.683503587573526,
+     "mean_cost_total": 32.683503587573526,
+     "mean_return": -32.683503587573526,
+     "mean_slo_attainment": 0.9809738734315051,
+     "mean_replica_seconds": 7528.051076272049,
+     "mean_scale_events": 7.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 75000,
+     "objective": 33.21795747255881,
+     "mean_cost_total": 33.21795747255881,
+     "mean_return": -33.21795747255881,
+     "mean_slo_attainment": 0.9808025231916148,
+     "mean_replica_seconds": 7634.38724176763,
+     "mean_scale_events": 4.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 90000,
+     "objective": 34.219801448950754,
+     "mean_cost_total": 34.219801448950754,
+     "mean_return": -34.219801448950754,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7778.940434685219,
+     "mean_scale_events": 31.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 105000,
+     "objective": 28.97450443493352,
+     "mean_cost_total": 28.97450443493352,
+     "mean_return": -28.97450443493352,
+     "mean_slo_attainment": 0.9813337089352748,
+     "mean_replica_seconds": 6337.351330480049,
+     "mean_scale_events": 21.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 120000,
+     "objective": 29.576330640869468,
+     "mean_cost_total": 29.576330640869468,
+     "mean_return": -29.576330640869468,
+     "mean_slo_attainment": 0.9807607783092287,
+     "mean_replica_seconds": 6103.899192260833,
+     "mean_scale_events": 26.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 135000,
+     "objective": 35.097267132486046,
+     "mean_cost_total": 35.097267132486046,
+     "mean_return": -35.097267132486046,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 8219.180139745804,
+     "mean_scale_events": 15.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 150000,
+     "objective": 28.32740062910609,
+     "mean_cost_total": 28.32740062910609,
+     "mean_return": -28.32740062910609,
+     "mean_slo_attainment": 0.9791888053328586,
+     "mean_replica_seconds": 5819.220188731817,
+     "mean_scale_events": 21.0,
+     "n_episodes": 5
+    }
+   ],
+   "dev": {
+    "objective": 57.58517114280046,
+    "mean_cost_total": 57.58517114280046,
+    "mean_return": -57.58517114280046,
+    "mean_slo_attainment": 0.9795436084390914,
+    "mean_replica_seconds": 12946.551342840132,
+    "mean_scale_events": 17.5,
+    "n_episodes": 10
+   },
+   "model_path": "out/rl/dqn_constant_seed2.zip",
+   "model_sha256": "988e2deda019704991a4dedc7cff7e0498f69c639d6af6f619d960a37018e3aa"
+  },
+  {
+   "seed": 3,
+   "steps": 150000,
+   "wall_s": 247.6,
+   "curve": [
+    {
+     "steps": 15000,
+     "objective": 38.34720993903843,
+     "mean_cost_total": 38.34720993903843,
+     "mean_return": -38.34720993903843,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 9071.162981711523,
+     "mean_scale_events": 28.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 30000,
+     "objective": 30.709178548459683,
+     "mean_cost_total": 30.709178548459683,
+     "mean_return": -30.709178548459683,
+     "mean_slo_attainment": 0.9755586776508709,
+     "mean_replica_seconds": 5789.753564537896,
+     "mean_scale_events": 36.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 45000,
+     "objective": 41.79377110426613,
+     "mean_cost_total": 41.79377110426613,
+     "mean_return": -41.79377110426613,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 10102.13133127984,
+     "mean_scale_events": 21.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 60000,
+     "objective": 35.53185566765283,
+     "mean_cost_total": 35.53185566765283,
+     "mean_return": -35.53185566765283,
+     "mean_slo_attainment": 0.9808818283684104,
+     "mean_replica_seconds": 8154.556700295847,
+     "mean_scale_events": 20.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 75000,
+     "objective": 30.979542203545073,
+     "mean_cost_total": 30.979542203545073,
+     "mean_return": -30.979542203545073,
+     "mean_slo_attainment": 0.9792447905578253,
+     "mean_replica_seconds": 6494.862661063514,
+     "mean_scale_events": 28.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 90000,
+     "objective": 30.525013956970316,
+     "mean_cost_total": 30.525013956970316,
+     "mean_return": -30.525013956970316,
+     "mean_slo_attainment": 0.9797624571145974,
+     "mean_replica_seconds": 6463.504187091089,
+     "mean_scale_events": 26.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 105000,
+     "objective": 31.619804000169047,
+     "mean_cost_total": 31.619804000169047,
+     "mean_return": -31.619804000169047,
+     "mean_slo_attainment": 0.979860096872218,
+     "mean_replica_seconds": 6827.941200050709,
+     "mean_scale_events": 22.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 120000,
+     "objective": 29.07059746159082,
+     "mean_cost_total": 29.07059746159082,
+     "mean_return": -29.07059746159082,
+     "mean_slo_attainment": 0.9718419417855827,
+     "mean_replica_seconds": 5031.179238477235,
+     "mean_scale_events": 23.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 135000,
+     "objective": 31.184427674921313,
+     "mean_cost_total": 31.184427674921313,
+     "mean_return": -31.184427674921313,
+     "mean_slo_attainment": 0.9759459733926341,
+     "mean_replica_seconds": 6355.328302476386,
+     "mean_scale_events": 16.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 150000,
+     "objective": 31.085007076696673,
+     "mean_cost_total": 31.085007076696673,
+     "mean_return": -31.085007076696673,
+     "mean_slo_attainment": 0.9712546948662706,
+     "mean_replica_seconds": 5653.502123008989,
+     "mean_scale_events": 21.2,
+     "n_episodes": 5
+    }
+   ],
+   "dev": {
+    "objective": 45.642832092933276,
+    "mean_cost_total": 45.642832092933276,
+    "mean_return": -45.642832092933276,
+    "mean_slo_attainment": 0.9732143429478859,
+    "mean_replica_seconds": 8279.349627879978,
+    "mean_scale_events": 16.5,
+    "n_episodes": 10
+   },
+   "model_path": "out/rl/dqn_constant_seed3.zip",
+   "model_sha256": "300898beed917b1b199dd078a6bdb9817243214b06049b819e1681e3f004f3da"
+  },
+  {
+   "seed": 4,
+   "steps": 150000,
+   "wall_s": 252.5,
+   "curve": [
+    {
+     "steps": 15000,
+     "objective": 34.1522913194935,
+     "mean_cost_total": 34.1522913194935,
+     "mean_return": -34.1522913194935,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7938.687395848037,
+     "mean_scale_events": 19.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 30000,
+     "objective": 31.749560202477248,
+     "mean_cost_total": 31.749560202477248,
+     "mean_return": -31.749560202477248,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 7091.868060743165,
+     "mean_scale_events": 28.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 45000,
+     "objective": 31.397206929800994,
+     "mean_cost_total": 31.397206929800994,
+     "mean_return": -31.397206929800994,
+     "mean_slo_attainment": 0.9814879241511761,
+     "mean_replica_seconds": 6734.16207894029,
+     "mean_scale_events": 42.2,
+     "n_episodes": 5
+    },
+    {
+     "steps": 60000,
+     "objective": 29.79593646171724,
+     "mean_cost_total": 29.79593646171724,
+     "mean_return": -29.79593646171724,
+     "mean_slo_attainment": 0.9808881983115599,
+     "mean_replica_seconds": 6508.780938515168,
+     "mean_scale_events": 21.0,
+     "n_episodes": 5
+    },
+    {
+     "steps": 75000,
+     "objective": 31.953082220582406,
+     "mean_cost_total": 31.953082220582406,
+     "mean_return": -31.953082220582406,
+     "mean_slo_attainment": 0.9781677834122988,
+     "mean_replica_seconds": 6519.924666174714,
+     "mean_scale_events": 38.4,
+     "n_episodes": 5
+    },
+    {
+     "steps": 90000,
+     "objective": 30.74498462710725,
+     "mean_cost_total": 30.74498462710725,
+     "mean_return": -30.74498462710725,
+     "mean_slo_attainment": 0.9769495554137564,
+     "mean_replica_seconds": 6502.495388132173,
+     "mean_scale_events": 8.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 105000,
+     "objective": 33.586945165634276,
+     "mean_cost_total": 33.586945165634276,
+     "mean_return": -33.586945165634276,
+     "mean_slo_attainment": 0.9661730559914051,
+     "mean_replica_seconds": 5486.083549690273,
+     "mean_scale_events": 31.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 120000,
+     "objective": 31.604114406840825,
+     "mean_cost_total": 31.604114406840825,
+     "mean_return": -31.604114406840825,
+     "mean_slo_attainment": 0.9800176405781261,
+     "mean_replica_seconds": 6904.2343220522425,
+     "mean_scale_events": 27.6,
+     "n_episodes": 5
+    },
+    {
+     "steps": 135000,
+     "objective": 31.251613749606225,
+     "mean_cost_total": 31.251613749606225,
+     "mean_return": -31.251613749606225,
+     "mean_slo_attainment": 0.9676475055893821,
+     "mean_replica_seconds": 5292.484124881858,
+     "mean_scale_events": 21.8,
+     "n_episodes": 5
+    },
+    {
+     "steps": 150000,
+     "objective": 27.256192893165327,
+     "mean_cost_total": 27.256192893165327,
+     "mean_return": -27.256192893165327,
+     "mean_slo_attainment": 0.978279916721285,
+     "mean_replica_seconds": 5488.8578679495895,
+     "mean_scale_events": 18.4,
+     "n_episodes": 5
+    }
+   ],
+   "dev": {
+    "objective": 42.05917841122889,
+    "mean_cost_total": 42.05917841122889,
+    "mean_return": -42.05917841122889,
+    "mean_slo_attainment": 0.9790109224657432,
+    "mean_replica_seconds": 8287.253523368669,
+    "mean_scale_events": 23.3,
+    "n_episodes": 10
+   },
+   "model_path": "out/rl/dqn_constant_seed4.zip",
+   "model_sha256": "2537001de963f01278782f6822b4e6d12b56fae348c8a1bfb69b40d85e54dbe8"
+  }
+ ],
+ "ledger": {
+  "method": "dqn",
+  "family": "constant",
+  "cap_env_steps": 1200000,
+  "spent_env_steps": 1129200,
+  "by_phase": {
+   "search_train": 300000,
+   "search_select_dev": 7200,
+   "final_train": 750000,
+   "final_curve_dev": 60000,
+   "final_select_dev": 12000
+  },
+  "n_trials": 8,
+  "wall_s": 1901.23,
+  "headroom_env_steps": 70800
+ },
+ "notes": [
+  "budget currency is train+dev environment steps; test steps are not charged",
+  "no reward or observation normalisation wrapper (see module docstring)",
+  "learning curves are dev-split evaluations, so they are not test leakage"
+ ]
+}

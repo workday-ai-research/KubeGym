@@ -1,0 +1,5173 @@
+{
+ "hpa_semantics_source": "Kubernetes documentation, 'Horizontal Pod Autoscaling' (kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/), page last modified 2026-03-15, retrieved 2026-08-12. Implements: the desiredReplicas = ceil(currentReplicas * currentMetricValue / desiredMetricValue) ratio rule; the tolerance band (default 0.1, documented as FEATURE STATE Kubernetes v1.35 [beta] for the per-direction `tolerance` field, and as the cluster-wide --horizontal-pod-autoscaler-tolerance default before that); the scaleDown stabilization window (default 300 s, rolling MAXIMUM over previously computed desired states); scaleUp stabilization window default 0; and the default scaling policies (scaleUp: 100%/15s and 4 pods/15s with selectPolicy Max; scaleDown: 100%/15s). Control cadence 15 s matches the documented default --horizontal-pod-autoscaler-sync-period.",
+ "source_controllers_sha256": "8b0357b051537a5d49d2972de777b9fc64909ab20829a2546bd03c8fb98841ec",
+ "method": "decisions compared along one trajectory: the ported controller drives, the source controller is shadowed on the raw ClusterState history at the same step. ObsView.assert_lossless is checked on every step.",
+ "notes": [
+  "forecast: the source hard-codes the backlog guard divisor at 12.0; the port exposes it as `backlog_target` and the parity cases pin it to 12.0 to match. The swept grid uses smaller values because a 4-slot replica cannot hold 12 concurrent requests."
+ ],
+ "summary": [
+  {
+   "controller": "hpa",
+   "service_model": "llm_serving",
+   "kind": "port",
+   "n_runs": 8,
+   "n_steps": 160,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  },
+  {
+   "controller": "forecast",
+   "service_model": "request_service",
+   "kind": "port",
+   "n_runs": 48,
+   "n_steps": 11520,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  },
+  {
+   "controller": "hpa",
+   "service_model": "request_service",
+   "kind": "port",
+   "n_runs": 72,
+   "n_steps": 17280,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  },
+  {
+   "controller": "leading",
+   "service_model": "request_service",
+   "kind": "adaptation",
+   "n_runs": 36,
+   "n_steps": 8640,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  },
+  {
+   "controller": "queue",
+   "service_model": "request_service",
+   "kind": "port",
+   "n_runs": 72,
+   "n_steps": 17280,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  },
+  {
+   "controller": "static",
+   "service_model": "request_service",
+   "kind": "port",
+   "n_runs": 24,
+   "n_steps": 5760,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "examples": []
+  }
+ ],
+ "oracle_property_checks": [
+  {
+   "controller": "oracle",
+   "kind": "privileged_property_check",
+   "family": "burst",
+   "params": {
+    "H_s": 30.0,
+    "safety": 1.0,
+    "mode": "rate+residency"
+   },
+   "P1a_demand_is_read": true,
+   "P1a_total_decisions_moved_mode_rate": 321,
+   "P1a_total_decisions_moved_configured_mode": 0,
+   "P1b_future_arrivals_are_read": true,
+   "P1b_total_decisions_moved": 702,
+   "P2_privilege_buys_anticipation": true,
+   "P2_total_anticipatory_scale_ups": 28,
+   "runs": [
+    {
+     "family": "burst",
+     "episode": 39,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 134,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 11,
+     "n_steps_oracle_above_queue": 240
+    },
+    {
+     "family": "burst",
+     "episode": 46,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 89,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 231,
+     "P2_anticipatory_scale_ups": 7,
+     "n_steps_oracle_above_queue": 240
+    },
+    {
+     "family": "burst",
+     "episode": 47,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 98,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 231,
+     "P2_anticipatory_scale_ups": 10,
+     "n_steps_oracle_above_queue": 240
+    }
+   ],
+   "note": "not a port check: the source project's Oracle is LLM-specific (decode_step_time_s, kv_tokens_per_replica) and has no request-service counterpart to shadow.",
+   "P1a_masking_finding": "the demand path is REAL but MASKED under the configured mode on this family: doubling every request's true service demand moved 321 decisions in mode 'rate' and 0 in mode 'rate+residency'. On this corpus offered work per request is small (pooled reconstructed Azure service times: median 0.017 s) relative to a 4-slot replica over a 32 s lookahead, so the residency bound ceil(n_concurrent / rs_max_concurrency) dominates the work-rate bound. The oracle's privilege here is therefore mostly KNOWING FUTURE ARRIVAL TIMES, not knowing their durations -- see P1b."
+  },
+  {
+   "controller": "oracle",
+   "kind": "privileged_property_check",
+   "family": "azure_replay",
+   "params": {
+    "H_s": 30.0,
+    "safety": 1.0,
+    "mode": "rate+residency"
+   },
+   "P1a_demand_is_read": true,
+   "P1a_total_decisions_moved_mode_rate": 11,
+   "P1a_total_decisions_moved_configured_mode": 0,
+   "P1b_future_arrivals_are_read": true,
+   "P1b_total_decisions_moved": 685,
+   "P2_privilege_buys_anticipation": true,
+   "P2_total_anticipatory_scale_ups": 30,
+   "runs": [
+    {
+     "family": "azure_replay",
+     "episode": 32,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 11,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 205,
+     "P2_anticipatory_scale_ups": 16,
+     "n_steps_oracle_above_queue": 205
+    },
+    {
+     "family": "azure_replay",
+     "episode": 79,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 0,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 6,
+     "n_steps_oracle_above_queue": 240
+    },
+    {
+     "family": "azure_replay",
+     "episode": 80,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 0,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 8,
+     "n_steps_oracle_above_queue": 240
+    }
+   ],
+   "note": "not a port check: the source project's Oracle is LLM-specific (decode_step_time_s, kv_tokens_per_replica) and has no request-service counterpart to shadow.",
+   "P1a_masking_finding": "the demand path is REAL but MASKED under the configured mode on this family: doubling every request's true service demand moved 11 decisions in mode 'rate' and 0 in mode 'rate+residency'. On this corpus offered work per request is small (pooled reconstructed Azure service times: median 0.017 s) relative to a 4-slot replica over a 32 s lookahead, so the residency bound ceil(n_concurrent / rs_max_concurrency) dominates the work-rate bound. The oracle's privilege here is therefore mostly KNOWING FUTURE ARRIVAL TIMES, not knowing their durations -- see P1b."
+  },
+  {
+   "controller": "oracle",
+   "kind": "privileged_property_check",
+   "family": "variable",
+   "params": {
+    "H_s": 30.0,
+    "safety": 1.0,
+    "mode": "rate+residency"
+   },
+   "P1a_demand_is_read": true,
+   "P1a_total_decisions_moved_mode_rate": 380,
+   "P1a_total_decisions_moved_configured_mode": 0,
+   "P1b_future_arrivals_are_read": true,
+   "P1b_total_decisions_moved": 720,
+   "P2_privilege_buys_anticipation": true,
+   "P2_total_anticipatory_scale_ups": 34,
+   "runs": [
+    {
+     "family": "variable",
+     "episode": 20,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 132,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 0,
+     "n_steps_oracle_above_queue": 240
+    },
+    {
+     "family": "variable",
+     "episode": 28,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 136,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 5,
+     "n_steps_oracle_above_queue": 240
+    },
+    {
+     "family": "variable",
+     "episode": 34,
+     "n_steps": 240,
+     "P1a_decisions_moved_by_doubling_demand_mode_rate": 112,
+     "P1a_decisions_moved_by_doubling_demand_configured_mode": 0,
+     "P1b_decisions_moved_by_hiding_future_arrivals": 240,
+     "P2_anticipatory_scale_ups": 29,
+     "n_steps_oracle_above_queue": 240
+    }
+   ],
+   "note": "not a port check: the source project's Oracle is LLM-specific (decode_step_time_s, kv_tokens_per_replica) and has no request-service counterpart to shadow.",
+   "P1a_masking_finding": "the demand path is REAL but MASKED under the configured mode on this family: doubling every request's true service demand moved 380 decisions in mode 'rate' and 0 in mode 'rate+residency'. On this corpus offered work per request is small (pooled reconstructed Azure service times: median 0.017 s) relative to a 4-slot replica over a 32 s lookahead, so the residency bound ceil(n_concurrent / rs_max_concurrency) dominates the work-rate bound. The oracle's privilege here is therefore mostly KNOWING FUTURE ARRIVAL TIMES, not knowing their durations -- see P1b."
+  }
+ ],
+ "runs": [
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-Burst-Dev",
+   "family": "burst",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 1
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 4
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 10
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "static",
+   "kind": "port",
+   "params": {
+    "k": 20
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 1.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 2.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 4.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 1.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 2.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.0,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 0.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "queue",
+   "kind": "port",
+   "params": {
+    "target_concurrency": 4.0,
+    "hyst": 0.15,
+    "cooldown_s": 60.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "ewma",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 0.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.0,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "forecast",
+   "kind": "port",
+   "params": {
+    "forecaster": "holt",
+    "H_s": 30.0,
+    "safety": 1.5,
+    "per_replica_rps": 4.0,
+    "backlog_target": 12.0,
+    "alpha": 0.4,
+    "beta": 0.3
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 0.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 15.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 30.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 1
+  },
+  {
+   "n_steps": 240,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "request_service",
+   "task": "Corpus-AzureReplay-Dev",
+   "family": "azure_replay",
+   "controller": "leading",
+   "kind": "adaptation",
+   "params": {
+    "per_replica_rps": 4.0,
+    "kappa": 15.0,
+    "window_s": 45.0,
+    "backlog_target": 2.0
+   },
+   "episode": 2
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.3,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.3,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.6,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.6,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.9,
+    "tolerance": 0.1,
+    "down_stabilization_s": 60.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "kv",
+    "target": 0.9,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "conc",
+    "target": 8.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  },
+  {
+   "n_steps": 20,
+   "n_disagree": 0,
+   "n_disagree_in_zeropad_window": 0,
+   "max_abs_diff": 0,
+   "first_disagreements": [],
+   "service_model": "llm_serving",
+   "task": "LLMServing-S1",
+   "family": "llm_serving_s1",
+   "controller": "hpa",
+   "kind": "port",
+   "params": {
+    "metric": "running",
+    "target": 8.0,
+    "tolerance": 0.1,
+    "down_stabilization_s": 300.0
+   },
+   "episode": 0
+  }
+ ]
+}
