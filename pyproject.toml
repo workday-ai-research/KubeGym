@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kubegym"
+version = "0.1.0"
+description = "Reproducible benchmark core for RL in cloud resource management (horizontal autoscaling)"
+requires-python = ">=3.10"
+# Core is stdlib + numpy on purpose. numpy is used only for observation assembly
+# (kubegym.core.state.ObservationSpec). gymnasium / torch / stable-baselines3 are
+# NOT dependencies of the core and are added by the RL layer in a later phase.
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+# The Gym layer (kubegym.gym) needs gymnasium; the corpus layer
+# (kubegym.workloads) needs scipy/pandas/pyarrow to build or validate traces,
+# though replaying a shipped trace needs neither. The RL baselines need torch.
+gym = ["gymnasium>=1.0"]
+corpus = ["pandas>=2.0", "pyarrow>=14", "scipy>=1.10"]
+rl = ["gymnasium>=1.0", "stable-baselines3>=2.3", "torch>=2.2"]
+all = ["gymnasium>=1.0", "pandas>=2.0", "pyarrow>=14", "scipy>=1.10",
+       "stable-baselines3>=2.3", "torch>=2.2", "matplotlib>=3.7"]
+
+[tool.setuptools.packages.find]
+include = ["kubegym*"]
+
+[tool.setuptools.package-data]
+kubegym = ["configs/*.json", "tests/data/*.jsonl", "tests/data/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["kubegym/tests"]

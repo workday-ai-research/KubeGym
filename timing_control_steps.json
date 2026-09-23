@@ -1,0 +1,16 @@
+{
+  "n_requests": 4680,
+  "k_replicas": 4,
+  "n_control_steps": 240,
+  "control_interval_s": 15.0,
+  "step_ms_mean": 16.22,
+  "step_ms_median": 16.39,
+  "step_ms_p95": 20.34,
+  "step_ms_max": 23.65,
+  "drain_ms": 149.1,
+  "total_wall_s_incl_drain": 4.042,
+  "n_done": 4680,
+  "preemptions": 1317,
+  "replica_seconds": 15519.27,
+  "t_end_s": 3879.82
+}
