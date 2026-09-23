@@ -1,0 +1,713 @@
+{
+  "schema": "kubegym-core-provenance-1",
+  "generated_utc": "2026-08-29T16:23:12Z",
+  "package": {
+    "name": "kubegym",
+    "version": "0.1.0",
+    "scope": "Phase 0: provenance system, discrete-event core, two service models. No Gymnasium wrapper, no workload corpus, no RL baselines."
+  },
+  "claims_gate": {
+    "rule": "A run is calibrated=False if ANY field with required_for_claims=true is a placeholder (calibrated=false). The flag is computed by ProvenancedConfig.calibrated and stamped onto every result row by ProvenancedConfig.stamp().",
+    "llm_serving_l40s.json": {
+      "calibrated": false,
+      "uncalibrated_required_fields": [
+        "decode_batch_extrapolation_above_8",
+        "output_length_distribution",
+        "prefill_tokens_per_s",
+        "slo"
+      ]
+    },
+    "request_service_default.json": {
+      "calibrated": false,
+      "uncalibrated_required_fields": [
+        "replica_cold_start_s",
+        "rs_max_concurrency",
+        "rs_service_time_distribution",
+        "slo"
+      ]
+    },
+    "conclusion": "BOTH shipped configs are calibrated=false. No number produced by this package with either config may be reported as an empirical result."
+  },
+  "port_provenance": {
+    "ported_from": "vLLM replica-autoscaling testbed (source testbed): sim_cluster.py, cluster_config.json, length_model.py",
+    "source_file_sha256": {
+      "sim_cluster.py": "0960890594f4c3258b825e6492f9752b1065d2971e3eb767068c1ab3502e46e2",
+      "cluster_config.json": "ce557d1fed3fc527cb7267f5921e86a2b4a033d4b818706405530b296025ebbb",
+      "length_model.py": "7d35ce5e6e89b278fef16f6678a45faf636bcdc56ca0274ffc77b05115d60d34",
+      "controllers.py": "4185faabc833ba2759dd9f621c91e85638cb9314a2e4e5830295df8f814fb612",
+      "workload.py": "5752cbf8488b4cb8ce10d851cb0aa7891fd487402000d545fac02f193fbd5386",
+      "router.py": "f8b4b13af8703bd05333467b48a312577f70de7a04982ce890434abbfc6a69ba",
+      "run_eval.py": "4cd30cd1d6c46c7a798af3d53156f1f1c7b5c6f3416158c8be5a5da9c1dc14bd",
+      "capacity.json": "73784ea1c0012e4babf76daf1d3a72960ecdc4f7ec3c8ced3657aa10e1423c0b"
+    },
+    "cluster_config_fields_carried_over_verbatim": [
+      "chunked_prefill",
+      "class_predictor_accuracy",
+      "class_signal",
+      "control_interval_s",
+      "decode_batch_extrapolation_above_8",
+      "decode_step_time_s",
+      "gpu_cost_per_replica_hour_usd",
+      "kv_tokens_per_replica",
+      "max_num_seqs",
+      "metric_scrape_interval_s",
+      "n_replicas_max",
+      "n_replicas_min",
+      "output_length_distribution",
+      "preemption_policy",
+      "prefill_tokens_per_s",
+      "replica_cold_start_s",
+      "replica_teardown_s",
+      "router_policy",
+      "slo"
+    ],
+    "fields_added_by_the_port": [
+      "replica_bringup"
+    ],
+    "values_changed_by_the_port": [],
+    "calibration_flags_changed_by_the_port": [],
+    "length_model_vendored_verbatim": {
+      "path": "kubegym/models/length_model.py",
+      "sha256": "7d35ce5e6e89b278fef16f6678a45faf636bcdc56ca0274ffc77b05115d60d34",
+      "identical_to_source": true
+    },
+    "discrepancy_found_in_the_source_config": "cluster_config.json's literal top-level 'uncalibrated_required_fields' listed 3 fields and omitted 'slo', which is required_for_claims=true and calibrated=false. The source CODE (ClusterConfig.uncalibrated_required) computed 4 and was correct; the stale literal list was the error. The port recomputes the list rather than copying it, so llm_serving_l40s.json lists all 4."
+  },
+  "measured_constants": [
+    {
+      "field": "class_signal",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "thinking_mode",
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "The router genuinely observes `chat_template_kwargs.enable_thinking` on every request, so conditioning a belief on thinking mode uses no privileged information. CAVEAT, see controllers_report.md 6.2: in the emitted traces thinking_flip_prob=0.0, so thinking_mode is a NOISELESS proxy for the length class. Set class_predictor_accuracy < 1.0 to inject predictor error."
+    },
+    {
+      "field": "control_interval_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 15.0,
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "Matches the Kubernetes HPA default sync period (--horizontal-pod-autoscaler-sync-period, default 15 s) so that the HPA baseline runs at its real cadence. All controllers are given the same decision cadence."
+    },
+    {
+      "field": "decode_step_time_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": {
+        "a0_s": 0.01657539,
+        "a1_s_per_seq": 0.00011063
+      },
+      "calibrated": true,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "LEAST-SQUARES FIT to measured single-replica decode throughput from vLLM's own iteration logger: 60.3 / 232.6 / 460.2 tok/s at 1 / 4 / 8 concurrent requests. Model t_step(b) = a0 + a1*b seconds per scheduler step, where one step emits one token for each of the b running sequences. Max relative error on the three fitted points: 1.05%.",
+      "fit_points": {
+        "batch": [
+          1,
+          4,
+          8
+        ],
+        "tok_per_s": [
+          60.3,
+          232.6,
+          460.2
+        ]
+      },
+      "max_rel_err_on_fit_points": 0.0105,
+      "measured_batch_range": [
+        1,
+        8
+      ]
+    },
+    {
+      "field": "kv_tokens_per_replica",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 55200,
+      "calibrated": true,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "MEASURED on the GPU testbed: KV budget per replica at --gpu-memory-utilization 0.21, vLLM 0.25.1, Qwen3-1.7B."
+    },
+    {
+      "field": "n_replicas_max",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 4,
+      "calibrated": true,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "GPU testbed track: 4 co-resident vLLM replicas on one L40S 46GB, each --gpu-memory-utilization 0.21, --max-model-len 8192.",
+      "note": "Hard ceiling of the physical testbed. The simulator will refuse a target above this unless --allow-hypothetical-replicas is passed, which stamps hypothetical:true."
+    },
+    {
+      "field": "n_replicas_min",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 1,
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "Design choice: at least one replica must serve."
+    },
+    {
+      "field": "replica_bringup",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "sequential",
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "VERIFIED OPERATIONAL CONSTRAINT on the GPU testbed: starting several vLLM engines concurrently fails KV sizing, so replicas were brought up ONE AT A TIME. The pool therefore serialises boots: the i-th replica requested at t becomes ready at max(t, last_pending_ready) + replica_cold_start_s. This is a lifecycle policy, not a measured scalar; `calibrated: true` records that the sequential path is the one that was actually exercised, not that a timing was fitted.",
+      "note": "The source simulator booted replicas in PARALLEL (every replica requested at t ready at t + cold_start), which makes multi-replica scale-up look faster than the verified path, i.e. OPTIMISTIC. Set to 'parallel' to reproduce the source simulator exactly; the parity harness does. The two policies are identical whenever scale-up adds one replica at a time, which is the common case for every controller in the suite."
+    },
+    {
+      "field": "replica_cold_start_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 31.9,
+      "calibrated": true,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "MEASURED, n=9: median 31.90 s to serving-ready, IQR [31.82, 32.40]. This is the actuation lag d.",
+      "iqr_s": [
+        31.82,
+        32.4
+      ],
+      "n": 9
+    },
+    {
+      "field": "replica_teardown_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 0.54,
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": true,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "MEASURED but n=2 only (0.54 s for 1 replica, 1.31 s for 4 concurrent). TREAT AS AN UPPER BOUND / weak evidence.",
+      "n": 2
+    }
+  ],
+  "placeholder_constants": [
+    {
+      "field": "chunked_prefill",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": false,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "NOT MODELLED. vLLM v1 enables chunked prefill by default; the simulator charges a whole-prompt prefill that stalls the replica's decode. This overstates the TBT spike caused by an admission and understates the TTFT of a long prompt under load."
+    },
+    {
+      "field": "class_predictor_accuracy",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "Sensitivity knob, not a measurement. 1.0 = the controller reads thinking_mode as-is. Below 1.0 the class signal handed to belief-based controllers is corrupted with that per-request probability of being correct, standing in for a real prompt-length predictor's error."
+    },
+    {
+      "field": "decode_batch_extrapolation_above_8",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "affine",
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": true,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER / UNVERIFIED. Throughput was measured only at batch 1, 4 and 8. Above batch 8 the simulator extrapolates the affine step-time model, which predicts near-linear aggregate throughput (e.g. 872 tok/s at batch 16, 1591 tok/s at batch 32). Real engines saturate; the affine extrapolation is therefore OPTIMISTIC about large batches and biases the simulator toward under-provisioning being cheap. Must be measured at batch 16/32/64 before any claim."
+    },
+    {
+      "field": "gpu_cost_per_replica_hour_usd",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "NORMALISED UNIT, not a price quote. Cost is reported primarily as replica-seconds (GPU-seconds); the USD column is replica-hours x 1.0 so it is a pure rescaling. Substitute a real instance price only when quoting money."
+    },
+    {
+      "field": "max_num_seqs",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 256,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER: vLLM's documented default max_num_seqs. Not read off the live server config. In practice KV pressure binds before this does at these sequence lengths."
+    },
+    {
+      "field": "metric_scrape_interval_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 15.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "Design choice matching the control interval. On the real testbed this is the Prometheus scrape interval and introduces staleness the simulator currently models as zero."
+    },
+    {
+      "field": "output_length_distribution",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "length_model.py",
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "Delegated to length_model.py, which returns calibrated:false and the labelled placeholder lognormals until measured_lengths.json lands. THIS IS THE DOMINANT UNCALIBRATED INPUT: it sets the offered token load."
+    },
+    {
+      "field": "preemption_policy",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "recompute",
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "Models vLLM's recompute-style preemption: a preempted sequence returns to the head of the waiting queue and re-pays prefill on its already-generated prefix. Output tokens are not lost (deterministic-decode assumption). vLLM's exact victim-selection order was NOT read from source; the simulator preempts the most-recently-admitted sequence."
+    },
+    {
+      "field": "prefill_tokens_per_s",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": 6000.0,
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER, NOT MEASURED. Prompt-prefill throughput was never measured on the testbed. Governs TTFT and the decode stall a new admission causes. Any TTFT number from this simulator is placeholder-derived."
+    },
+    {
+      "field": "router_policy",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": "least_running",
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "PLACEHOLDER for the real router's balancing policy: dispatch to the READY replica with the fewest running+waiting requests. The real router's policy must be recorded and matched here before any claim."
+    },
+    {
+      "field": "slo",
+      "config": "llm_serving_l40s.json",
+      "service_model": "llm_serving",
+      "value": {
+        "ttft_p95_s": 2.0,
+        "tbt_p95_s": 0.05,
+        "ttft_hard_s": 5.0
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "DESIGN CHOICE pending calibration, not a measurement. tbt_p95_s = 0.05 s (20 tok/s per stream) sits above the measured single-stream 58 tok/s, so it is reachable; ttft targets are provisional and must be set from the measured single-replica capacity curve.",
+      "note": "These targets define the cost-SLO objective every controller is tuned against, so they must be identical across controllers (tune.py enforces this)."
+    }
+  ],
+  "request_service_constants": [
+    {
+      "field": "control_interval_s",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 15.0,
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "Matches the Kubernetes HPA default sync period (--horizontal-pod-autoscaler-sync-period, default 15 s) so the HPA baseline runs at its real cadence. All controllers get the same decision cadence."
+    },
+    {
+      "field": "cost_per_replica_hour_usd",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "NORMALISED UNIT, not a price quote. Cost is reported primarily as replica-seconds; the USD column is replica-hours x 1.0, a pure rescaling. Substitute a real instance price only when quoting money."
+    },
+    {
+      "field": "metric_scrape_interval_s",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 15.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": true,
+      "consumed_by": "eval/other layer",
+      "source": "Design choice matching the control interval. On a real platform this is the metrics scrape period and introduces staleness that this model currently treats as zero, which is OPTIMISTIC about the controller's information."
+    },
+    {
+      "field": "n_replicas_max",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 20,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "PLACEHOLDER. Arbitrary ceiling chosen so that a scale-out range exists for RL action spaces; it is NOT the capacity of any real platform. Unlike the LLM config's n_replicas_max=4, this is not a physical limit that was measured, so a target near it is not automatically hypothetical."
+    },
+    {
+      "field": "n_replicas_min",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 1,
+      "calibrated": true,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "Design choice: at least one replica must serve. Not a measurement."
+    },
+    {
+      "field": "replica_bringup",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": "parallel",
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "PLACEHOLDER / design choice. Container platforms start replicas concurrently, so parallel bring-up is the plausible default here -- unlike the LLM config, where concurrent engine init was verified to fail KV sizing and sequential bring-up is the verified path. Not measured."
+    },
+    {
+      "field": "replica_cold_start_s",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 2.0,
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "PLACEHOLDER, NOT MEASURED. A round 2 s stand-in for container cold start. Real serverless cold starts span roughly two orders of magnitude across runtimes and platforms, and the value dominates every scale-up decision, so this is the single most important constant to replace before any claim."
+    },
+    {
+      "field": "replica_teardown_s",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 0.5,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "PLACEHOLDER, NOT MEASURED. Not billed by default (see kubegym/core/replica.py), so it currently affects nothing; kept so the field exists when teardown billing is switched on."
+    },
+    {
+      "field": "router_policy",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": "least_running",
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "engine",
+      "source": "PLACEHOLDER for a real load balancer's policy: dispatch to the READY replica with the fewest running+waiting requests. See kubegym/core/router.py for the alternatives."
+    },
+    {
+      "field": "rs_contention_slowdown",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 0.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": true,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER, NOT MEASURED. Per-request service rate is 1/(1 + slowdown*(b-1)) with b in service. The default 0.0 means concurrency slots are perfectly independent, so a loaded replica is as fast as an idle one. That is the OPTIMISTIC end: it makes under-provisioning look cheaper than it would be on real shared-CPU hardware. Set >0 for a pessimistic sensitivity arm."
+    },
+    {
+      "field": "rs_max_concurrency",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": 4,
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER, NOT MEASURED. Requests served simultaneously per replica; the rest queue FIFO. Round number chosen to be obviously synthetic. This is the binding capacity constant of the model, analogous to kv_tokens_per_replica in the LLM model."
+    },
+    {
+      "field": "rs_queue_discipline",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": "fifo",
+      "calibrated": false,
+      "required_for_claims": false,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "Design choice, not a measurement: per-replica FIFO with an unbounded queue, no admission control, no timeouts, no drops. Real platforms shed load; this model does not, which makes queueing delay the only visible symptom of overload."
+    },
+    {
+      "field": "rs_service_time_distribution",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": {
+        "family": "lognormal",
+        "mu": 0.0,
+        "sigma": 1.0,
+        "min_s": 0.01,
+        "max_s": 600.0
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "service_model",
+      "source": "PLACEHOLDER, NOT MEASURED. Lognormal with mu=0, sigma=1 on the natural-log scale of seconds (median 1.0 s, mean about 1.65 s, CV about 1.31) -- deliberately round parameters, not an estimate of any workload. Drawn once per request at episode build time so controller comparisons are paired. Tail heaviness (sigma) is the parameter that decides whether capacity planning is hard at all, so it must not be treated as an empirical choice. When a replay trace supplies a measured service_time_s per record, that value is used verbatim and this field is not consulted.",
+      "note": "The workload corpus phase is expected to replace this with measured per-function durations from a public trace, at which point the field's source string must name the trace, its version, and the extraction procedure."
+    },
+    {
+      "field": "slo",
+      "config": "request_service_default.json",
+      "service_model": "request_service",
+      "value": {
+        "latency_p95_s": 1.0,
+        "latency_hard_s": 5.0,
+        "queue_delay_p95_s": 0.5
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "weak_evidence": false,
+      "flagged_optimistic": false,
+      "consumed_by": "eval/other layer",
+      "source": "DESIGN CHOICE pending calibration, not a measurement. Provisional targets so the cost-SLO objective is well defined. They must be identical across controllers in any comparison."
+    }
+  ],
+  "output_length_model": {
+    "module": "kubegym/models/length_model.py",
+    "calibrated": false,
+    "label": "PLACEHOLDER (not measured; per-class output-length distribution pending live-model measurement)",
+    "placeholder_params_lognormal_mu_sigma": {
+      "short|no_think": {
+        "mu": 4.60517,
+        "sigma": 0.5
+      },
+      "short|think": {
+        "mu": 5.991465,
+        "sigma": 0.8
+      },
+      "long|no_think": {
+        "mu": 5.991465,
+        "sigma": 0.8
+      },
+      "long|think": {
+        "mu": 7.600902,
+        "sigma": 1.0
+      }
+    },
+    "placeholder_cap_tokens": 32768,
+    "status": "PLACEHOLDER. Dominant uncalibrated input: it sets the offered token load. Not upgraded by the port. Drops in automatically when measured_lengths.json exists; until then LengthModel.calibrated is False."
+  },
+  "service_model_provenance": {
+    "llm_serving": {
+      "service_model": "llm_serving",
+      "step_time_model": "t_step(b) = a0 + a1*b, a0=0.01657539 s, a1=0.00011063 s/seq",
+      "kv_tokens_per_replica": 55200,
+      "prefill_tokens_per_s": 6000.0,
+      "known_infidelities": [
+        "prefill_tokens_per_s is a PLACEHOLDER (never measured); all TTFT numbers are placeholder-derived",
+        "decode step time above batch 8 is an unmeasured affine extrapolation; real engines saturate, so this is OPTIMISTIC about large batches",
+        "chunked prefill not modelled: OVERSTATES the inter-token spike on admission, UNDERSTATES long-prompt TTFT under load",
+        "preemption victim order (most-recently-admitted) was not read from vLLM source"
+      ],
+      "config_provenance": {
+        "schema": "kubegym-config-1",
+        "calibrated": false,
+        "uncalibrated_required_fields": [
+          "decode_batch_extrapolation_above_8",
+          "output_length_distribution",
+          "prefill_tokens_per_s"
+        ],
+        "calibration_note": "UNCALIBRATED OVERALL. Cold start, KV budget and the decode step-time model on batch<=8 are MEASURED on the GPU testbed (vLLM 0.25.1 / Qwen3-1.7B / single L40S 46GB). The per-class OUTPUT-LENGTH DISTRIBUTION is still a labelled placeholder from length_model.py, prefill throughput was never measured, and decode step time above batch 8 is an unmeasured affine extrapolation. No number produced by this simulator may be reported as an empirical result.",
+        "config_path": "llm_serving_l40s.json",
+        "measured_fields": [
+          "decode_step_time_s",
+          "kv_tokens_per_replica"
+        ],
+        "placeholder_fields": [
+          "decode_batch_extrapolation_above_8",
+          "max_num_seqs",
+          "output_length_distribution",
+          "preemption_policy",
+          "prefill_tokens_per_s"
+        ],
+        "weak_evidence_fields": [],
+        "flagged_optimistic_fields": [
+          "decode_batch_extrapolation_above_8"
+        ],
+        "overrides": []
+      },
+      "length_model": {
+        "calibrated": false,
+        "label": "PLACEHOLDER (not measured; per-class output-length distribution pending live-model measurement)"
+      }
+    },
+    "request_service": {
+      "service_model": "request_service",
+      "calibrated": false,
+      "status": "MODELLING SCAFFOLD. Every constant is a placeholder; none was measured on any system. No number from this model is reportable.",
+      "max_concurrency": 4,
+      "contention_slowdown": 0.0,
+      "service_time_distribution": {
+        "family": "lognormal",
+        "mu": 0.0,
+        "sigma": 1.0,
+        "min_s": 0.01,
+        "max_s": 600.0
+      },
+      "known_infidelities": [
+        "rs_contention_slowdown default 0.0 makes a loaded replica as fast as an idle one: OPTIMISTIC, under-provisioning looks cheaper than on real hardware",
+        "no per-request cold start (only replica-level); a warm-container platform would differ",
+        "unbounded queue, no admission control, no drops or timeouts",
+        "service time is independent of replica state and of the request payload"
+      ],
+      "config_provenance": {
+        "schema": "kubegym-config-1",
+        "calibrated": false,
+        "uncalibrated_required_fields": [
+          "rs_max_concurrency",
+          "rs_service_time_distribution"
+        ],
+        "calibration_note": "UNCALIBRATED, ENTIRELY. No constant in this config was measured. The request-service model exists so that a serverless/microservice workload corpus has a physics layer to land on and so that the ServiceModel seam is exercised by a model structurally unlike LLM decoding (no token stream, no growing memory footprint, no preemption). No number produced with this config may be reported as an empirical result. Cold start, per-replica concurrency and the service-time distribution are the three constants that would need real measurement (or a documented citation to a measured public dataset) before any claim.",
+        "config_path": "request_service_default.json",
+        "measured_fields": [],
+        "placeholder_fields": [
+          "rs_contention_slowdown",
+          "rs_max_concurrency",
+          "rs_queue_discipline",
+          "rs_service_time_distribution"
+        ],
+        "weak_evidence_fields": [],
+        "flagged_optimistic_fields": [
+          "rs_contention_slowdown"
+        ],
+        "overrides": []
+      }
+    }
+  },
+  "verified_interface_facts": {
+    "metrics_verified_present_vllm_0_25_1": [
+      "vllm:num_requests_running",
+      "vllm:num_requests_waiting",
+      "vllm:kv_cache_usage_perc",
+      "vllm:num_preemptions_total",
+      "vllm:generation_tokens_total",
+      "vllm:request_success_total"
+    ],
+    "metrics_verified_absent": {
+      "vllm:gpu_cache_usage_perc": "absent from all 66 vllm:* families on the live server; ClusterState.get() raises"
+    },
+    "guard_enforced_in": [
+      "kubegym/core/state.py: RETIRED_METRIC_NAMES (always-on floor)",
+      "kubegym/models/llm_serving.py: RETIRED_METRIC_NAMES"
+    ],
+    "sequential_replica_bringup": "verified operational constraint: concurrent vLLM engine init fails KV sizing; default replica_bringup=sequential"
+  },
+  "parity": {
+    "cases": 14,
+    "all_bit_exact": true,
+    "comparison": "per-request t_done and t_first_token, generated tokens, preemption counts, replica-seconds, scale-event log",
+    "note": "run with replica_bringup=parallel to match the source simulator"
+  },
+  "timing": {
+    "budget_s_per_simulated_hour": 5.5,
+    "original_s_per_simulated_hour": 5.467405915958807,
+    "kubegym_s_per_simulated_hour": 3.94853316701483,
+    "control_step_ms": {
+      "step_ms_mean": 16.22,
+      "step_ms_median": 16.39,
+      "step_ms_p95": 20.34,
+      "step_ms_max": 23.65
+    },
+    "reference_control_step_budget_ms": [
+      13,
+      25
+    ]
+  },
+  "package_file_sha256": {
+    "kubegym/__init__.py": "c0adbf4adc26634d2f6398d7edaddc7f66293a84d020e921fb97b07f1fc29fe2",
+    "kubegym/provenance.py": "bc6f2dc8d71ca8018d9db647126117427569e88c2ced703fcc8e5dbbd1e90613",
+    "kubegym/core/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kubegym/core/engine.py": "4df90c21113dbf08dcc998ce8fb639e8731f6cc91eb5a770657109a78065594d",
+    "kubegym/core/replica.py": "fed1ee9e256dad90ecd08c5b104fdfffea5f3943d98821b2ee537ec9047bce22",
+    "kubegym/core/router.py": "dc8de670123c2852a21dbe720ebc752f163413ec2ae07e56ad82dfd1c0829ee7",
+    "kubegym/core/service.py": "35bbaf394249c61a1a058678bed8476a7f260162ce8af4d38ccb19b336019a1d",
+    "kubegym/core/state.py": "73562119d00fdf761bde3ac9188c5f8ff088480ad969b8b6ab7cb2a0ce1200bb",
+    "kubegym/core/workload.py": "0ed62527270f972a3d2c422e5a24dada7ee27179460dbe9ce5a416dda8555f40",
+    "kubegym/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kubegym/tests/conftest.py": "12c5d8d1e57d40b22fb621b5fd88c27d8a32069380ec9282a6c15e94c1e8ecfd",
+    "kubegym/tests/test_episode.py": "58f2390c9e2e4deed16e60e87f2a5834e73c9446726f32a5840aa5284bb9d1a5",
+    "kubegym/tests/test_metric_guard.py": "36adc57ce7cf911e9ce6d4dd1e3d59c03eef8ccfa9ee567d4d0f1223df095c76",
+    "kubegym/tests/test_parity.py": "97882c69c45543371a2b8e2235b3a5fb2a527004d1dbd3dc899459b26a07218f",
+    "kubegym/tests/test_provenance.py": "d4e3ea39c1d7d5c23a88269b959df80d1c7caf7edfb695447e962b0a351fc6d9",
+    "kubegym/tests/test_replica_pool.py": "b139106f5ea437caf523af574ce7b52e4cc1878eda28fb838a31315db16dad67",
+    "kubegym/tests/test_service_models.py": "29f5426896107fe1ff6fd19a776c1b9880d2bc3339063f5064a2d5d8bbd232b6",
+    "kubegym/tests/data/README.md": "3a1dc44d318a3b46bcb97c0906a5f31950ca92dc7d6f5eeaf0cc87dafc8f86a6",
+    "kubegym/tests/data/S1_dev.jsonl": "2d8c19b0d6ccd8be26ce3d07bb6b897ea52bae2ab76178dc570d1c62737c59f7",
+    "kubegym/tests/data/S3_dev.jsonl": "4c366a3e2d2e01f521f11b8ba71ab5cdd71ba1bc95dea099d57d067dd179f007",
+    "kubegym/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kubegym/models/length_model.py": "7d35ce5e6e89b278fef16f6678a45faf636bcdc56ca0274ffc77b05115d60d34",
+    "kubegym/models/llm_serving.py": "596d5c81baaf29697b4c36899c821ddb4359611e47da26b38a4b05abe19f31af",
+    "kubegym/models/request_service.py": "1ecacb9af2b5db74db700b5b0aa0ae44eafe5c8603dc9c48b4bd0d97ecf19811",
+    "kubegym/configs/llm_serving_l40s.json": "2f7624f9afd7a45ddaa8f438791e3b44a69e2e41cb4556b03db2c54a49058728",
+    "kubegym/configs/request_service_default.json": "c7122c8ac397702200ba515009fe39ce02c240fb9c138f8968dae6bd72f403eb"
+  }
+}

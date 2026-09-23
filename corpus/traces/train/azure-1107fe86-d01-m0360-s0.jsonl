@@ -1,0 +1,15 @@
+{"seq":0,"t_arrival":33.231967,"service_time_s":0.001000}
+{"seq":1,"t_arrival":281.768662,"service_time_s":0.001000}
+{"seq":2,"t_arrival":535.308386,"service_time_s":0.001000}
+{"seq":3,"t_arrival":729.621845,"service_time_s":0.001000}
+{"seq":4,"t_arrival":965.139892,"service_time_s":0.007890}
+{"seq":5,"t_arrival":1249.579476,"service_time_s":0.001000}
+{"seq":6,"t_arrival":1449.701846,"service_time_s":0.001000}
+{"seq":7,"t_arrival":1689.685611,"service_time_s":0.008523}
+{"seq":8,"t_arrival":1978.089865,"service_time_s":0.001000}
+{"seq":9,"t_arrival":2188.238665,"service_time_s":0.001000}
+{"seq":10,"t_arrival":2420.266440,"service_time_s":0.010147}
+{"seq":11,"t_arrival":2641.414304,"service_time_s":0.007988}
+{"seq":12,"t_arrival":2927.397449,"service_time_s":0.011253}
+{"seq":13,"t_arrival":3177.257533,"service_time_s":0.001000}
+{"seq":14,"t_arrival":3373.786709,"service_time_s":0.001000}

@@ -1,0 +1,999 @@
+{
+  "apps": [
+    {
+      "app_hash": "123e78a859f4d26d3b9c51d662a24ed71cb32a6e7d1d16052457475a0bd3b484",
+      "dominant_trigger": "http",
+      "regime": "sparse",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 1.132546296296297,
+        "mean_rate_per_minute": 0.000744047619047619,
+        "peak_per_minute": 2.0,
+        "rel_fourier24": 1.9999999999999998,
+        "total_invocations_14d": 15.0,
+        "zero_minute_fraction": 0.9993055555555556
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "0ac69b228fb7ef91a20392c527949bf389ed5e31d999789d6ab0bb9037f79dd6",
+      "dominant_trigger": "timer",
+      "regime": "sparse",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 0.9993055555555559,
+        "mean_rate_per_minute": 0.0006944444444444445,
+        "peak_per_minute": 1.0,
+        "rel_fourier24": 2.0,
+        "total_invocations_14d": 14.0,
+        "zero_minute_fraction": 0.9993055555555556
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "0d1b16a345c6ed2365d241b5bcf843e24ea7980e042813b132730a77855bc604",
+      "dominant_trigger": "event",
+      "regime": "sparse",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 1.283961640211641,
+        "mean_rate_per_minute": 0.0010416666666666667,
+        "peak_per_minute": 3.0,
+        "rel_fourier24": 1.6272522676941994,
+        "total_invocations_14d": 21.0,
+        "zero_minute_fraction": 0.9990575396825396
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "23a9554936e90d4a1645cc20c8ca46dcb1f4b7f6203e5f6e393add2c91eaecee",
+      "dominant_trigger": "http",
+      "regime": "sparse",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 1.417385477582846,
+        "mean_rate_per_minute": 0.0028273809523809523,
+        "peak_per_minute": 3.0,
+        "rel_fourier24": 1.8163797652201028,
+        "total_invocations_14d": 57.0,
+        "zero_minute_fraction": 0.9976686507936507
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "41873a481d316e16df8ee133d83ff7a7cc94478e895052cecc2c8a155b1c37ea",
+      "dominant_trigger": "orchestration",
+      "regime": "sparse",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 8.991607384823846,
+        "mean_rate_per_minute": 0.008134920634920636,
+        "peak_per_minute": 11.0,
+        "rel_fourier24": 1.8685117976591783,
+        "total_invocations_14d": 164.0,
+        "zero_minute_fraction": 0.9988591269841269
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "6db011fb4e7163983a1797e9702c62a1d81f5da586b6223b8aa8603835d288c8",
+      "dominant_trigger": "timer",
+      "regime": "sparse",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 0.9833333333333336,
+        "mean_rate_per_minute": 0.016666666666666666,
+        "peak_per_minute": 1.0,
+        "rel_fourier24": 1.469228272652485e-16,
+        "total_invocations_14d": 336.0,
+        "zero_minute_fraction": 0.9833333333333333
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "96b99aaf94584420d72ebfb73895189aa7e654a6085eebda921c9b3cc414653a",
+      "dominant_trigger": "http",
+      "regime": "sparse",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 18.671965277777776,
+        "mean_rate_per_minute": 0.01984126984126984,
+        "peak_per_minute": 58.0,
+        "rel_fourier24": 1.0526495273500802,
+        "total_invocations_14d": 400.0,
+        "zero_minute_fraction": 0.9939484126984127
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "31656c8c0c06e1c833a6d5c3829e1e5165eec7e18b177d74c06c20a75636314d",
+      "dominant_trigger": "queue",
+      "regime": "sparse",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 5.899999999999997,
+        "mean_rate_per_minute": 0.1,
+        "peak_per_minute": 6.0,
+        "rel_fourier24": 8.601860735312776e-17,
+        "total_invocations_14d": 2016.0,
+        "zero_minute_fraction": 0.9833333333333333
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "3219ee2324f1bd23951da6d012ea68197cd09c9656498999dd1a7148651e2e8a",
+      "dominant_trigger": "orchestration",
+      "regime": "sparse",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 20.78196164430685,
+        "mean_rate_per_minute": 0.03204365079365079,
+        "peak_per_minute": 31.0,
+        "rel_fourier24": 1.9992435194815277,
+        "total_invocations_14d": 646.0,
+        "zero_minute_fraction": 0.9979166666666667
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "31d8d2ace1ab9d734259b8ba90bf5cba0f0f5021d7109fe0f8a6ced8526fd2f8",
+      "dominant_trigger": "timer",
+      "regime": "intermittent",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 0.8005455980043553,
+        "mean_rate_per_minute": 0.19995039682539684,
+        "peak_per_minute": 2.0,
+        "rel_fourier24": 0.001494900009430121,
+        "total_invocations_14d": 4031.0,
+        "zero_minute_fraction": 0.8000992063492063
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "d0e2141fe1963785da2f2a3fb36221eb2e4cb2cf64bbfecd987714417ba1fa84",
+      "dominant_trigger": "http",
+      "regime": "intermittent",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 2.4427380868627173,
+        "mean_rate_per_minute": 0.11750992063492063,
+        "peak_per_minute": 10.0,
+        "rel_fourier24": 1.1439906348341207,
+        "total_invocations_14d": 2369.0,
+        "zero_minute_fraction": 0.9293154761904762
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "953f25791ccf34b00d787c84835ab8a4a619e03a9a32e7921bb0b7ff9f074f71",
+      "dominant_trigger": "queue",
+      "regime": "intermittent",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 2.0929761904761905,
+        "mean_rate_per_minute": 0.10416666666666667,
+        "peak_per_minute": 10.0,
+        "rel_fourier24": 0.5375887936068175,
+        "total_invocations_14d": 2100.0,
+        "zero_minute_fraction": 0.9290674603174603
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "1107fe865171d80e9df93cba0e57f7f8fe1fb1890a932d31cdf511b0df9df1f5",
+      "dominant_trigger": "timer",
+      "regime": "intermittent",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 0.7500986943672534,
+        "mean_rate_per_minute": 0.24990079365079365,
+        "peak_per_minute": 1.0,
+        "rel_fourier24": 3.636446780442376e-05,
+        "total_invocations_14d": 5038.0,
+        "zero_minute_fraction": 0.7500992063492063
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "0f940025f73fb57c0a062892a6e666fbeeb1ebb1df73f33c41530b23f940b7bf",
+      "dominant_trigger": "event",
+      "regime": "intermittent",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 2.5882726868935353,
+        "mean_rate_per_minute": 0.20163690476190477,
+        "peak_per_minute": 5.0,
+        "rel_fourier24": 0.01506432597850243,
+        "total_invocations_14d": 4065.0,
+        "zero_minute_fraction": 0.9209821428571429
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "35f4020896682cc6ba62110909db9f9c9c9e73f0b79e1ca3ce9817567b1c0c59",
+      "dominant_trigger": "others",
+      "regime": "intermittent",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 0.6670134237899159,
+        "mean_rate_per_minute": 0.33328373015873014,
+        "peak_per_minute": 2.0,
+        "rel_fourier24": 0.0008929772773711293,
+        "total_invocations_14d": 6719.0,
+        "zero_minute_fraction": 0.666765873015873
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "ddfd297a55a84b5e2bcb5a061c946731e9ef68830f37fbb4e9d6221ab243a831",
+      "dominant_trigger": "queue",
+      "regime": "intermittent",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 58.66614697781666,
+        "mean_rate_per_minute": 4.4244047619047615,
+        "peak_per_minute": 306.0,
+        "rel_fourier24": 0.12280383291953616,
+        "total_invocations_14d": 89196.0,
+        "zero_minute_fraction": 0.8940476190476191
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "dc5a634543c6dbe13eebb4b7106c6cae6969a8743b8bc3dce843f578818e512b",
+      "dominant_trigger": "http",
+      "regime": "intermittent",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 5.295033204205866,
+        "mean_rate_per_minute": 0.35853174603174603,
+        "peak_per_minute": 30.0,
+        "rel_fourier24": 0.88494975097833,
+        "total_invocations_14d": 7228.0,
+        "zero_minute_fraction": 0.8068948412698412
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "8b6cc571e2cf2e070752c065be56151098698e5b9873b290acda21eae2ad2e38",
+      "dominant_trigger": "timer",
+      "regime": "intermittent",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 1.882230949087796,
+        "mean_rate_per_minute": 0.3347222222222222,
+        "peak_per_minute": 4.0,
+        "rel_fourier24": 0.008230041049052067,
+        "total_invocations_14d": 6748.0,
+        "zero_minute_fraction": 0.7997519841269841
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "ee4dbef01c67514c35e894d815cd7da0986bd16f0d6412af4c1f801bff09191d",
+      "dominant_trigger": "queue",
+      "regime": "diurnal",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 1.9358756700596278,
+        "mean_rate_per_minute": 0.823561507936508,
+        "peak_per_minute": 15.0,
+        "rel_fourier24": 0.5559692197576099,
+        "total_invocations_14d": 16603.0,
+        "zero_minute_fraction": 0.5918650793650794
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "539b96bee834188ca431401fe7aaf081ea45deaa2a1f598115841021fb7cae7c",
+      "dominant_trigger": "storage",
+      "regime": "diurnal",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 9.32305540766036,
+        "mean_rate_per_minute": 2.7017857142857142,
+        "peak_per_minute": 148.0,
+        "rel_fourier24": 0.9499217190790974,
+        "total_invocations_14d": 54468.0,
+        "zero_minute_fraction": 0.5341765873015873
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "ee0eb230672f601cf9912afa573c7164cd14d17eca3165c17007a64b05f8877e",
+      "dominant_trigger": "http",
+      "regime": "diurnal",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 415.58487956842185,
+        "mean_rate_per_minute": 2.1760912698412698,
+        "peak_per_minute": 801.0,
+        "rel_fourier24": 1.559951257279223,
+        "total_invocations_14d": 43870.0,
+        "zero_minute_fraction": 0.5587797619047619
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "7b2af4670587c323401a45d0481a9a86d5124085abb70bee74dac2b7ba3ea018",
+      "dominant_trigger": "http",
+      "regime": "diurnal",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 32.436328244356446,
+        "mean_rate_per_minute": 3.6075396825396826,
+        "peak_per_minute": 728.0,
+        "rel_fourier24": 0.9346505358631639,
+        "total_invocations_14d": 72728.0,
+        "zero_minute_fraction": 0.5300099206349207
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "8cd98007a10e91e8a9fdde772d32777fbae368b2bd383a7507712aa67a5c3b6a",
+      "dominant_trigger": "event",
+      "regime": "diurnal",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 5.0731151496023585,
+        "mean_rate_per_minute": 11.630257936507936,
+        "peak_per_minute": 50.0,
+        "rel_fourier24": 0.7691184238524831,
+        "total_invocations_14d": 234466.0,
+        "zero_minute_fraction": 0.020238095238095277
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "648868e91832e145fdb7ffc6656623b24a922edfcf2897b09c9a5c5ed01cc51d",
+      "dominant_trigger": "queue",
+      "regime": "diurnal",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 181.95777596398824,
+        "mean_rate_per_minute": 12.21155753968254,
+        "peak_per_minute": 651.0,
+        "rel_fourier24": 1.100592608512139,
+        "total_invocations_14d": 246185.0,
+        "zero_minute_fraction": 0.0022817460317460236
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "fefe05bb8fe855b4bdffcf4794362efafac000af1f54876216dafc67239ceaa2",
+      "dominant_trigger": "http",
+      "regime": "diurnal",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 102.60515498592012,
+        "mean_rate_per_minute": 91.95570436507937,
+        "peak_per_minute": 482.0,
+        "rel_fourier24": 1.331678546604121,
+        "total_invocations_14d": 1853827.0,
+        "zero_minute_fraction": 0.23258928571428572
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "4dd8d457b9ea5a8c01df263c97fa73f45fd400358bd3fe9e22aff9ae4f9148c7",
+      "dominant_trigger": "storage",
+      "regime": "diurnal",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 554.2629954548588,
+        "mean_rate_per_minute": 27.50128968253968,
+        "peak_per_minute": 1718.0,
+        "rel_fourier24": 1.2977677447734712,
+        "total_invocations_14d": 554426.0,
+        "zero_minute_fraction": 0.5088789682539683
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "2e86203814fef0b26c3059068a680e5f0fd989df5d6360206dab3c5586ae7e54",
+      "dominant_trigger": "queue",
+      "regime": "diurnal",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 554.7538104989991,
+        "mean_rate_per_minute": 226.72237103174604,
+        "peak_per_minute": 3965.0,
+        "rel_fourier24": 0.8657951168085029,
+        "total_invocations_14d": 4570723.0,
+        "zero_minute_fraction": 0.010813492063492025
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "acea92f7533d414d7045a0818850b23e781b518a6b0f9fa86fbb92480f8bdeea",
+      "dominant_trigger": "queue",
+      "regime": "bursty",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 16.41521862213433,
+        "mean_rate_per_minute": 6.421081349206349,
+        "peak_per_minute": 59.0,
+        "rel_fourier24": 0.040155481461701566,
+        "total_invocations_14d": 129449.0,
+        "zero_minute_fraction": 0.11190476190476195
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "e0903e2b0872f3b6fc6b0a917ce89fcd0daf7bd36b76c3b787c7a8e24ecca0b1",
+      "dominant_trigger": "http",
+      "regime": "bursty",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 4.761567969277611,
+        "mean_rate_per_minute": 2.888988095238095,
+        "peak_per_minute": 87.0,
+        "rel_fourier24": 0.06477776241342638,
+        "total_invocations_14d": 58242.0,
+        "zero_minute_fraction": 0.5346230158730159
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "c970ffdfa162037c9173583327cfb98a0c375f7ddb886c83c1254a39e5d83cac",
+      "dominant_trigger": "timer",
+      "regime": "bursty",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 76.30813740361523,
+        "mean_rate_per_minute": 1.4824404761904761,
+        "peak_per_minute": 1047.0,
+        "rel_fourier24": 0.19905252600561693,
+        "total_invocations_14d": 29886.0,
+        "zero_minute_fraction": 0.2094246031746032
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "f3b59153d6b1ecc2e2741c236a1ca6c64ae6f7dd9963fafc39f93de096805615",
+      "dominant_trigger": "event",
+      "regime": "bursty",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 8.245390071574192,
+        "mean_rate_per_minute": 10.113640873015873,
+        "peak_per_minute": 418.0,
+        "rel_fourier24": 0.015604602058063754,
+        "total_invocations_14d": 203891.0,
+        "zero_minute_fraction": 0.06746031746031744
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "3bfe0edeeded588bde5126f6dd5328dd0b5350135f67ae9781768bc5b17efb53",
+      "dominant_trigger": "queue",
+      "regime": "bursty",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 6.944840200692204,
+        "mean_rate_per_minute": 46.33516865079365,
+        "peak_per_minute": 204.0,
+        "rel_fourier24": 0.3113157166111106,
+        "total_invocations_14d": 934117.0,
+        "zero_minute_fraction": 0.0008928571428571397
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "7a9fbb71f99b959c4ec67e6f64c40587fcff724ad50074ee24f035bb06fcbc01",
+      "dominant_trigger": "timer",
+      "regime": "bursty",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 33.698597815448174,
+        "mean_rate_per_minute": 42.59305555555556,
+        "peak_per_minute": 122.0,
+        "rel_fourier24": 0.007603670163235016,
+        "total_invocations_14d": 858676.0,
+        "zero_minute_fraction": 0.029365079365079372
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "5df1b744ae0b64c5888bdc1193a880ade4411e726699f107f54e243f419490b5",
+      "dominant_trigger": "http",
+      "regime": "bursty",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 31.17955851025987,
+        "mean_rate_per_minute": 505.8673115079365,
+        "peak_per_minute": 1030.0,
+        "rel_fourier24": 0.008253617035704396,
+        "total_invocations_14d": 10198285.0,
+        "zero_minute_fraction": 0.0
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "f9682ecb0446ce09c96fadbd5688a1c09cdbaa95ddc3fd4db1f7bcda0fa72176",
+      "dominant_trigger": "queue",
+      "regime": "bursty",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 6.637831859549474,
+        "mean_rate_per_minute": 210.00391865079365,
+        "peak_per_minute": 736.0,
+        "rel_fourier24": 0.009857377159295069,
+        "total_invocations_14d": 4233679.0,
+        "zero_minute_fraction": 0.0015376984126984627
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "009f72f7ae1bc39581c27a9bc53c34ef59d6694bdd09147181251c3ea43caea7",
+      "dominant_trigger": "event",
+      "regime": "bursty",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 125.29680672072205,
+        "mean_rate_per_minute": 243.04920634920634,
+        "peak_per_minute": 2104.0,
+        "rel_fourier24": 0.2543427226710716,
+        "total_invocations_14d": 4899872.0,
+        "zero_minute_fraction": 0.01651785714285714
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "5cd6cf86bbb41adabde7a164545e1423ab51c676d7cdb3792f59322b3828e371",
+      "dominant_trigger": "http",
+      "regime": "steady",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 0.012622897269166263,
+        "mean_rate_per_minute": 0.9891369047619047,
+        "peak_per_minute": 3.0,
+        "rel_fourier24": 0.02239600221595497,
+        "total_invocations_14d": 19941.0,
+        "zero_minute_fraction": 0.011755952380952395
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "f5d03658f6228571b13a9ebc9c8b606da66936159b57f9d118862bb9f6271511",
+      "dominant_trigger": "timer",
+      "regime": "steady",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 0.5944534450733864,
+        "mean_rate_per_minute": 0.9376488095238096,
+        "peak_per_minute": 29.0,
+        "rel_fourier24": 0.16756541705672928,
+        "total_invocations_14d": 18903.0,
+        "zero_minute_fraction": 0.25089285714285714
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "a63598904ad34f19d47b9ca579ff9ead95a960465f5d7eb0481d717135237783",
+      "dominant_trigger": "event",
+      "regime": "steady",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 0.7162433571559464,
+        "mean_rate_per_minute": 0.902281746031746,
+        "peak_per_minute": 6.0,
+        "rel_fourier24": 0.08236029226013719,
+        "total_invocations_14d": 18190.0,
+        "zero_minute_fraction": 0.35525793650793647
+      },
+      "volume_tercile": "low"
+    },
+    {
+      "app_hash": "12f44dc6422adc999aed9e1781d23c4384ef420aa57035cb7af2b637c7ad8b62",
+      "dominant_trigger": "timer",
+      "regime": "steady",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 1.3477376075878382,
+        "mean_rate_per_minute": 2.2604166666666665,
+        "peak_per_minute": 38.0,
+        "rel_fourier24": 0.20554757579087193,
+        "total_invocations_14d": 45570.0,
+        "zero_minute_fraction": 0.0025297619047619513
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "3b7fd3358bda52820635bb21c2a50aa49c8526af5a4391aa9bb06c1cc7cf2cc2",
+      "dominant_trigger": "http",
+      "regime": "steady",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 1.5792803448067254,
+        "mean_rate_per_minute": 2.368700396825397,
+        "peak_per_minute": 30.0,
+        "rel_fourier24": 0.027815295963729697,
+        "total_invocations_14d": 47753.0,
+        "zero_minute_fraction": 0.37043650793650795
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "e08b81b9836da4f3f6f807a65c4aeb996d0f9e60b77617cb7c1732ae8fb8e452",
+      "dominant_trigger": "orchestration",
+      "regime": "steady",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 0.14705317814365138,
+        "mean_rate_per_minute": 2.157142857142857,
+        "peak_per_minute": 8.0,
+        "rel_fourier24": 0.05725823084295147,
+        "total_invocations_14d": 43488.0,
+        "zero_minute_fraction": 0.0
+      },
+      "volume_tercile": "mid"
+    },
+    {
+      "app_hash": "227584efd308007f4c74a63ab522bf7fb98f9bc64738d5f67c6a8233601c6ce6",
+      "dominant_trigger": "http",
+      "regime": "steady",
+      "split": "train",
+      "stats": {
+        "index_of_dispersion": 0.023703987083414545,
+        "mean_rate_per_minute": 7.974107142857143,
+        "peak_per_minute": 16.0,
+        "rel_fourier24": 0.003264494330997147,
+        "total_invocations_14d": 160758.0,
+        "zero_minute_fraction": 0.00024801587301592765
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "5a577bbd7358594c18416bad18d2eb7c72f0af7a1c8b3e8ea1b5dec32f5dc589",
+      "dominant_trigger": "timer",
+      "regime": "steady",
+      "split": "dev",
+      "stats": {
+        "index_of_dispersion": 0.007228977437855694,
+        "mean_rate_per_minute": 11.98531746031746,
+        "peak_per_minute": 13.0,
+        "rel_fourier24": 0.0013087056320924611,
+        "total_invocations_14d": 241624.0,
+        "zero_minute_fraction": 0.0
+      },
+      "volume_tercile": "high"
+    },
+    {
+      "app_hash": "e474cb1a1d0140ba80d32f2538cb381e28be966cd0a2217780ed6d1560d1a306",
+      "dominant_trigger": "event",
+      "regime": "steady",
+      "split": "test",
+      "stats": {
+        "index_of_dispersion": 0.1999426697797605,
+        "mean_rate_per_minute": 6.026488095238095,
+        "peak_per_minute": 17.0,
+        "rel_fourier24": 0.016210208487314397,
+        "total_invocations_14d": 121494.0,
+        "zero_minute_fraction": 0.005555555555555536
+      },
+      "volume_tercile": "high"
+    }
+  ],
+  "meta": {
+    "dataset": "Azure Functions Trace 2019 (revision 2, 20200618)",
+    "documentation_url": "https://github.com/Azure/AzurePublicDataset/blob/master/AzureFunctionsDataset2019.md",
+    "duration_table_audit": {
+      "full_table": {
+        "apps_affected": 14,
+        "functions_affected": 23,
+        "maximum_below_percentile_100": 1,
+        "maximum_equals_zero_rows": 6085,
+        "minimum_above_percentile_0": 20,
+        "minmax_negative": 7,
+        "minmax_null": 1,
+        "minmax_unusable_fraction": 4.374538976388049e-05,
+        "minmax_unusable_total": 29,
+        "n_apps": 24937,
+        "n_function_days": 662927,
+        "n_functions": 82375,
+        "note": "Categories are not disjoint. 'unusable' drives the minmax_usable flag; under the default missing_minmax_policy='percentile_bounds' it changes no draw, because Minimum/Maximum are not used as knots.",
+        "percentiles_negative_rows": 7,
+        "percentiles_nonmonotone_rows": 0
+      },
+      "selected_apps": {
+        "apps_affected": 0,
+        "functions_affected": 0,
+        "maximum_below_percentile_100": 0,
+        "maximum_equals_zero_rows": 12,
+        "minimum_above_percentile_0": 0,
+        "minmax_negative": 0,
+        "minmax_null": 0,
+        "minmax_unusable_fraction": 0.0,
+        "minmax_unusable_total": 0,
+        "n_apps": 45,
+        "n_function_days": 2248,
+        "n_functions": 214,
+        "note": "Categories are not disjoint. 'unusable' drives the minmax_usable flag; under the default missing_minmax_policy='percentile_bounds' it changes no draw, because Minimum/Maximum are not used as knots.",
+        "percentiles_negative_rows": 0,
+        "percentiles_nonmonotone_rows": 0
+      }
+    },
+    "license": "CC-BY Attribution License (per dataset LICENSE)",
+    "population_comparison": {
+      "axes": {
+        "index_of_dispersion": {
+          "population_all_14day_apps": {
+            "mean": 110.05184043006778,
+            "n": 13057,
+            "p10": 0.44939300991684633,
+            "p50": 0.999305555555556,
+            "p90": 37.22773482066879
+          },
+          "selected": {
+            "mean": 51.27547397784155,
+            "n": 45,
+            "p10": 0.357746979897211,
+            "p50": 4.761567969277611,
+            "p90": 116.2201460268013
+          }
+        },
+        "mean_rate_per_minute": {
+          "population_all_14day_apps": {
+            "mean": 44.96407712794086,
+            "n": 13057,
+            "p10": 0.001388888888888889,
+            "p50": 0.2331845238095238,
+            "p90": 8.800505952380945
+          },
+          "selected": {
+            "mean": 33.11538470017637,
+            "n": 45,
+            "p10": 0.011547619047619051,
+            "p50": 2.157142857142857,
+            "p90": 73.70749007936514
+          }
+        },
+        "peak": {
+          "population_all_14day_apps": {
+            "mean": 439.3198284445125,
+            "n": 13057,
+            "p10": 1.0,
+            "p50": 4.0,
+            "p90": 260.0
+          },
+          "selected": {
+            "mean": 333.5777777777778,
+            "n": 45,
+            "p10": 2.0,
+            "p50": 30.0,
+            "p90": 938.4000000000003
+          }
+        },
+        "rel_fourier24": {
+          "population_all_14day_apps": {
+            "mean": 0.5582827020498119,
+            "n": 13057,
+            "p10": 0.0002993699028318143,
+            "p50": 0.07820938216823234,
+            "p90": 1.9942941744744629
+          },
+          "selected": {
+            "mean": 0.5764271859825749,
+            "n": 45,
+            "p10": 0.0013831833830275251,
+            "p50": 0.19905252600561693,
+            "p90": 1.7407287662097417
+          }
+        },
+        "total": {
+          "population_all_14day_apps": {
+            "mean": 906475.7948992878,
+            "n": 13057,
+            "p10": 28.0,
+            "p50": 4701.0,
+            "p90": 177418.19999999987
+          },
+          "selected": {
+            "mean": 667606.1555555556,
+            "n": 45,
+            "p10": 232.80000000000007,
+            "p50": 43488.0,
+            "p90": 1485943.0000000014
+          }
+        },
+        "zero_minute_fraction": {
+          "population_all_14day_apps": {
+            "mean": 0.6873541080865218,
+            "n": 13057,
+            "p10": 0.0008928571428571397,
+            "p50": 0.8000496031746032,
+            "p90": 0.9986111111111111
+          },
+          "selected": {
+            "mean": 0.47572861552028217,
+            "n": 45,
+            "p10": 0.0011507936507936692,
+            "p50": 0.5300099206349207,
+            "p90": 0.9978174603174603
+          }
+        }
+      },
+      "dominant_trigger_share": {
+        "population": {
+          "event": 0.0437,
+          "http": 0.2397,
+          "orchestration": 0.0206,
+          "others": 0.0255,
+          "queue": 0.1208,
+          "storage": 0.0168,
+          "timer": 0.5329
+        },
+        "selected": {
+          "event": 0.1556,
+          "http": 0.2889,
+          "orchestration": 0.0667,
+          "others": 0.0222,
+          "queue": 0.2,
+          "storage": 0.0444,
+          "timer": 0.2222
+        }
+      },
+      "reading": "The selection is stratified, not representative by design: it oversamples the rare regimes (diurnal, bursty) and the high-volume terciles relative to their population share so that every regime an autoscaler faces is present with equal weight. The population columns are given so the distortion is quantified rather than hidden. Note the population itself is dominated by very low-rate applications (median 14-day total ~4.5k invocations, median zero-minute fraction ~0.80), and the corpus keeps that regime as two of its five strata (sparse, intermittent) rather than dropping it.",
+      "regime_share": {
+        "population": {
+          "bursty": 0.0453,
+          "diurnal": 0.0544,
+          "intermittent": 0.3948,
+          "sparse": 0.3334,
+          "steady": 0.1721
+        },
+        "selected": {
+          "bursty": 0.2,
+          "diurnal": 0.2,
+          "intermittent": 0.2,
+          "sparse": 0.2,
+          "steady": 0.2
+        }
+      }
+    },
+    "required_attribution": "Shahrad, Fonseca, Goiri, Chaudhry, Batum, Cooke, Laureano, Tresness, Russinovich, Bianchini. 'Serverless in the Wild: Characterizing and Optimizing the Serverless Workload at a Large Cloud Provider', USENIX ATC 2020.",
+    "selection": {
+      "apps_per_cell": 3,
+      "candidate_regime_counts": {
+        "bursty": 523,
+        "diurnal": 633,
+        "intermittent": 5105,
+        "sparse": 4294,
+        "steady": 2237
+      },
+      "capacity_envelope_exclusion": {
+        "direction_of_bias": "the corpus under-represents the very-high-volume head of the Azure population, which is where most invocation VOLUME lives even though it is a small share of applications",
+        "fraction_of_14day_apps_excluded": 0.014857930611932297,
+        "fraction_of_14day_invocation_volume_excluded": 0.7868731123043261,
+        "n_apps_excluded": 194,
+        "why": "peak per-minute rate above the modelled platform's serving capacity (n_replicas_max=20 x rs_max_concurrency=4). A trace above the ceiling measures the ceiling, not the controller."
+      },
+      "day_splits": {
+        "dev": [
+          4,
+          10,
+          14
+        ],
+        "test": [
+          5,
+          7,
+          11,
+          12
+        ],
+        "train": [
+          1,
+          2,
+          3,
+          6,
+          8,
+          9,
+          13
+        ]
+      },
+      "n_apps_in_source": 24274,
+      "n_apps_present_all_14_days": 13057,
+      "n_candidates_after_filter": 12792,
+      "n_selected": 45,
+      "peak_per_minute_cap": 4800.0,
+      "rule": "see kubegym/workloads/azure2019.py module docstring; deterministic, no RNG",
+      "seed_bands": {
+        "dev": [
+          100000,
+          200000
+        ],
+        "test": [
+          200000,
+          300000
+        ],
+        "train": [
+          0,
+          100000
+        ]
+      },
+      "selection_salt": "kubegym-azure2019-selection-v1"
+    },
+    "source_facts_verified_against_documentation": [
+      "execution time is in milliseconds and does NOT include cold start time (note 4)",
+      "the percentile_Average_* columns are weighted percentiles of 30-second-interval AVERAGES, not of individual invocation durations (note 7)",
+      "Minimum/Maximum are the true extremes but were not recorded for a few functions owing to a field naming issue in some Azure Functions runtime versions (note 6)",
+      "the durations-table Count comes from a different log than the invocation counts and may rarely diverge (note 5)",
+      "invocation counts are recorded after the functions execute (note 3)"
+    ],
+    "staging_manifest": {
+      "anomaly_to_investigate": "Days 06, 07, 13 and 14 contain markedly fewer distinct functions (~36.0-36.7k) than the other days (~46.4-48.4k), yet comparable total invocation volume. The 7-day spacing is consistent with a weekday/weekend effect, but the source documentation does not state a collection-day mapping, so the calendar alignment is UNVERIFIED and must not be asserted.",
+      "dataset": "Azure Functions Trace 2019 (revision 2, 20200618)",
+      "documentation_url": "https://github.com/Azure/AzurePublicDataset/blob/master/AzureFunctionsDataset2019.md",
+      "downstream_reconstruction_required": "Turning per-minute counts into a request-level arrival trace, and duration percentiles into per-request service times, requires explicit sampling assumptions. Those assumptions are a modelling choice of this benchmark and must be documented and sensitivity-tested, not presented as properties of the source data.",
+      "files": {
+        "azure2019_app_invocations_per_minute.parquet": {
+          "bytes": 161207544,
+          "sha256": "dfd0a87781573d24d2f66078633262615314d2836a3a65a72f721cef83b74cf8"
+        },
+        "azure2019_app_memory.parquet": {
+          "bytes": 10600342,
+          "sha256": "8a2d9ed6952332a118e61d311fcafeaade0e553f1cc8fb9d208956badff6c328"
+        },
+        "azure2019_app_trigger_mix.parquet": {
+          "bytes": 921929,
+          "sha256": "11576466dad3eb9ca63a23d11277fa778267160246e5d6005836f3c849a2d48a"
+        },
+        "azure2019_function_durations.parquet": {
+          "bytes": 49751360,
+          "sha256": "c6fd012111ca49ad80c870830829ec673ac58b968ba9f7f2c1fcb5caafdabf11"
+        }
+      },
+      "license": "CC-BY Attribution License (per dataset LICENSE)",
+      "observed_shape": {
+        "app_day_rows": 241626,
+        "app_day_rows_memory": 206809,
+        "distinct_apps": 24274,
+        "function_day_rows_durations": 662927,
+        "functions_per_day": {
+          "d01": 46412,
+          "d02": 46889,
+          "d03": 47081,
+          "d04": 47527,
+          "d05": 46657,
+          "d06": 36429,
+          "d07": 36031,
+          "d08": 46998,
+          "d09": 47659,
+          "d10": 48405,
+          "d11": 48105,
+          "d12": 47188,
+          "d13": 36676,
+          "d14": 36488
+        },
+        "total_invocations_14d": 12495810846
+      },
+      "raw_archive_bytes": 142968140,
+      "raw_archive_sha256": "aff8b3ca7240a41a109e4ee598e0a96e45fcb92e7b8395ac19cb3748cd260d89",
+      "raw_files": {
+        "app_memory_percentiles.anon.d01-d12.csv": 12,
+        "function_durations_percentiles.anon.d01-d14.csv": 14,
+        "invocations_per_function_md.anon.d01-d14.csv": 14
+      },
+      "required_attribution": "Shahrad, Fonseca, Goiri, Chaudhry, Batum, Cooke, Laureano, Tresness, Russinovich, Bianchini. 'Serverless in the Wild: Characterizing and Optimizing the Serverless Workload at a Large Cloud Provider', USENIX ATC 2020.",
+      "retrieved_utc": "2026-08-29",
+      "schema": "kubegym-azure-staging-1",
+      "source_url": "https://github.com/Azure/AzurePublicDataset/releases/download/dataset-functions-2019/azurefunctions_dataset2019_azurefunctions-dataset2019.tar.xz",
+      "transformations_applied": {
+        "azure2019_app_invocations_per_minute.parquet": "Per-minute invocation counts SUMMED over the functions belonging to each HashApp, per day. Applications are the unit of resource allocation in Azure Functions, so app level is the correct granularity for an autoscaling benchmark. Columns: HashApp, HashOwner, day, '1'..'1440' (int32). HashOwner taken as the first value within the app group (ids are salted per owner, so owner is constant within an app). NO other modification; counts are exact sums of the source.",
+        "azure2019_app_memory.parquet": "Concatenation of the 12 daily app-memory CSVs with a `day` column added. Unmodified.",
+        "azure2019_app_trigger_mix.parquet": "Total invocations per (HashApp, Trigger) summed over all functions and all 14 days, computed BEFORE app aggregation.",
+        "azure2019_function_durations.parquet": "Concatenation of the 14 daily duration CSVs with a `day` column added. Kept at FUNCTION level, unmodified."
+      },
+      "what_the_source_provides": {
+        "durations": "per-FUNCTION execution-time summary statistics and WEIGHTED PERCENTILES OF 30s-INTERVAL AVERAGES (not percentiles of individual invocation durations). Excludes cold-start time.",
+        "invocations": "per-FUNCTION invocation COUNTS for each of the 1440 minutes of each 24h period. NOT per-request timestamps.",
+        "memory": "per-APPLICATION allocated-memory percentiles of per-minute averages."
+      }
+    },
+    "unverified": [
+      "the calendar alignment of days 1-14 (the source documents no collection-day mapping), so the weekday/weekend interpretation of the low-function-count days 6, 7, 13, 14 is a conjecture and is not asserted anywhere in the corpus"
+    ]
+  },
+  "schema": "kubegym-azure-extract-1"
+}

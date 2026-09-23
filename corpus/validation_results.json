@@ -1,0 +1,5085 @@
+{
+ "calibrated": false,
+ "caveat": "The Azure side is itself a reconstruction. Below one minute the 'real' inter-arrival distribution IS arrival-placement assumption A1, so agreement there compares two models. At and above one minute the count series is the recorded data and the comparison is against data.",
+ "rate_match_band_rps": [
+  1.1,
+  6.6000000000000005
+ ],
+ "schema": "kubegym-workload-validation-1",
+ "splits": {
+  "dev": {
+   "azure_mean_rate_rps": {
+    "max": 8.253055555555555,
+    "median": 0.04666666666666667,
+    "min": 0.0005555555555555556
+   },
+   "families": {
+    "burst": {
+     "gen_mean_rate_rps": {
+      "max": 12.369444444444444,
+      "median": 2.896805555555556,
+      "min": 1.3691666666666666
+     },
+     "n_gen_traces": 48,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.35297194925662856,
+       "gen_median": 0.33574031083854944,
+       "over_traces": {
+        "ks_d": 0.5,
+        "ks_p": 2.679651918669934e-07,
+        "mean_a": -0.058808234526647615,
+        "mean_b": 0.34471379806128727,
+        "median_a": -0.017231638418079096,
+        "median_b": 0.33574031083854944,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.403522032587935
+       },
+       "real_median": -0.017231638418079096
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.03588086758119567,
+       "gen_median": -0.07082593316369408,
+       "over_traces": {
+        "ks_d": 0.2644230769230769,
+        "ks_p": 0.02518338436031473,
+        "mean_a": -0.020445619771670726,
+        "mean_b": -0.1360614510931148,
+        "median_a": -0.03494506558249841,
+        "median_b": -0.07082593316369408,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.11561583132144407
+       },
+       "real_median": -0.03494506558249841
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.09979086339672055,
+       "ks_p": 0.0,
+       "mean_a": 1.0,
+       "mean_b": 1.0027383319477916,
+       "median_a": 0.6137116684774908,
+       "median_b": 0.44718858251061716,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 598836,
+       "n_b_used": 199612,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.24943049373134324
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.1626573982822131,
+       "ks_p": 0.0,
+       "mean_a": 1.6794669471450792,
+       "mean_b": 0.2888556594227984,
+       "median_a": 0.20096857132557489,
+       "median_b": 0.10349771405947195,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 598836,
+       "n_b_used": 199612,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 1.3906112877697685
+      },
+      "iod_15s": {
+       "gen_median": 31.498418208333373,
+       "gen_p10_p90": [
+        5.756388281909964,
+        172.19647269832535
+       ],
+       "log10_median_ratio": 1.3484833419139983,
+       "over_traces": {
+        "ks_d": 0.8313008130081301,
+        "ks_p": 7.8250507497939215e-22,
+        "mean_a": 5.092741271971142,
+        "mean_b": 56.93248475395558,
+        "median_a": 1.411904761904762,
+        "median_b": 31.498418208333373,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 51.839743481984435
+       },
+       "real_median": 1.411904761904762,
+       "real_p10_p90": [
+        0.8233780602636535,
+        4.150395021645025
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 3.011484267295508,
+       "gen_p10_p90": [
+        1.3313096894265795,
+        12.430093310907193
+       ],
+       "log10_median_ratio": 0.47833409549111766,
+       "over_traces": {
+        "ks_d": 0.820630081300813,
+        "ks_p": 3.0545727153251564e-21,
+        "mean_a": 1.275376006511101,
+        "mean_b": 4.732784366731099,
+        "median_a": 1.001028640218485,
+        "median_b": 3.011484267295508,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 3.457408360219998
+       },
+       "real_median": 1.001028640218485,
+       "real_p10_p90": [
+        0.9836111111111111,
+        1.3295511695906428
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 122.96976619914054,
+       "gen_p10_p90": [
+        19.964725433386498,
+        685.9768450836582
+       ],
+       "log10_median_ratio": 1.6539866636297837,
+       "over_traces": {
+        "ks_d": 0.8521341463414634,
+        "ks_p": 3.586101687396467e-23,
+        "mean_a": 17.319690721926282,
+        "mean_b": 224.74564774736368,
+        "median_a": 2.7277947154471542,
+        "median_b": 122.96976619914054,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 207.42595702543736
+       },
+       "real_median": 2.7277947154471542,
+       "real_p10_p90": [
+        0.3164331948272788,
+        10.803333333333335
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 82,
+      "rate_per_15s_bin": {
+       "ks_d": 0.868555216802168,
+       "ks_p": 0.0,
+       "mean_a": 7.01224593495935,
+       "mean_b": 51.98645833333333,
+       "median_a": 0.0,
+       "median_b": 33.0,
+       "n_a": 19680,
+       "n_a_used": 19680,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 44.974212398373986
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8873814363143632,
+       "ks_p": 0.0,
+       "mean_a": 28.0489837398374,
+       "mean_b": 207.94583333333333,
+       "median_a": 1.0,
+       "median_b": 145.0,
+       "n_a": 4920,
+       "n_a_used": 4920,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 179.89684959349597
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.46150670655215115,
+       "gen_median": 0.33574031083854944,
+       "over_traces": {
+        "ks_d": 0.5714285714285714,
+        "ks_p": 0.01909793252745528,
+        "mean_a": -0.09534707019865406,
+        "mean_b": 0.34471379806128727,
+        "median_a": -0.1257663957136017,
+        "median_b": 0.33574031083854944,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.4400608682599414
+       },
+       "real_median": -0.1257663957136017
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.022892536878669212,
+       "gen_median": -0.07082593316369408,
+       "over_traces": {
+        "ks_d": 0.27380952380952384,
+        "ks_p": 0.6543712890882702,
+        "mean_a": -0.09644665499247809,
+        "mean_b": -0.1360614510931148,
+        "median_a": -0.09371847004236329,
+        "median_b": -0.07082593316369408,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.08671884305521413
+       },
+       "real_median": -0.09371847004236329
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.13624424628824805,
+       "ks_p": 0.0,
+       "mean_a": 1.0,
+       "mean_b": 1.0027383319477916,
+       "median_a": 0.6816429258502896,
+       "median_b": 0.44718858251061716,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 598836,
+       "n_b_used": 199612,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.27697342782055756
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.20732680514944346,
+       "ks_p": 0.0,
+       "mean_a": 0.31991973190216955,
+       "mean_b": 0.2888556594227984,
+       "median_a": 0.2055387521544958,
+       "median_b": 0.10349771405947195,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 598836,
+       "n_b_used": 199612,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.07939204229496948
+      },
+      "iod_15s": {
+       "gen_median": 31.498418208333373,
+       "gen_p10_p90": [
+        5.756388281909964,
+        172.19647269832535
+       ],
+       "log10_median_ratio": 1.1719118664529475,
+       "over_traces": {
+        "ks_d": 0.9375,
+        "ks_p": 1.1826870872375872e-06,
+        "mean_a": 2.215680920122297,
+        "mean_b": 56.93248475395558,
+        "median_a": 2.1202002355712604,
+        "median_b": 31.498418208333373,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 54.716803833833275
+       },
+       "real_median": 2.1202002355712604,
+       "real_p10_p90": [
+        1.6627718316247926,
+        2.8572102364406806
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 3.011484267295508,
+       "gen_p10_p90": [
+        1.3313096894265795,
+        12.430093310907193
+       ],
+       "log10_median_ratio": 0.4537480358302348,
+       "over_traces": {
+        "ks_d": 0.9166666666666666,
+        "ks_p": 3.252389489903364e-06,
+        "mean_a": 1.077734431094472,
+        "mean_b": 4.732784366731099,
+        "median_a": 1.0593331495971245,
+        "median_b": 3.011484267295508,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 3.655049935636628
+       },
+       "real_median": 1.0593331495971245,
+       "real_p10_p90": [
+        1.0529167186072457,
+        1.1196055744564701
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 122.96976619914054,
+       "gen_p10_p90": [
+        19.964725433386498,
+        685.9768450836582
+       ],
+       "log10_median_ratio": 1.3498738555168972,
+       "over_traces": {
+        "ks_d": 0.9375,
+        "ks_p": 1.1826870872375872e-06,
+        "mean_a": 5.874852113621521,
+        "mean_b": 224.74564774736368,
+        "median_a": 5.494453367598244,
+        "median_b": 122.96976619914054,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 218.87079563374212
+       },
+       "real_median": 5.494453367598244,
+       "real_p10_p90": [
+        3.725407138351491,
+        8.234034942314107
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.46667906746031745,
+       "ks_p": 4.0921098777687085e-293,
+       "mean_a": 46.88333333333333,
+       "mean_b": 51.98645833333333,
+       "median_a": 51.0,
+       "median_b": 33.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 30.131820436507944
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.5755456349206349,
+       "ks_p": 2.7732279689921853e-114,
+       "mean_a": 187.53333333333333,
+       "mean_b": 207.94583333333333,
+       "median_a": 210.5,
+       "median_b": 145.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 126.31121031746035
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8873814363143632
+      ],
+      [
+       "rate_per_15s_bin",
+       0.868555216802168
+      ],
+      [
+       "iod_60s",
+       0.8521341463414634
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_15s",
+       0.9375
+      ],
+      [
+       "iod_60s",
+       0.9375
+      ],
+      [
+       "iod_1s",
+       0.9166666666666666
+      ]
+     ]
+    },
+    "constant": {
+     "gen_mean_rate_rps": {
+      "max": 6.646388888888889,
+      "median": 3.2759722222222223,
+      "min": 1.0722222222222222
+     },
+     "n_gen_traces": 10,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.04845213269396577,
+       "gen_median": 0.03122049427588667,
+       "over_traces": {
+        "ks_d": 0.2692307692307692,
+        "ks_p": 0.4645339584755771,
+        "mean_a": -0.058808234526647615,
+        "mean_b": 0.006059982688848595,
+        "median_a": -0.017231638418079096,
+        "median_b": 0.03122049427588667,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.15165593809148992
+       },
+       "real_median": -0.017231638418079096
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.0015197143540432653,
+       "gen_median": -0.03646477993654167,
+       "over_traces": {
+        "ks_d": 0.20769230769230762,
+        "ks_p": 0.7652187051513899,
+        "mean_a": -0.020445619771670726,
+        "mean_b": -0.018926578639462163,
+        "median_a": -0.03494506558249841,
+        "median_b": -0.03646477993654167,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.051934056145108515
+       },
+       "real_median": -0.03494506558249841
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.04505334775745612,
+       "ks_p": 1.1126591756149166e-116,
+       "mean_a": 1.0,
+       "mean_b": 1.0,
+       "median_a": 0.6137116684774908,
+       "median_b": 0.6981423556734825,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 126210,
+       "n_b_used": 126210,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.13426398093019357
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.11996095350785951,
+       "ks_p": 0.0,
+       "mean_a": 1.6794669471450792,
+       "mean_b": 0.2851384192538381,
+       "median_a": 0.20096857132557489,
+       "median_b": 0.16334165899780828,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 126210,
+       "n_b_used": 126210,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 1.394632789089761
+      },
+      "iod_15s": {
+       "gen_median": 0.9871385366415077,
+       "gen_p10_p90": [
+        0.8526665356542524,
+        1.094232199307029
+       ],
+       "log10_median_ratio": -0.15542729641944653,
+       "over_traces": {
+        "ks_d": 0.6585365853658536,
+        "ks_p": 0.00027786405016707124,
+        "mean_a": 5.092741271971142,
+        "mean_b": 0.9712985582472593,
+        "median_a": 1.411904761904762,
+        "median_b": 0.9871385366415077,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 4.135764979532584
+       },
+       "real_median": 1.411904761904762,
+       "real_p10_p90": [
+        0.8233780602636535,
+        4.150395021645025
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.0006761754882036,
+       "gen_p10_p90": [
+        0.9602513644027711,
+        1.0128010542561612
+       ],
+       "log10_median_ratio": -0.00015294311909287215,
+       "over_traces": {
+        "ks_d": 0.3902439024390244,
+        "ks_p": 0.09875631649774994,
+        "mean_a": 1.275376006511101,
+        "mean_b": 0.9934776123312188,
+        "median_a": 1.001028640218485,
+        "median_b": 1.0006761754882036,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.28194287984483174
+       },
+       "real_median": 1.001028640218485,
+       "real_p10_p90": [
+        0.9836111111111111,
+        1.3295511695906428
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 0.9449400833081316,
+       "gen_p10_p90": [
+        0.7761112191051706,
+        1.145128622536571
+       ],
+       "log10_median_ratio": -0.4604074120191116,
+       "over_traces": {
+        "ks_d": 0.6707317073170731,
+        "ks_p": 0.0001934302698639089,
+        "mean_a": 17.319690721926282,
+        "mean_b": 0.9744687847980336,
+        "median_a": 2.7277947154471542,
+        "median_b": 0.9449400833081316,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 16.548375604019782
+       },
+       "real_median": 2.7277947154471542,
+       "real_p10_p90": [
+        0.3164331948272788,
+        10.803333333333335
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 82,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8580081300813008,
+       "ks_p": 0.0,
+       "mean_a": 7.01224593495935,
+       "mean_b": 52.59166666666667,
+       "median_a": 0.0,
+       "median_b": 49.0,
+       "n_a": 19680,
+       "n_a_used": 19680,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 46.67557926829268
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8786178861788617,
+       "ks_p": 5.63e-322,
+       "mean_a": 28.0489837398374,
+       "mean_b": 210.36666666666667,
+       "median_a": 1.0,
+       "median_b": 197.0,
+       "n_a": 4920,
+       "n_a_used": 4920,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 187.32207317073176
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.15698688998948837,
+       "gen_median": 0.03122049427588667,
+       "over_traces": {
+        "ks_d": 0.3714285714285714,
+        "ks_p": 0.49727478403949,
+        "mean_a": -0.09534707019865406,
+        "mean_b": 0.006059982688848595,
+        "median_a": -0.1257663957136017,
+        "median_b": 0.03122049427588667,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.10950090568532238
+       },
+       "real_median": -0.1257663957136017
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.05725369010582162,
+       "gen_median": -0.03646477993654167,
+       "over_traces": {
+        "ks_d": 0.4571428571428571,
+        "ks_p": 0.2814171122994653,
+        "mean_a": -0.09644665499247809,
+        "mean_b": -0.018926578639462163,
+        "median_a": -0.09371847004236329,
+        "median_b": -0.03646477993654167,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.0785301770746783
+       },
+       "real_median": -0.09371847004236329
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.009171264467306983,
+       "ks_p": 0.0005692937213059543,
+       "mean_a": 1.0,
+       "mean_b": 1.0,
+       "median_a": 0.6816429258502896,
+       "median_b": 0.6981423556734825,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 126210,
+       "n_b_used": 126210,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.014815240703516003
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.07875222191027142,
+       "ks_p": 4.784290285685802e-262,
+       "mean_a": 0.31991973190216955,
+       "mean_b": 0.2851384192538381,
+       "median_a": 0.2055387521544958,
+       "median_b": 0.16334165899780828,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 126210,
+       "n_b_used": 126210,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.040012031696294074
+      },
+      "iod_15s": {
+       "gen_median": 0.9871385366415077,
+       "gen_p10_p90": [
+        0.8526665356542524,
+        1.094232199307029
+       ],
+       "log10_median_ratio": -0.3319987718804974,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 0.00010283833813245579,
+        "mean_a": 2.215680920122297,
+        "mean_b": 0.9712985582472593,
+        "median_a": 2.1202002355712604,
+        "median_b": 0.9871385366415077,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.2443823618750378
+       },
+       "real_median": 2.1202002355712604,
+       "real_p10_p90": [
+        1.6627718316247926,
+        2.8572102364406806
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.0006761754882036,
+       "gen_p10_p90": [
+        0.9602513644027711,
+        1.0128010542561612
+       ],
+       "log10_median_ratio": -0.0247390027799757,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 0.00010283833813245579,
+        "mean_a": 1.077734431094472,
+        "mean_b": 0.9934776123312188,
+        "median_a": 1.0593331495971245,
+        "median_b": 1.0006761754882036,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.0842568187632532
+       },
+       "real_median": 1.0593331495971245,
+       "real_p10_p90": [
+        1.0529167186072457,
+        1.1196055744564701
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 0.9449400833081316,
+       "gen_p10_p90": [
+        0.7761112191051706,
+        1.145128622536571
+       ],
+       "log10_median_ratio": -0.7645202201319982,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 0.00010283833813245579,
+        "mean_a": 5.874852113621521,
+        "mean_b": 0.9744687847980336,
+        "median_a": 5.494453367598244,
+        "median_b": 0.9449400833081316,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 4.900383328823489
+       },
+       "real_median": 5.494453367598244,
+       "real_p10_p90": [
+        3.725407138351491,
+        8.234034942314107
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.24690476190476196,
+       "ks_p": 2.2648570989711636e-53,
+       "mean_a": 46.88333333333333,
+       "mean_b": 52.59166666666667,
+       "median_a": 51.0,
+       "median_b": 49.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 12.397500000000003
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.33738095238095245,
+       "ks_p": 1.9851056995534897e-25,
+       "mean_a": 187.53333333333333,
+       "mean_b": 210.36666666666667,
+       "median_a": 210.5,
+       "median_b": 197.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 57.45428571428572
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8786178861788617
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8580081300813008
+      ],
+      [
+       "iod_60s",
+       0.6707317073170731
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_1s",
+       1.0
+      ],
+      [
+       "iod_15s",
+       1.0
+      ],
+      [
+       "iod_60s",
+       1.0
+      ]
+     ]
+    },
+    "diurnal": {
+     "gen_mean_rate_rps": {
+      "max": 6.643611111111111,
+      "median": 3.8184722222222227,
+      "min": 2.147777777777778
+     },
+     "n_gen_traces": 24,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.9084446342600168,
+       "gen_median": 0.8912129958419377,
+       "over_traces": {
+        "ks_d": 0.9743589743589743,
+        "ks_p": 4.750118792782831e-21,
+        "mean_a": -0.058808234526647615,
+        "mean_b": 0.8519246472755732,
+        "median_a": -0.017231638418079096,
+        "median_b": 0.8912129958419377,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.9107328818022207
+       },
+       "real_median": -0.017231638418079096
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.6337240132223662,
+       "gen_median": 0.5987789476398677,
+       "over_traces": {
+        "ks_d": 0.641025641025641,
+        "ks_p": 1.0931837610045929e-07,
+        "mean_a": -0.020445619771670726,
+        "mean_b": 0.3466018405801535,
+        "median_a": -0.03494506558249841,
+        "median_b": 0.5987789476398677,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.5344258837298386
+       },
+       "real_median": -0.03494506558249841
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.01730321405719354,
+       "ks_p": 1.0075709425750845e-19,
+       "mean_a": 1.0,
+       "mean_b": 0.9988575303476794,
+       "median_a": 0.6137116684774908,
+       "median_b": 0.6335649245664139,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 321041,
+       "n_b_used": 160521,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.08198232834394094
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.13143356725728983,
+       "ks_p": 0.0,
+       "mean_a": 1.6794669471450792,
+       "mean_b": 0.26891264270467935,
+       "median_a": 0.20096857132557489,
+       "median_b": 0.1553862123976728,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 321041,
+       "n_b_used": 160521,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 1.4106551078995744
+      },
+      "iod_15s": {
+       "gen_median": 4.801906460479644,
+       "gen_p10_p90": [
+        1.731217374781347,
+        22.038399913570693
+       ],
+       "log10_median_ratio": 0.5316082929268254,
+       "over_traces": {
+        "ks_d": 0.6036585365853658,
+        "ks_p": 6.70864744153557e-07,
+        "mean_a": 5.092741271971142,
+        "mean_b": 8.028150925366289,
+        "median_a": 1.411904761904762,
+        "median_b": 4.801906460479644,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 6.7147847987027935
+       },
+       "real_median": 1.411904761904762,
+       "real_p10_p90": [
+        0.8233780602636535,
+        4.150395021645025
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2742662830278242,
+       "gen_p10_p90": [
+        1.0525151774983146,
+        2.3858824048865013
+       ],
+       "log10_median_ratio": 0.10481368870102692,
+       "over_traces": {
+        "ks_d": 0.6260162601626017,
+        "ks_p": 2.045794258337211e-07,
+        "mean_a": 1.275376006511101,
+        "mean_b": 1.4639830336370327,
+        "median_a": 1.001028640218485,
+        "median_b": 1.2742662830278242,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.4451610897385598
+       },
+       "real_median": 1.001028640218485,
+       "real_p10_p90": [
+        0.9836111111111111,
+        1.3295511695906428
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 15.872372038525974,
+       "gen_p10_p90": [
+        3.8680451290291162,
+        84.94561235925747
+       ],
+       "log10_median_ratio": 0.7648301508333112,
+       "over_traces": {
+        "ks_d": 0.6229674796747968,
+        "ks_p": 2.34782066921635e-07,
+        "mean_a": 17.319690721926282,
+        "mean_b": 28.889386611147188,
+        "median_a": 2.7277947154471542,
+        "median_b": 15.872372038525974,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 26.845777235686597
+       },
+       "real_median": 2.7277947154471542,
+       "real_p10_p90": [
+        0.3164331948272788,
+        10.803333333333335
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 82,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8385289634146341,
+       "ks_p": 0.0,
+       "mean_a": 7.01224593495935,
+       "mean_b": 55.740451388888886,
+       "median_a": 0.0,
+       "median_b": 49.0,
+       "n_a": 19680,
+       "n_a_used": 19680,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 49.62608824525745
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.844800135501355,
+       "ks_p": 3.06e-322,
+       "mean_a": 28.0489837398374,
+       "mean_b": 222.96180555555554,
+       "median_a": 1.0,
+       "median_b": 196.0,
+       "n_a": 4920,
+       "n_a_used": 4920,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 199.0421578590786
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 1.0169793915555394,
+       "gen_median": 0.8912129958419377,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 7.605791810463668e-07,
+        "mean_a": -0.09534707019865406,
+        "mean_b": 0.8519246472755732,
+        "median_a": -0.1257663957136017,
+        "median_b": 0.8912129958419377,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.9472717174742271
+       },
+       "real_median": -0.1257663957136017
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.692497417682231,
+       "gen_median": 0.5987789476398677,
+       "over_traces": {
+        "ks_d": 0.6666666666666667,
+        "ks_p": 0.008362568095604804,
+        "mean_a": -0.09644665499247809,
+        "mean_b": 0.3466018405801535,
+        "median_a": -0.09371847004236329,
+        "median_b": 0.5987789476398677,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.6075865145135341
+       },
+       "real_median": -0.09371847004236329
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.02627511950250061,
+       "ks_p": 4.034184686469238e-32,
+       "mean_a": 1.0,
+       "mean_b": 0.9988575303476794,
+       "median_a": 0.6816429258502896,
+       "median_b": 0.6335649245664139,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 321041,
+       "n_b_used": 160521,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.06514160033852047
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.09424108534577724,
+       "ks_p": 0.0,
+       "mean_a": 0.31991973190216955,
+       "mean_b": 0.26891264270467935,
+       "median_a": 0.2055387521544958,
+       "median_b": 0.1553862123976728,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 321041,
+       "n_b_used": 160521,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.052936331419632096
+      },
+      "iod_15s": {
+       "gen_median": 4.801906460479644,
+       "gen_p10_p90": [
+        1.731217374781347,
+        22.038399913570693
+       ],
+       "log10_median_ratio": 0.35503681746577465,
+       "over_traces": {
+        "ks_d": 0.7083333333333334,
+        "ks_p": 0.0038645028188965896,
+        "mean_a": 2.215680920122297,
+        "mean_b": 8.028150925366289,
+        "median_a": 2.1202002355712604,
+        "median_b": 4.801906460479644,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 5.841419717247458
+       },
+       "real_median": 2.1202002355712604,
+       "real_p10_p90": [
+        1.6627718316247926,
+        2.8572102364406806
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2742662830278242,
+       "gen_p10_p90": [
+        1.0525151774983146,
+        2.3858824048865013
+       ],
+       "log10_median_ratio": 0.08022762904014408,
+       "over_traces": {
+        "ks_d": 0.6666666666666667,
+        "ks_p": 0.008362568095604804,
+        "mean_a": 1.077734431094472,
+        "mean_b": 1.4639830336370327,
+        "median_a": 1.0593331495971245,
+        "median_b": 1.2742662830278242,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.3932427180813791
+       },
+       "real_median": 1.0593331495971245,
+       "real_p10_p90": [
+        1.0529167186072457,
+        1.1196055744564701
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 15.872372038525974,
+       "gen_p10_p90": [
+        3.8680451290291162,
+        84.94561235925747
+       ],
+       "log10_median_ratio": 0.4607173427204246,
+       "over_traces": {
+        "ks_d": 0.7083333333333334,
+        "ks_p": 0.0038645028188965896,
+        "mean_a": 5.874852113621521,
+        "mean_b": 28.889386611147188,
+        "median_a": 5.494453367598244,
+        "median_b": 15.872372038525974,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 23.048825619939716
+       },
+       "real_median": 5.494453367598244,
+       "real_p10_p90": [
+        3.725407138351491,
+        8.234034942314107
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.27946428571428583,
+       "ks_p": 4.8571864968300485e-90,
+       "mean_a": 46.88333333333333,
+       "mean_b": 55.740451388888886,
+       "median_a": 51.0,
+       "median_b": 49.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 12.404985119047618
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.32658730158730165,
+       "ks_p": 2.9872004250278016e-31,
+       "mean_a": 187.53333333333333,
+       "mean_b": 222.96180555555554,
+       "median_a": 210.5,
+       "median_b": 196.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 57.791964285714286
+      }
+     },
+     "worst_axes_all": [
+      [
+       "acf60_lag1",
+       0.9743589743589743
+      ],
+      [
+       "rate_per_60s_bin",
+       0.844800135501355
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8385289634146341
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "acf60_lag1",
+       1.0
+      ],
+      [
+       "iod_15s",
+       0.7083333333333334
+      ],
+      [
+       "iod_60s",
+       0.7083333333333334
+      ]
+     ]
+    },
+    "variable": {
+     "gen_mean_rate_rps": {
+      "max": 5.946111111111111,
+      "median": 3.312777777777778,
+      "min": 1.6536111111111111
+     },
+     "n_gen_traces": 40,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.6995099651611527,
+       "gen_median": 0.6822783267430736,
+       "over_traces": {
+        "ks_d": 0.7596153846153846,
+        "ks_p": 1.1312157220390152e-15,
+        "mean_a": -0.058808234526647615,
+        "mean_b": 0.5980760843907594,
+        "median_a": -0.017231638418079096,
+        "median_b": 0.6822783267430736,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.6568843189174068
+       },
+       "real_median": -0.017231638418079096
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.2279601688563886,
+       "gen_median": 0.19301510327389018,
+       "over_traces": {
+        "ks_d": 0.48461538461538456,
+        "ks_p": 3.0233513771137064e-06,
+        "mean_a": -0.020445619771670726,
+        "mean_b": 0.19680589023697254,
+        "median_a": -0.03494506558249841,
+        "median_b": 0.19301510327389018,
+        "n_a": 78,
+        "n_a_used": 78,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.21725151000864323
+       },
+       "real_median": -0.03494506558249841
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.031203764705829473,
+       "ks_p": 3.907577827953337e-63,
+       "mean_a": 1.0,
+       "mean_b": 1.0017816171335436,
+       "median_a": 0.6137116684774908,
+       "median_b": 0.5586744352490343,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 480720,
+       "n_b_used": 160240,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.12337053672338714
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.10810075069495395,
+       "ks_p": 0.0,
+       "mean_a": 1.6794669471450792,
+       "mean_b": 0.3000821629186755,
+       "median_a": 0.20096857132557489,
+       "median_b": 0.15451369242668989,
+       "n_a": 137919,
+       "n_a_used": 137919,
+       "n_b": 480720,
+       "n_b_used": 160240,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 1.3793852663364718
+      },
+      "iod_15s": {
+       "gen_median": 10.315056111752623,
+       "gen_p10_p90": [
+        2.3787388375594625,
+        60.638718982302194
+       ],
+       "log10_median_ratio": 0.8636661918205836,
+       "over_traces": {
+        "ks_d": 0.7158536585365853,
+        "ks_p": 8.674274146751071e-14,
+        "mean_a": 5.092741271971142,
+        "mean_b": 24.879181218363534,
+        "median_a": 1.411904761904762,
+        "median_b": 10.315056111752623,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 19.786439946392395
+       },
+       "real_median": 1.411904761904762,
+       "real_p10_p90": [
+        0.8233780602636535,
+        4.150395021645025
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.6236311671541301,
+       "gen_p10_p90": [
+        1.0914265236522265,
+        5.024166549150484
+       ],
+       "log10_median_ratio": 0.2100408762589351,
+       "over_traces": {
+        "ks_d": 0.7048780487804879,
+        "ks_p": 1.9231864781496347e-13,
+        "mean_a": 1.275376006511101,
+        "mean_b": 2.589685324695083,
+        "median_a": 1.001028640218485,
+        "median_b": 1.6236311671541301,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.314309318183982
+       },
+       "real_median": 1.001028640218485,
+       "real_p10_p90": [
+        0.9836111111111111,
+        1.3295511695906428
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 38.16700206506436,
+       "gen_p10_p90": [
+        6.549726019758059,
+        239.91379122602376
+       ],
+       "log10_median_ratio": 1.145876364713967,
+       "over_traces": {
+        "ks_d": 0.7396341463414634,
+        "ks_p": 8.12082337080052e-15,
+        "mean_a": 17.319690721926282,
+        "mean_b": 96.47455091108236,
+        "median_a": 2.7277947154471542,
+        "median_b": 38.16700206506436,
+        "n_a": 82,
+        "n_a_used": 82,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 79.1548601891561
+       },
+       "real_median": 2.7277947154471542,
+       "real_p10_p90": [
+        0.3164331948272788,
+        10.803333333333335
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 82,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8135111788617886,
+       "ks_p": 0.0,
+       "mean_a": 7.01224593495935,
+       "mean_b": 50.079166666666666,
+       "median_a": 0.0,
+       "median_b": 42.0,
+       "n_a": 19680,
+       "n_a_used": 19680,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 43.06692073170731
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8232418699186992,
+       "ks_p": 0.0,
+       "mean_a": 28.0489837398374,
+       "mean_b": 200.31666666666666,
+       "median_a": 1.0,
+       "median_b": 166.0,
+       "n_a": 4920,
+       "n_a_used": 4920,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 172.2676829268292
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.8080447224566754,
+       "gen_median": 0.6822783267430736,
+       "over_traces": {
+        "ks_d": 0.925,
+        "ks_p": 3.816096035491219e-06,
+        "mean_a": -0.09534707019865406,
+        "mean_b": 0.5980760843907594,
+        "median_a": -0.1257663957136017,
+        "median_b": 0.6822783267430736,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.6934231545894135
+       },
+       "real_median": -0.1257663957136017
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.2867335733162535,
+       "gen_median": 0.19301510327389018,
+       "over_traces": {
+        "ks_d": 0.725,
+        "ks_p": 0.0014380957909748658,
+        "mean_a": -0.09644665499247809,
+        "mean_b": 0.19680589023697254,
+        "median_a": -0.09371847004236329,
+        "median_b": 0.19301510327389018,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.29662443451844045
+       },
+       "real_median": -0.09371847004236329
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.0685330653885215,
+       "ks_p": 4.354459429927918e-216,
+       "mean_a": 1.0,
+       "mean_b": 1.0017816171335436,
+       "median_a": 0.6816429258502896,
+       "median_b": 0.5586744352490343,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 480720,
+       "n_b_used": 160240,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.15558011206568428
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.09519970349210999,
+       "ks_p": 0.0,
+       "mean_a": 0.31991973190216955,
+       "mean_b": 0.3000821629186755,
+       "median_a": 0.2055387521544958,
+       "median_b": 0.15451369242668989,
+       "n_a": 78757,
+       "n_a_used": 78757,
+       "n_b": 480720,
+       "n_b_used": 160240,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.05142560219466111
+      },
+      "iod_15s": {
+       "gen_median": 10.315056111752623,
+       "gen_p10_p90": [
+        2.3787388375594625,
+        60.638718982302194
+       ],
+       "log10_median_ratio": 0.6870947163595327,
+       "over_traces": {
+        "ks_d": 0.825,
+        "ks_p": 0.00011648633148336944,
+        "mean_a": 2.215680920122297,
+        "mean_b": 24.879181218363534,
+        "median_a": 2.1202002355712604,
+        "median_b": 10.315056111752623,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 22.683891053514294
+       },
+       "real_median": 2.1202002355712604,
+       "real_p10_p90": [
+        1.6627718316247926,
+        2.8572102364406806
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.6236311671541301,
+       "gen_p10_p90": [
+        1.0914265236522265,
+        5.024166549150484
+       ],
+       "log10_median_ratio": 0.1854548165980522,
+       "over_traces": {
+        "ks_d": 0.825,
+        "ks_p": 0.00011648633148336944,
+        "mean_a": 1.077734431094472,
+        "mean_b": 2.589685324695083,
+        "median_a": 1.0593331495971245,
+        "median_b": 1.6236311671541301,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.5147498595202773
+       },
+       "real_median": 1.0593331495971245,
+       "real_p10_p90": [
+        1.0529167186072457,
+        1.1196055744564701
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 38.16700206506436,
+       "gen_p10_p90": [
+        6.549726019758059,
+        239.91379122602376
+       ],
+       "log10_median_ratio": 0.8417635566010804,
+       "over_traces": {
+        "ks_d": 0.825,
+        "ks_p": 0.00011648633148336944,
+        "mean_a": 5.874852113621521,
+        "mean_b": 96.47455091108236,
+        "median_a": 5.494453367598244,
+        "median_b": 38.16700206506436,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 90.67369705260616
+       },
+       "real_median": 5.494453367598244,
+       "real_p10_p90": [
+        3.725407138351491,
+        8.234034942314107
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.23903273809523806,
+       "ks_p": 2.96074404396178e-72,
+       "mean_a": 46.88333333333333,
+       "mean_b": 50.079166666666666,
+       "median_a": 51.0,
+       "median_b": 42.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 16.16508928571428
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.287797619047619,
+       "ks_p": 1.2061077231438787e-26,
+       "mean_a": 187.53333333333333,
+       "mean_b": 200.31666666666666,
+       "median_a": 210.5,
+       "median_b": 166.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 72.27690476190473
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8232418699186992
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8135111788617886
+      ],
+      [
+       "acf60_lag1",
+       0.7596153846153846
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "acf60_lag1",
+       0.925
+      ],
+      [
+       "iod_1s",
+       0.825
+      ],
+      [
+       "iod_15s",
+       0.825
+      ]
+     ]
+    }
+   },
+   "n_azure_traces": 82,
+   "n_azure_traces_rate_matched": 7
+  },
+  "test": {
+   "azure_mean_rate_rps": {
+    "max": 10.356388888888889,
+    "median": 0.023194444444444445,
+    "min": 0.0005555555555555556
+   },
+   "families": {
+    "burst": {
+     "gen_mean_rate_rps": {
+      "max": 12.340833333333334,
+      "median": 2.8963888888888887,
+      "min": 1.3702777777777777
+     },
+     "n_gen_traces": 48,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.5158396172528911,
+       "gen_median": 0.36107771249098636,
+       "over_traces": {
+        "ks_d": 0.58,
+        "ks_p": 1.1821671188299592e-10,
+        "mean_a": -0.1030631009521785,
+        "mean_b": 0.3464987143316276,
+        "median_a": -0.15476190476190474,
+        "median_b": 0.36107771249098636,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.455214724139633
+       },
+       "real_median": -0.15476190476190474
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.04219545632445712,
+       "gen_median": -0.09398012903270556,
+       "over_traces": {
+        "ks_d": 0.3491666666666666,
+        "ks_p": 0.0004937467251009671,
+        "mean_a": 0.011811978961939956,
+        "mean_b": -0.15288037759928222,
+        "median_a": -0.051784672708248436,
+        "median_b": -0.09398012903270556,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.17460199676305527
+       },
+       "real_median": -0.051784672708248436
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.03911610482470379,
+       "ks_p": 6.621134710018793e-108,
+       "mean_a": 0.9936328921703915,
+       "mean_b": 0.9957709563450717,
+       "median_a": 0.4914194654901849,
+       "median_b": 0.446997696531754,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 598609,
+       "n_b_used": 199537,
+       "stride_a": 2,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.22296030214873197
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.05155767909463027,
+       "ks_p": 3.415131848344648e-187,
+       "mean_a": 1.2013653886230908,
+       "mean_b": 0.28783488529831486,
+       "median_a": 0.11531543260571198,
+       "median_b": 0.10396196933015744,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 598609,
+       "n_b_used": 199537,
+       "stride_a": 2,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9342877108437071
+      },
+      "iod_15s": {
+       "gen_median": 31.904727522670534,
+       "gen_p10_p90": [
+        5.416809001497327,
+        175.08732567308405
+       ],
+       "log10_median_ratio": 1.4758257151941956,
+       "over_traces": {
+        "ks_d": 0.6568627450980392,
+        "ks_p": 6.714177476065581e-14,
+        "mean_a": 8.521880449612105,
+        "mean_b": 57.409205525957056,
+        "median_a": 1.066668143160879,
+        "median_b": 31.904727522670534,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 48.88732507634493
+       },
+       "real_median": 1.066668143160879,
+       "real_p10_p90": [
+        0.7783333333333333,
+        22.55332155272611
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 3.015695090784077,
+       "gen_p10_p90": [
+        1.325764627053922,
+        12.630393987188228
+       ],
+       "log10_median_ratio": 0.47952582920732684,
+       "over_traces": {
+        "ks_d": 0.6274509803921569,
+        "ks_p": 1.260329685733145e-12,
+        "mean_a": 1.5013741244526642,
+        "mean_b": 4.75337872434095,
+        "median_a": 0.9996813725490197,
+        "median_b": 3.015695090784077,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 3.2520045998882856
+       },
+       "real_median": 0.9996813725490197,
+       "real_p10_p90": [
+        0.9773484848484845,
+        2.4704358331970098
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 125.11954809044866,
+       "gen_p10_p90": [
+        18.717587514249022,
+        697.2817065668352
+       ],
+       "log10_median_ratio": 2.0222220474234223,
+       "over_traces": {
+        "ks_d": 0.6666666666666666,
+        "ks_p": 2.4108474671818267e-14,
+        "mean_a": 31.112962478419007,
+        "mean_b": 226.64111857395133,
+        "median_a": 1.1887844611528822,
+        "median_b": 125.11954809044866,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 195.52815609553232
+       },
+       "real_median": 1.1887844611528822,
+       "real_p10_p90": [
+        0.15928739359971467,
+        87.42043104584907
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 102,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8167994281045752,
+       "ks_p": 0.0,
+       "mean_a": 11.10608660130719,
+       "mean_b": 51.96675347222222,
+       "median_a": 0.0,
+       "median_b": 33.0,
+       "n_a": 24480,
+       "n_a_used": 24480,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 40.86295445261439
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8543709150326797,
+       "ks_p": 0.0,
+       "mean_a": 44.42434640522876,
+       "mean_b": 207.8670138888889,
+       "median_a": 1.0,
+       "median_b": 145.0,
+       "n_a": 6120,
+       "n_a_used": 6120,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 163.4776348039216
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.4756457167059262,
+       "gen_median": 0.36107771249098636,
+       "over_traces": {
+        "ks_d": 0.5384615384615385,
+        "ks_p": 0.0028347265199568984,
+        "mean_a": 0.11277663006587961,
+        "mean_b": 0.3464987143316276,
+        "median_a": -0.11456800421493984,
+        "median_b": 0.36107771249098636,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.25636319897929294
+       },
+       "real_median": -0.11456800421493984
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.19863206379120907,
+       "gen_median": -0.09398012903270556,
+       "over_traces": {
+        "ks_d": 0.6923076923076923,
+        "ks_p": 2.7961609336139467e-05,
+        "mean_a": 0.12962784792796309,
+        "mean_b": -0.15288037759928222,
+        "median_a": 0.10465193475850353,
+        "median_b": -0.09398012903270556,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.28250822552724525
+       },
+       "real_median": 0.10465193475850353
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.05532911597264917,
+       "ks_p": 1.19791255415134e-241,
+       "mean_a": 1.0,
+       "mean_b": 0.9957709563450717,
+       "median_a": 0.5157060017540935,
+       "median_b": 0.446997696531754,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 598609,
+       "n_b_used": 199537,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.23567208943353202
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.09169775565061494,
+       "ks_p": 0.0,
+       "mean_a": 0.28135928227275553,
+       "mean_b": 0.28783488529831486,
+       "median_a": 0.12769893185009096,
+       "median_b": 0.10396196933015744,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 598609,
+       "n_b_used": 199537,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.085102890656581
+      },
+      "iod_15s": {
+       "gen_median": 31.904727522670534,
+       "gen_p10_p90": [
+        5.416809001497327,
+        175.08732567308405
+       ],
+       "log10_median_ratio": 0.17052135837284063,
+       "over_traces": {
+        "ks_d": 0.36057692307692313,
+        "ks_p": 0.10407843105713172,
+        "mean_a": 26.845028266226983,
+        "mean_b": 57.409205525957056,
+        "median_a": 21.544364175909713,
+        "median_b": 31.904727522670534,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 33.66284548812483
+       },
+       "real_median": 21.544364175909713,
+       "real_p10_p90": [
+        9.328796476688522,
+        40.19689474982766
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 3.015695090784077,
+       "gen_p10_p90": [
+        1.325764627053922,
+        12.630393987188228
+       ],
+       "log10_median_ratio": 0.10736467064433015,
+       "over_traces": {
+        "ks_d": 0.36057692307692313,
+        "ks_p": 0.10407843105713172,
+        "mean_a": 2.715483899344969,
+        "mean_b": 4.75337872434095,
+        "median_a": 2.3551726989686714,
+        "median_b": 3.015695090784077,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 2.2294513404279774
+       },
+       "real_median": 2.3551726989686714,
+       "real_p10_p90": [
+        1.5344811492917119,
+        3.5964334477835673
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 125.11954809044866,
+       "gen_p10_p90": [
+        18.717587514249022,
+        697.2817065668352
+       ],
+       "log10_median_ratio": 0.1804185688214585,
+       "over_traces": {
+        "ks_d": 0.3814102564102565,
+        "ks_p": 0.07381687966251584,
+        "mean_a": 104.22658443072662,
+        "mean_b": 226.64111857395133,
+        "median_a": 82.58603165336967,
+        "median_b": 125.11954809044866,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 134.61124890916653
+       },
+       "real_median": 82.58603165336967,
+       "real_p10_p90": [
+        34.261345951629856,
+        156.69466188407426
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 13,
+      "rate_per_15s_bin": {
+       "ks_d": 0.3062767094017095,
+       "ks_p": 6.401972515038097e-205,
+       "mean_a": 53.24807692307692,
+       "mean_b": 51.96675347222222,
+       "median_a": 43.0,
+       "median_b": 33.0,
+       "n_a": 3120,
+       "n_a_used": 3120,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 24.092234241453
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.3508279914529915,
+       "ks_p": 1.0267914006189226e-67,
+       "mean_a": 212.9923076923077,
+       "mean_b": 207.8670138888889,
+       "median_a": 169.5,
+       "median_b": 145.0,
+       "n_a": 780,
+       "n_a_used": 780,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 99.78298611111114
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8543709150326797
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8167994281045752
+      ],
+      [
+       "iod_60s",
+       0.6666666666666666
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "acf60_lag5",
+       0.6923076923076923
+      ],
+      [
+       "acf60_lag1",
+       0.5384615384615385
+      ],
+      [
+       "iod_60s",
+       0.3814102564102565
+      ]
+     ]
+    },
+    "constant": {
+     "gen_mean_rate_rps": {
+      "max": 6.5875,
+      "median": 3.2891666666666666,
+      "min": 1.0797222222222222
+     },
+     "n_gen_traces": 10,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.08793632796581619,
+       "gen_median": -0.06682557679608855,
+       "over_traces": {
+        "ks_d": 0.36,
+        "ks_p": 0.1546479321064847,
+        "mean_a": -0.1030631009521785,
+        "mean_b": -0.0801914165658501,
+        "median_a": -0.15476190476190474,
+        "median_b": -0.06682557679608855,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.21620823520407223
+       },
+       "real_median": -0.15476190476190474
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.03683116724192873,
+       "gen_median": -0.014953505466319706,
+       "over_traces": {
+        "ks_d": 0.21999999999999997,
+        "ks_p": 0.7112517678497148,
+        "mean_a": 0.011811978961939956,
+        "mean_b": -0.027830146188527315,
+        "median_a": -0.051784672708248436,
+        "median_b": -0.014953505466319706,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.13160649895912957
+       },
+       "real_median": -0.051784672708248436
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.11141661874581632,
+       "ks_p": 0.0,
+       "mean_a": 0.9936328921703915,
+       "mean_b": 1.0,
+       "median_a": 0.4914194654901849,
+       "median_b": 0.6892469809831686,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 126427,
+       "n_b_used": 126427,
+       "stride_a": 2,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.32985527841529727
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.10830469911245022,
+       "ks_p": 0.0,
+       "mean_a": 1.2013653886230908,
+       "mean_b": 0.28469759143922857,
+       "median_a": 0.11531543260571198,
+       "median_b": 0.16221013313770527,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 126427,
+       "n_b_used": 126427,
+       "stride_a": 2,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.971110217775848
+      },
+      "iod_15s": {
+       "gen_median": 0.9452714892939035,
+       "gen_p10_p90": [
+        0.9010901241684951,
+        1.1231412658036182
+       ],
+       "log10_median_ratio": -0.05247276559194207,
+       "over_traces": {
+        "ks_d": 0.4509803921568627,
+        "ks_p": 0.03293594110439874,
+        "mean_a": 8.521880449612105,
+        "mean_b": 0.9751517475137359,
+        "median_a": 1.066668143160879,
+        "median_b": 0.9452714892939035,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 7.590046015037123
+       },
+       "real_median": 1.066668143160879,
+       "real_p10_p90": [
+        0.7783333333333333,
+        22.55332155272611
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.0149044893911876,
+       "gen_p10_p90": [
+        1.006456506852296,
+        1.0403375136151607
+       ],
+       "log10_median_ratio": 0.006563573790885639,
+       "over_traces": {
+        "ks_d": 0.5588235294117647,
+        "ks_p": 0.003352432103788136,
+        "mean_a": 1.5013741244526642,
+        "mean_b": 1.021039988924749,
+        "median_a": 0.9996813725490197,
+        "median_b": 1.0149044893911876,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.5049632419204267
+       },
+       "real_median": 0.9996813725490197,
+       "real_p10_p90": [
+        0.9773484848484845,
+        2.4704358331970098
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 1.03280223948417,
+       "gen_p10_p90": [
+        0.8222252735389279,
+        1.0776919721095117
+       ],
+       "log10_median_ratio": -0.06108594873581639,
+       "over_traces": {
+        "ks_d": 0.5098039215686274,
+        "ks_p": 0.010203186351297031,
+        "mean_a": 31.112962478419007,
+        "mean_b": 0.9915768204485182,
+        "median_a": 1.1887844611528822,
+        "median_b": 1.03280223948417,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 30.493991064793583
+       },
+       "real_median": 1.1887844611528822,
+       "real_p10_p90": [
+        0.15928739359971467,
+        87.42043104584907
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 102,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8128267973856209,
+       "ks_p": 0.0,
+       "mean_a": 11.10608660130719,
+       "mean_b": 52.68208333333333,
+       "median_a": 0.0,
+       "median_b": 49.0,
+       "n_a": 24480,
+       "n_a_used": 24480,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 44.861617647058814
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8190849673202614,
+       "ks_p": 1.383e-321,
+       "mean_a": 44.42434640522876,
+       "mean_b": 210.72833333333332,
+       "median_a": 1.0,
+       "median_b": 196.0,
+       "n_a": 6120,
+       "n_a_used": 6120,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 181.02019607843135
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.04774242741885129,
+       "gen_median": -0.06682557679608855,
+       "over_traces": {
+        "ks_d": 0.3846153846153846,
+        "ks_p": 0.29269552630704876,
+        "mean_a": 0.11277663006587961,
+        "mean_b": -0.0801914165658501,
+        "median_a": -0.11456800421493984,
+        "median_b": -0.06682557679608855,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.29917090048631856
+       },
+       "real_median": -0.11456800421493984
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.11960544022482324,
+       "gen_median": -0.014953505466319706,
+       "over_traces": {
+        "ks_d": 0.49230769230769234,
+        "ks_p": 0.09426117024717105,
+        "mean_a": 0.12962784792796309,
+        "mean_b": -0.027830146188527315,
+        "median_a": 0.10465193475850353,
+        "median_b": -0.014953505466319706,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.16482257913243267
+       },
+       "real_median": 0.10465193475850353
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.09622793648297001,
+       "ks_p": 0.0,
+       "mean_a": 1.0,
+       "mean_b": 1.0,
+       "median_a": 0.5157060017540935,
+       "median_b": 0.6892469809831686,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 126427,
+       "n_b_used": 126427,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.2856947804265948
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.07665241153657643,
+       "ks_p": 0.0,
+       "mean_a": 0.28135928227275553,
+       "mean_b": 0.28469759143922857,
+       "median_a": 0.12769893185009096,
+       "median_b": 0.16221013313770527,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 126427,
+       "n_b_used": 126427,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.06523899841272723
+      },
+      "iod_15s": {
+       "gen_median": 0.9452714892939035,
+       "gen_p10_p90": [
+        0.9010901241684951,
+        1.1231412658036182
+       ],
+       "log10_median_ratio": -1.3577771224132968,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 1.748150893392514e-06,
+        "mean_a": 26.845028266226983,
+        "mean_b": 0.9751517475137359,
+        "median_a": 21.544364175909713,
+        "median_b": 0.9452714892939035,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 25.86987651871324
+       },
+       "real_median": 21.544364175909713,
+       "real_p10_p90": [
+        9.328796476688522,
+        40.19689474982766
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.0149044893911876,
+       "gen_p10_p90": [
+        1.006456506852296,
+        1.0403375136151607
+       ],
+       "log10_median_ratio": -0.365597584772111,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 1.748150893392514e-06,
+        "mean_a": 2.715483899344969,
+        "mean_b": 1.021039988924749,
+        "median_a": 2.3551726989686714,
+        "median_b": 1.0149044893911876,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.6944439104202194
+       },
+       "real_median": 2.3551726989686714,
+       "real_p10_p90": [
+        1.5344811492917119,
+        3.5964334477835673
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 1.03280223948417,
+       "gen_p10_p90": [
+        0.8222252735389279,
+        1.0776919721095117
+       ],
+       "log10_median_ratio": -1.9028894273377803,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 1.748150893392514e-06,
+        "mean_a": 104.22658443072662,
+        "mean_b": 0.9915768204485182,
+        "median_a": 82.58603165336967,
+        "median_b": 1.03280223948417,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 103.23500761027807
+       },
+       "real_median": 82.58603165336967,
+       "real_p10_p90": [
+        34.261345951629856,
+        156.69466188407426
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 13,
+      "rate_per_15s_bin": {
+       "ks_d": 0.15153846153846154,
+       "ks_p": 1.2355867962977177e-27,
+       "mean_a": 53.24807692307692,
+       "mean_b": 52.68208333333333,
+       "median_a": 43.0,
+       "median_b": 49.0,
+       "n_a": 3120,
+       "n_a_used": 3120,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 11.550480769230766
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.20743589743589738,
+       "ks_p": 2.9608507677750147e-13,
+       "mean_a": 212.9923076923077,
+       "mean_b": 210.72833333333332,
+       "median_a": 169.5,
+       "median_b": 196.0,
+       "n_a": 780,
+       "n_a_used": 780,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 47.72038461538461
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8190849673202614
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8128267973856209
+      ],
+      [
+       "iod_1s",
+       0.5588235294117647
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_1s",
+       1.0
+      ],
+      [
+       "iod_15s",
+       1.0
+      ],
+      [
+       "iod_60s",
+       1.0
+      ]
+     ]
+    },
+    "diurnal": {
+     "gen_mean_rate_rps": {
+      "max": 6.658333333333333,
+      "median": 3.851805555555556,
+      "min": 2.1625
+     },
+     "n_gen_traces": 24,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 1.050604820753036,
+       "gen_median": 0.8958429159911313,
+       "over_traces": {
+        "ks_d": 0.91,
+        "ks_p": 3.0886040477097504e-18,
+        "mean_a": -0.1030631009521785,
+        "mean_b": 0.8685324246454962,
+        "median_a": -0.15476190476190474,
+        "median_b": 0.8958429159911313,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.9715955255976746
+       },
+       "real_median": -0.15476190476190474
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.6572799852450695,
+       "gen_median": 0.605495312536821,
+       "over_traces": {
+        "ks_d": 0.5633333333333334,
+        "ks_p": 3.0541936383082373e-06,
+        "mean_a": 0.011811978961939956,
+        "mean_b": 0.3345274722413059,
+        "median_a": -0.051784672708248436,
+        "median_b": 0.605495312536821,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.4218341473878306
+       },
+       "real_median": -0.051784672708248436
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.08323937562970374,
+       "ks_p": 0.0,
+       "mean_a": 0.9936328921703915,
+       "mean_b": 0.99859353143267,
+       "median_a": 0.4914194654901849,
+       "median_b": 0.6334357415026821,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 322125,
+       "n_b_used": 161063,
+       "stride_a": 2,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.26160565242698386
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.09523887740871917,
+       "ks_p": 0.0,
+       "mean_a": 1.2013653886230908,
+       "mean_b": 0.26756663415463555,
+       "median_a": 0.11531543260571198,
+       "median_b": 0.15545112545919437,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 322125,
+       "n_b_used": 161063,
+       "stride_a": 2,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9770538034696338
+      },
+      "iod_15s": {
+       "gen_median": 4.972011833544071,
+       "gen_p10_p90": [
+        1.9595245567326696,
+        22.068142295964172
+       ],
+       "log10_median_ratio": 0.6685028288492864,
+       "over_traces": {
+        "ks_d": 0.6078431372549019,
+        "ks_p": 2.7145642398474157e-07,
+        "mean_a": 8.521880449612105,
+        "mean_b": 8.061347397498638,
+        "median_a": 1.066668143160879,
+        "median_b": 4.972011833544071,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 5.494933292188212
+       },
+       "real_median": 1.066668143160879,
+       "real_p10_p90": [
+        0.7783333333333333,
+        22.55332155272611
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2854791148077256,
+       "gen_p10_p90": [
+        1.061203583856373,
+        2.3861719028619084
+       ],
+       "log10_median_ratio": 0.10920342524329141,
+       "over_traces": {
+        "ks_d": 0.6274509803921569,
+        "ks_p": 8.80233369364374e-08,
+        "mean_a": 1.5013741244526642,
+        "mean_b": 1.4768822668808437,
+        "median_a": 0.9996813725490197,
+        "median_b": 1.2854791148077256,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.37624164631216395
+       },
+       "real_median": 0.9996813725490197,
+       "real_p10_p90": [
+        0.9773484848484845,
+        2.4704358331970098
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 16.749675236570496,
+       "gen_p10_p90": [
+        4.622966791651839,
+        84.54320185137067
+       ],
+       "log10_median_ratio": 1.1489032711149203,
+       "over_traces": {
+        "ks_d": 0.6274509803921569,
+        "ks_p": 8.80233369364374e-08,
+        "mean_a": 31.112962478419007,
+        "mean_b": 28.934620208770795,
+        "median_a": 1.1887844611528822,
+        "median_b": 16.749675236570496,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 21.861992302849547
+       },
+       "real_median": 1.1887844611528822,
+       "real_p10_p90": [
+        0.15928739359971467,
+        87.42043104584907
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 102,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8068525326797384,
+       "ks_p": 0.0,
+       "mean_a": 11.10608660130719,
+       "mean_b": 55.928645833333334,
+       "median_a": 0.0,
+       "median_b": 50.0,
+       "n_a": 24480,
+       "n_a_used": 24480,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 47.415430964052284
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.810049019607843,
+       "ks_p": 8e-322,
+       "mean_a": 44.42434640522876,
+       "mean_b": 223.71458333333334,
+       "median_a": 1.0,
+       "median_b": 195.0,
+       "n_a": 6120,
+       "n_a_used": 6120,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 190.5988153594771
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 1.0104109202060712,
+       "gen_median": 0.8958429159911313,
+       "over_traces": {
+        "ks_d": 0.8397435897435898,
+        "ks_p": 1.5287157863877092e-06,
+        "mean_a": 0.11277663006587961,
+        "mean_b": 0.8685324246454962,
+        "median_a": -0.11456800421493984,
+        "median_b": 0.8958429159911313,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.7557557945796165
+       },
+       "real_median": -0.11456800421493984
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.5008433777783174,
+       "gen_median": 0.605495312536821,
+       "over_traces": {
+        "ks_d": 0.5480769230769231,
+        "ks_p": 0.007671991824317939,
+        "mean_a": 0.12962784792796309,
+        "mean_b": 0.3345274722413059,
+        "median_a": 0.10465193475850353,
+        "median_b": 0.605495312536821,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.4021869795900336
+       },
+       "real_median": 0.10465193475850353
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.0680149645101944,
+       "ks_p": 0.0,
+       "mean_a": 1.0,
+       "mean_b": 0.99859353143267,
+       "median_a": 0.5157060017540935,
+       "median_b": 0.6334357415026821,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 322125,
+       "n_b_used": 161063,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.2165675583941452
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.06277778923942506,
+       "ks_p": 1.2768366989149884e-280,
+       "mean_a": 0.28135928227275553,
+       "mean_b": 0.26756663415463555,
+       "median_a": 0.12769893185009096,
+       "median_b": 0.15545112545919437,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 322125,
+       "n_b_used": 161063,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.05821489736445845
+      },
+      "iod_15s": {
+       "gen_median": 4.972011833544071,
+       "gen_p10_p90": [
+        1.9595245567326696,
+        22.068142295964172
+       ],
+       "log10_median_ratio": -0.6368015279720686,
+       "over_traces": {
+        "ks_d": 0.6794871794871794,
+        "ks_p": 0.00030859399046273355,
+        "mean_a": 26.845028266226983,
+        "mean_b": 8.061347397498638,
+        "median_a": 21.544364175909713,
+        "median_b": 4.972011833544071,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 18.78368086872834
+       },
+       "real_median": 21.544364175909713,
+       "real_p10_p90": [
+        9.328796476688522,
+        40.19689474982766
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2854791148077256,
+       "gen_p10_p90": [
+        1.061203583856373,
+        2.3861719028619084
+       ],
+       "log10_median_ratio": -0.26295773331970523,
+       "over_traces": {
+        "ks_d": 0.6666666666666666,
+        "ks_p": 0.00047084558502473835,
+        "mean_a": 2.715483899344969,
+        "mean_b": 1.4768822668808437,
+        "median_a": 2.3551726989686714,
+        "median_b": 1.2854791148077256,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.2386016324641247
+       },
+       "real_median": 2.3551726989686714,
+       "real_p10_p90": [
+        1.5344811492917119,
+        3.5964334477835673
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 16.749675236570496,
+       "gen_p10_p90": [
+        4.622966791651839,
+        84.54320185137067
+       ],
+       "log10_median_ratio": -0.6929002074870434,
+       "over_traces": {
+        "ks_d": 0.6794871794871794,
+        "ks_p": 0.00030859399046273355,
+        "mean_a": 104.22658443072662,
+        "mean_b": 28.934620208770795,
+        "median_a": 82.58603165336967,
+        "median_b": 16.749675236570496,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 75.2919642219558
+       },
+       "real_median": 82.58603165336967,
+       "real_p10_p90": [
+        34.261345951629856,
+        156.69466188407426
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 13,
+      "rate_per_15s_bin": {
+       "ks_d": 0.19481837606837604,
+       "ks_p": 1.209894255421e-67,
+       "mean_a": 53.24807692307692,
+       "mean_b": 55.928645833333334,
+       "median_a": 43.0,
+       "median_b": 50.0,
+       "n_a": 3120,
+       "n_a_used": 3120,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 12.121407585470084
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.2376602564102564,
+       "ks_p": 1.4527626375696175e-25,
+       "mean_a": 212.9923076923077,
+       "mean_b": 223.71458333333334,
+       "median_a": 169.5,
+       "median_b": 195.0,
+       "n_a": 780,
+       "n_a_used": 780,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 50.81469017094016
+      }
+     },
+     "worst_axes_all": [
+      [
+       "acf60_lag1",
+       0.91
+      ],
+      [
+       "rate_per_60s_bin",
+       0.810049019607843
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8068525326797384
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "acf60_lag1",
+       0.8397435897435898
+      ],
+      [
+       "iod_15s",
+       0.6794871794871794
+      ],
+      [
+       "iod_60s",
+       0.6794871794871794
+      ]
+     ]
+    },
+    "variable": {
+     "gen_mean_rate_rps": {
+      "max": 7.448055555555555,
+      "median": 3.1054166666666667,
+      "min": 0.7158333333333333
+     },
+     "n_gen_traces": 40,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.8234582895471823,
+       "gen_median": 0.6686963847852775,
+       "over_traces": {
+        "ks_d": 0.8,
+        "ks_p": 6.381157449093772e-19,
+        "mean_a": -0.1030631009521785,
+        "mean_b": 0.612889540909267,
+        "median_a": -0.15476190476190474,
+        "median_b": 0.6686963847852775,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.7168967585420861
+       },
+       "real_median": -0.15476190476190474
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.11336855635409308,
+       "gen_median": 0.06158388364584465,
+       "over_traces": {
+        "ks_d": 0.29000000000000004,
+        "ks_p": 0.013512213812827046,
+        "mean_a": 0.011811978961939956,
+        "mean_b": 0.11100996208734153,
+        "median_a": -0.051784672708248436,
+        "median_b": 0.06158388364584465,
+        "n_a": 100,
+        "n_a_used": 100,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.12142253377513583
+       },
+       "real_median": -0.051784672708248436
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.051673793309172655,
+       "ks_p": 3.462724311502425e-168,
+       "mean_a": 0.9936328921703915,
+       "mean_b": 1.0010126401129333,
+       "median_a": 0.4914194654901849,
+       "median_b": 0.5745847968350191,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 463295,
+       "n_b_used": 154432,
+       "stride_a": 2,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.22032857729303235
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.08872690200637678,
+       "ks_p": 0.0,
+       "mean_a": 1.2013653886230908,
+       "mean_b": 0.3108516908552071,
+       "median_a": 0.11531543260571198,
+       "median_b": 0.1573087788228804,
+       "n_a": 271775,
+       "n_a_used": 135888,
+       "n_b": 463295,
+       "n_b_used": 154432,
+       "stride_a": 2,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9452728256186728
+      },
+      "iod_15s": {
+       "gen_median": 10.768652092353918,
+       "gen_p10_p90": [
+        2.4355469662169664,
+        52.43868379342306
+       ],
+       "log10_median_ratio": 1.004132021486447,
+       "over_traces": {
+        "ks_d": 0.6078431372549019,
+        "ks_p": 1.6741107238374567e-10,
+        "mean_a": 8.521880449612105,
+        "mean_b": 22.18521623140966,
+        "median_a": 1.066668143160879,
+        "median_b": 10.768652092353918,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 14.214457528594018
+       },
+       "real_median": 1.066668143160879,
+       "real_p10_p90": [
+        0.7783333333333333,
+        22.55332155272611
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.6609494631180466,
+       "gen_p10_p90": [
+        1.0761817535188556,
+        4.443845287575334
+       ],
+       "log10_median_ratio": 0.22049481878451666,
+       "over_traces": {
+        "ks_d": 0.6024509803921568,
+        "ks_p": 2.557389490830961e-10,
+        "mean_a": 1.5013741244526642,
+        "mean_b": 2.4085341673271357,
+        "median_a": 0.9996813725490197,
+        "median_b": 1.6609494631180466,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.9419950588335245
+       },
+       "real_median": 0.9996813725490197,
+       "real_p10_p90": [
+        0.9773484848484845,
+        2.4704358331970098
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 39.93613492025479,
+       "gen_p10_p90": [
+        6.549045839443003,
+        206.93061065705118
+       ],
+       "log10_median_ratio": 1.5262629111886803,
+       "over_traces": {
+        "ks_d": 0.6274509803921569,
+        "ks_p": 3.199470397910935e-11,
+        "mean_a": 31.112962478419007,
+        "mean_b": 85.73693674777113,
+        "median_a": 1.1887844611528822,
+        "median_b": 39.93613492025479,
+        "n_a": 102,
+        "n_a_used": 102,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 56.83228857714363
+       },
+       "real_median": 1.1887844611528822,
+       "real_p10_p90": [
+        0.15928739359971467,
+        87.42043104584907
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 102,
+      "rate_per_15s_bin": {
+       "ks_d": 0.7815441176470588,
+       "ks_p": 0.0,
+       "mean_a": 11.10608660130719,
+       "mean_b": 48.2640625,
+       "median_a": 0.0,
+       "median_b": 40.0,
+       "n_a": 24480,
+       "n_a_used": 24480,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 37.180386029411764
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.7918627450980391,
+       "ks_p": 0.0,
+       "mean_a": 44.42434640522876,
+       "mean_b": 193.05625,
+       "median_a": 1.0,
+       "median_b": 162.0,
+       "n_a": 6120,
+       "n_a_used": 6120,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 148.77275326797383
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.7832643890002173,
+       "gen_median": 0.6686963847852775,
+       "over_traces": {
+        "ks_d": 0.6153846153846154,
+        "ks_p": 0.0005432320547170832,
+        "mean_a": 0.11277663006587961,
+        "mean_b": 0.612889540909267,
+        "median_a": -0.11456800421493984,
+        "median_b": 0.6686963847852775,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.5076402756572094
+       },
+       "real_median": -0.11456800421493984
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.04306805111265888,
+       "gen_median": 0.06158388364584465,
+       "over_traces": {
+        "ks_d": 0.1134615384615385,
+        "ks_p": 0.9968843971372877,
+        "mean_a": 0.12962784792796309,
+        "mean_b": 0.11100996208734153,
+        "median_a": 0.10465193475850353,
+        "median_b": 0.06158388364584465,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.05124063195388255
+       },
+       "real_median": 0.10465193475850353
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.038137251968518915,
+       "ks_p": 1.4177418465100929e-101,
+       "mean_a": 1.0,
+       "mean_b": 1.0010126401129333,
+       "median_a": 0.5157060017540935,
+       "median_b": 0.5745847968350191,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 463295,
+       "n_b_used": 154432,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.18122192141700946
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.06771290207558534,
+       "ks_p": 1.6904e-319,
+       "mean_a": 0.28135928227275553,
+       "mean_b": 0.3108516908552071,
+       "median_a": 0.12769893185009096,
+       "median_b": 0.1573087788228804,
+       "n_a": 166121,
+       "n_a_used": 166121,
+       "n_b": 463295,
+       "n_b_used": 154432,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.07039581823393862
+      },
+      "iod_15s": {
+       "gen_median": 10.768652092353918,
+       "gen_p10_p90": [
+        2.4355469662169664,
+        52.43868379342306
+       ],
+       "log10_median_ratio": -0.3011723353349077,
+       "over_traces": {
+        "ks_d": 0.4,
+        "ks_p": 0.05623847554195971,
+        "mean_a": 26.845028266226983,
+        "mean_b": 22.18521623140966,
+        "median_a": 21.544364175909713,
+        "median_b": 10.768652092353918,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 10.219745607546335
+       },
+       "real_median": 21.544364175909713,
+       "real_p10_p90": [
+        9.328796476688522,
+        40.19689474982766
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.6609494631180466,
+       "gen_p10_p90": [
+        1.0761817535188556,
+        4.443845287575334
+       ],
+       "log10_median_ratio": -0.15166633977848004,
+       "over_traces": {
+        "ks_d": 0.42500000000000004,
+        "ks_p": 0.035697150774876264,
+        "mean_a": 2.715483899344969,
+        "mean_b": 2.4085341673271357,
+        "median_a": 2.3551726989686714,
+        "median_b": 1.6609494631180466,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.6856531061853541
+       },
+       "real_median": 2.3551726989686714,
+       "real_p10_p90": [
+        1.5344811492917119,
+        3.5964334477835673
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 39.93613492025479,
+       "gen_p10_p90": [
+        6.549045839443003,
+        206.93061065705118
+       ],
+       "log10_median_ratio": -0.3155405674132835,
+       "over_traces": {
+        "ks_d": 0.4,
+        "ks_p": 0.05623847554195971,
+        "mean_a": 104.22658443072662,
+        "mean_b": 85.73693674777113,
+        "median_a": 82.58603165336967,
+        "median_b": 39.93613492025479,
+        "n_a": 13,
+        "n_a_used": 13,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 41.04718974388887
+       },
+       "real_median": 82.58603165336967,
+       "real_p10_p90": [
+        34.261345951629856,
+        156.69466188407426
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 13,
+      "rate_per_15s_bin": {
+       "ks_d": 0.0954166666666667,
+       "ks_p": 4.1594195509351336e-19,
+       "mean_a": 53.24807692307692,
+       "mean_b": 48.2640625,
+       "median_a": 43.0,
+       "median_b": 40.0,
+       "n_a": 3120,
+       "n_a_used": 3120,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 9.237748397435888
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.12352564102564101,
+       "ks_p": 2.7466955454873487e-08,
+       "mean_a": 212.9923076923077,
+       "mean_b": 193.05625,
+       "median_a": 169.5,
+       "median_b": 162.0,
+       "n_a": 780,
+       "n_a_used": 780,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 38.46400641025637
+      }
+     },
+     "worst_axes_all": [
+      [
+       "acf60_lag1",
+       0.8
+      ],
+      [
+       "rate_per_60s_bin",
+       0.7918627450980391
+      ],
+      [
+       "rate_per_15s_bin",
+       0.7815441176470588
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "acf60_lag1",
+       0.6153846153846154
+      ],
+      [
+       "iod_1s",
+       0.42500000000000004
+      ],
+      [
+       "iod_15s",
+       0.4
+      ]
+     ]
+    }
+   },
+   "n_azure_traces": 102,
+   "n_azure_traces_rate_matched": 13
+  },
+  "train": {
+   "azure_mean_rate_rps": {
+    "max": 8.741388888888888,
+    "median": 0.03333333333333333,
+    "min": 0.0005555555555555556
+   },
+   "families": {
+    "burst": {
+     "gen_mean_rate_rps": {
+      "max": 12.358055555555556,
+      "median": 2.94875,
+      "min": 1.361388888888889
+     },
+     "n_gen_traces": 48,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.39911280007386607,
+       "gen_median": 0.381881161655787,
+       "over_traces": {
+        "ks_d": 0.4036144578313253,
+        "ks_p": 5.675102652429062e-06,
+        "mean_a": 0.07466785314010302,
+        "mean_b": 0.34861943032921583,
+        "median_a": -0.017231638418079093,
+        "median_b": 0.381881161655787,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.27475754420466086
+       },
+       "real_median": -0.017231638418079093
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.07262851137367222,
+       "gen_median": -0.09099009329457618,
+       "over_traces": {
+        "ks_d": 0.4769076305220883,
+        "ks_p": 3.023095578739033e-08,
+        "mean_a": 0.09457447191479779,
+        "mean_b": -0.15007483971044025,
+        "median_a": -0.018361581920903956,
+        "median_b": -0.09099009329457618,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.24464931162523804
+       },
+       "real_median": -0.018361581920903956
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.12134112038870487,
+       "ks_p": 0.0,
+       "mean_a": 1.0008534140044871,
+       "mean_b": 0.9988514969037405,
+       "median_a": 0.6541727903312106,
+       "median_b": 0.447211553899078,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 598965,
+       "n_b_used": 199655,
+       "stride_a": 3,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.24459091294752633
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.09693562170076397,
+       "ks_p": 0.0,
+       "mean_a": 1.1147760214325644,
+       "mean_b": 0.2877852546612603,
+       "median_a": 0.09941296941542532,
+       "median_b": 0.10365036125767801,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 598965,
+       "n_b_used": 199655,
+       "stride_a": 3,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9269593716768424
+      },
+      "iod_15s": {
+       "gen_median": 30.28158394844354,
+       "gen_p10_p90": [
+        5.05698419158361,
+        173.22449783525866
+       ],
+       "log10_median_ratio": 1.4466926854703919,
+       "over_traces": {
+        "ks_d": 0.7074324324324325,
+        "ks_p": 3.5842961184105105e-19,
+        "mean_a": 3.5356784359024633,
+        "mean_b": 57.30167644603637,
+        "median_a": 1.0826445717403166,
+        "median_b": 30.28158394844354,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 53.76599801013389
+       },
+       "real_median": 1.0826445717403166,
+       "real_p10_p90": [
+        0.75,
+        9.308314221630516
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 2.9740778277845235,
+       "gen_p10_p90": [
+        1.276215014765596,
+        12.502523635870675
+       ],
+       "log10_median_ratio": 0.472900537620218,
+       "over_traces": {
+        "ks_d": 0.717454954954955,
+        "ks_p": 9.034485678219728e-20,
+        "mean_a": 1.1726534127344133,
+        "mean_b": 4.747736346321517,
+        "median_a": 1.001040829986613,
+        "median_b": 2.9740778277845235,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 3.5750829335871033
+       },
+       "real_median": 1.001040829986613,
+       "real_p10_p90": [
+        0.9833333333333336,
+        1.6028752489979077
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 117.71732924402812,
+       "gen_p10_p90": [
+        17.49507123477298,
+        689.6280018740629
+       ],
+       "log10_median_ratio": 1.8758637971046652,
+       "over_traces": {
+        "ks_d": 0.7120495495495497,
+        "ks_p": 1.958103332903615e-19,
+        "mean_a": 11.11651466299137,
+        "mean_b": 226.26150907753035,
+        "median_a": 1.5666666666666664,
+        "median_b": 117.71732924402812,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 215.14499441453896
+       },
+       "real_median": 1.5666666666666664,
+       "real_p10_p90": [
+        0.0008177408177408221,
+        34.65237502220076
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 185,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8721570007507508,
+       "ks_p": 0.0,
+       "mean_a": 11.817725225225225,
+       "mean_b": 51.99765625,
+       "median_a": 0.0,
+       "median_b": 33.0,
+       "n_a": 44400,
+       "n_a_used": 44400,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 40.179931024774774
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.882986111111111,
+       "ks_p": 0.0,
+       "mean_a": 47.2709009009009,
+       "mean_b": 207.990625,
+       "median_a": 1.0,
+       "median_b": 145.0,
+       "n_a": 11100,
+       "n_a_used": 11100,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 160.7197240990991
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": -0.1208493400863524,
+       "gen_median": 0.381881161655787,
+       "over_traces": {
+        "ks_d": 0.5,
+        "ks_p": 0.06662851515237754,
+        "mean_a": 0.5545526696015506,
+        "mean_b": 0.34861943032921583,
+        "median_a": 0.5027305017421394,
+        "median_b": 0.381881161655787,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.23296321892804114
+       },
+       "real_median": 0.5027305017421394
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.3013773523972282,
+       "gen_median": -0.09099009329457618,
+       "over_traces": {
+        "ks_d": 0.8571428571428572,
+        "ks_p": 1.7326365828030642e-05,
+        "mean_a": 0.276522794073565,
+        "mean_b": -0.15007483971044025,
+        "median_a": 0.21038725910265202,
+        "median_b": -0.09099009329457618,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.42659763378400534
+       },
+       "real_median": 0.21038725910265202
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.13701504497261813,
+       "ks_p": 0.0,
+       "mean_a": 1.0,
+       "mean_b": 0.9988514969037405,
+       "median_a": 0.6867016464717499,
+       "median_b": 0.447211553899078,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 598965,
+       "n_b_used": 199655,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.27905139691520486
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.2261041351954218,
+       "ks_p": 0.0,
+       "mean_a": 0.3679836029988718,
+       "mean_b": 0.2877852546612603,
+       "median_a": 0.22813460222755566,
+       "median_b": 0.10365036125767801,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 598965,
+       "n_b_used": 199655,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.08382060045845931
+      },
+      "iod_15s": {
+       "gen_median": 30.28158394844354,
+       "gen_p10_p90": [
+        5.05698419158361,
+        173.22449783525866
+       ],
+       "log10_median_ratio": 1.2960063311473513,
+       "over_traces": {
+        "ks_d": 0.9791666666666666,
+        "ks_p": 7.88458058158391e-08,
+        "mean_a": 1.669121480371991,
+        "mean_b": 57.30167644603637,
+        "median_a": 1.5316948673450608,
+        "median_b": 30.28158394844354,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 55.63255496566436
+       },
+       "real_median": 1.5316948673450608,
+       "real_p10_p90": [
+        1.1911242211117863,
+        2.229319604202032
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 2.9740778277845235,
+       "gen_p10_p90": [
+        1.276215014765596,
+        12.502523635870675
+       ],
+       "log10_median_ratio": 0.4527707303765265,
+       "over_traces": {
+        "ks_d": 0.9791666666666666,
+        "ks_p": 7.88458058158391e-08,
+        "mean_a": 1.0342594753516778,
+        "mean_b": 4.747736346321517,
+        "median_a": 1.048531782008663,
+        "median_b": 2.9740778277845235,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 3.71347687096984
+       },
+       "real_median": 1.048531782008663,
+       "real_p10_p90": [
+        0.9828778829064819,
+        1.0675068689947533
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 117.71732924402812,
+       "gen_p10_p90": [
+        17.49507123477298,
+        689.6280018740629
+       ],
+       "log10_median_ratio": 1.6270406173758218,
+       "over_traces": {
+        "ks_d": 0.9791666666666666,
+        "ks_p": 7.88458058158391e-08,
+        "mean_a": 3.5262094616211255,
+        "mean_b": 226.26150907753035,
+        "median_a": 2.778432068575636,
+        "median_b": 117.71732924402812,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 48,
+        "n_b_used": 48,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 222.73529961590916
+       },
+       "real_median": 2.778432068575636,
+       "real_p10_p90": [
+        1.8959621100262745,
+        5.582657401318554
+       ]
+      },
+      "n_gen_traces": 48,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.21367807539682537,
+       "ks_p": 3.187895862021686e-59,
+       "mean_a": 40.75535714285714,
+       "mean_b": 51.99765625,
+       "median_a": 41.0,
+       "median_b": 33.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 11520,
+       "n_b_used": 11520,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 23.82965029761905
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.29355158730158726,
+       "ks_p": 2.0141434365656967e-28,
+       "mean_a": 163.02142857142857,
+       "mean_b": 207.990625,
+       "median_a": 168.0,
+       "median_b": 145.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 2880,
+       "n_b_used": 2880,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 98.60114087301588
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.882986111111111
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8721570007507508
+      ],
+      [
+       "iod_1s",
+       0.717454954954955
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_1s",
+       0.9791666666666666
+      ],
+      [
+       "iod_15s",
+       0.9791666666666666
+      ],
+      [
+       "iod_60s",
+       0.9791666666666666
+      ]
+     ]
+    },
+    "constant": {
+     "gen_mean_rate_rps": {
+      "max": 6.601388888888889,
+      "median": 3.2693055555555555,
+      "min": 1.1030555555555555
+     },
+     "n_gen_traces": 10,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.034214145072408234,
+       "gen_median": 0.016982506654329137,
+       "over_traces": {
+        "ks_d": 0.26626506024096386,
+        "ks_p": 0.4377452392668904,
+        "mean_a": 0.07466785314010302,
+        "mean_b": 0.03265893063144679,
+        "median_a": -0.017231638418079093,
+        "median_b": 0.016982506654329137,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.16627632217348096
+       },
+       "real_median": -0.017231638418079093
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.024460284466673463,
+       "gen_median": 0.006098702545769507,
+       "over_traces": {
+        "ks_d": 0.22891566265060237,
+        "ks_p": 0.6266897788302092,
+        "mean_a": 0.09457447191479779,
+        "mean_b": -0.011852998030098752,
+        "median_a": -0.018361581920903956,
+        "median_b": 0.006098702545769507,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.13499163211596668
+       },
+       "real_median": -0.018361581920903956
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.021775818575017147,
+       "ks_p": 1.1828323356304964e-30,
+       "mean_a": 1.0008534140044871,
+       "mean_b": 1.0,
+       "median_a": 0.6541727903312106,
+       "median_b": 0.6954845264172104,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 126419,
+       "n_b_used": 126419,
+       "stride_a": 3,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.05270624131037133
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.1565676924624591,
+       "ks_p": 0.0,
+       "mean_a": 1.1147760214325644,
+       "mean_b": 0.2847240542092328,
+       "median_a": 0.09941296941542532,
+       "median_b": 0.1631527827763648,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 126419,
+       "n_b_used": 126419,
+       "stride_a": 3,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9518159849670201
+      },
+      "iod_15s": {
+       "gen_median": 1.0109401118145143,
+       "gen_p10_p90": [
+        0.9135856866528294,
+        1.080970175553411
+       ],
+       "log10_median_ratio": -0.029760474023543673,
+       "over_traces": {
+        "ks_d": 0.47027027027027024,
+        "ks_p": 0.019598874076023055,
+        "mean_a": 3.5356784359024633,
+        "mean_b": 0.998959542984202,
+        "median_a": 1.0826445717403166,
+        "median_b": 1.0109401118145143,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 2.5991327996134905
+       },
+       "real_median": 1.0826445717403166,
+       "real_p10_p90": [
+        0.75,
+        9.308314221630516
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 0.9842971032640454,
+       "gen_p10_p90": [
+        0.9689589816395479,
+        1.016495528492983
+       ],
+       "log10_median_ratio": -0.00732558464022951,
+       "over_traces": {
+        "ks_d": 0.4675675675675676,
+        "ks_p": 0.020623168691354807,
+        "mean_a": 1.1726534127344133,
+        "mean_b": 0.9900304383430063,
+        "median_a": 1.001040829986613,
+        "median_b": 0.9842971032640454,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.18294144225655543
+       },
+       "real_median": 1.001040829986613,
+       "real_p10_p90": [
+        0.9833333333333336,
+        1.6028752489979077
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 0.9313121661235663,
+       "gen_p10_p90": [
+        0.6928461924175991,
+        1.110739321928877
+       ],
+       "log10_median_ratio": -0.2258813268521145,
+       "over_traces": {
+        "ks_d": 0.518918918918919,
+        "ks_p": 0.00692985449482959,
+        "mean_a": 11.11651466299137,
+        "mean_b": 0.9213970447286878,
+        "median_a": 1.5666666666666664,
+        "median_b": 0.9313121661235663,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 10.481074583104972
+       },
+       "real_median": 1.5666666666666664,
+       "real_p10_p90": [
+        0.0008177408177408221,
+        34.65237502220076
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 185,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8658896396396396,
+       "ks_p": 0.0,
+       "mean_a": 11.817725225225225,
+       "mean_b": 52.67875,
+       "median_a": 0.0,
+       "median_b": 49.0,
+       "n_a": 44400,
+       "n_a_used": 44400,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 44.03079954954954
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8796396396396396,
+       "ks_p": 0.0,
+       "mean_a": 47.2709009009009,
+       "mean_b": 210.715,
+       "median_a": 1.0,
+       "median_b": 198.0,
+       "n_a": 11100,
+       "n_a_used": 11100,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 178.70698198198198
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": -0.48574799508781025,
+       "gen_median": 0.016982506654329137,
+       "over_traces": {
+        "ks_d": 0.9,
+        "ks_p": 0.0008227067050596464,
+        "mean_a": 0.5545526696015506,
+        "mean_b": 0.03265893063144679,
+        "median_a": 0.5027305017421394,
+        "median_b": 0.016982506654329137,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.5218937389701036
+       },
+       "real_median": 0.5027305017421394
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.20428855655688252,
+       "gen_median": 0.006098702545769507,
+       "over_traces": {
+        "ks_d": 0.5142857142857143,
+        "ks_p": 0.15538872891814065,
+        "mean_a": 0.276522794073565,
+        "mean_b": -0.011852998030098752,
+        "median_a": 0.21038725910265202,
+        "median_b": 0.006098702545769507,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.28837579210366376
+       },
+       "real_median": 0.21038725910265202
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.006244302548117364,
+       "ks_p": 0.06239031165686659,
+       "mean_a": 1.0,
+       "mean_b": 1.0,
+       "median_a": 0.6867016464717499,
+       "median_b": 0.6954845264172104,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 126419,
+       "n_b_used": 126419,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.011838001824832389
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.11219891792461839,
+       "ks_p": 0.0,
+       "mean_a": 0.3679836029988718,
+       "mean_b": 0.2847240542092328,
+       "median_a": 0.22813460222755566,
+       "median_b": 0.1631527827763648,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 126419,
+       "n_b_used": 126419,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.08325954969230623
+      },
+      "iod_15s": {
+       "gen_median": 1.0109401118145143,
+       "gen_p10_p90": [
+        0.9135856866528294,
+        1.080970175553411
+       ],
+       "log10_median_ratio": -0.1804468283465843,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 0.00010283833813245579,
+        "mean_a": 1.669121480371991,
+        "mean_b": 0.998959542984202,
+        "median_a": 1.5316948673450608,
+        "median_b": 1.0109401118145143,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.6701619373877887
+       },
+       "real_median": 1.5316948673450608,
+       "real_p10_p90": [
+        1.1911242211117863,
+        2.229319604202032
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 0.9842971032640454,
+       "gen_p10_p90": [
+        0.9689589816395479,
+        1.016495528492983
+       ],
+       "log10_median_ratio": -0.02745539188392102,
+       "over_traces": {
+        "ks_d": 0.7142857142857143,
+        "ks_p": 0.013986013986013983,
+        "mean_a": 1.0342594753516778,
+        "mean_b": 0.9900304383430063,
+        "median_a": 1.048531782008663,
+        "median_b": 0.9842971032640454,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.04422903700867156
+       },
+       "real_median": 1.048531782008663,
+       "real_p10_p90": [
+        0.9828778829064819,
+        1.0675068689947533
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 0.9313121661235663,
+       "gen_p10_p90": [
+        0.6928461924175991,
+        1.110739321928877
+       ],
+       "log10_median_ratio": -0.4747045065809577,
+       "over_traces": {
+        "ks_d": 1.0,
+        "ks_p": 0.00010283833813245579,
+        "mean_a": 3.5262094616211255,
+        "mean_b": 0.9213970447286878,
+        "median_a": 2.778432068575636,
+        "median_b": 0.9313121661235663,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 10,
+        "n_b_used": 10,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 2.604812416892438
+       },
+       "real_median": 2.778432068575636,
+       "real_p10_p90": [
+        1.8959621100262745,
+        5.582657401318554
+       ]
+      },
+      "n_gen_traces": 10,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.220952380952381,
+       "ks_p": 9.609598135243537e-43,
+       "mean_a": 40.75535714285714,
+       "mean_b": 52.67875,
+       "median_a": 41.0,
+       "median_b": 49.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 11.976845238095239
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.25309523809523815,
+       "ks_p": 2.1575786565431647e-14,
+       "mean_a": 163.02142857142857,
+       "mean_b": 210.715,
+       "median_a": 168.0,
+       "median_b": 198.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 600,
+       "n_b_used": 600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 49.14976190476189
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8796396396396396
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8658896396396396
+      ],
+      [
+       "iod_60s",
+       0.518918918918919
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_15s",
+       1.0
+      ],
+      [
+       "iod_60s",
+       1.0
+      ],
+      [
+       "acf60_lag1",
+       0.9
+      ]
+     ]
+    },
+    "diurnal": {
+     "gen_mean_rate_rps": {
+      "max": 6.656666666666666,
+      "median": 3.8427777777777776,
+      "min": 2.1691666666666665
+     },
+     "n_gen_traces": 24,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.9008091192705907,
+       "gen_median": 0.8835774808525116,
+       "over_traces": {
+        "ks_d": 0.8975903614457832,
+        "ks_p": 1.9090307331320164e-19,
+        "mean_a": 0.07466785314010302,
+        "mean_b": 0.8600732241031839,
+        "median_a": -0.017231638418079093,
+        "median_b": 0.8835774808525116,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.7854053709630808
+       },
+       "real_median": -0.017231638418079093
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.6232203566423793,
+       "gen_median": 0.6048587747214753,
+       "over_traces": {
+        "ks_d": 0.5281124497991969,
+        "ks_p": 5.720581245409393e-06,
+        "mean_a": 0.09457447191479779,
+        "mean_b": 0.3374814527845024,
+        "median_a": -0.018361581920903956,
+        "median_b": 0.6048587747214753,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.40971344279976163
+       },
+       "real_median": -0.018361581920903956
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.011858370729135426,
+       "ks_p": 1.2036724055315618e-10,
+       "mean_a": 1.0008534140044871,
+       "mean_b": 0.9993129626367492,
+       "median_a": 0.6541727903312106,
+       "median_b": 0.6377803178347234,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 320743,
+       "n_b_used": 160372,
+       "stride_a": 3,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.03761660864395083
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.14315113956815473,
+       "ks_p": 0.0,
+       "mean_a": 1.1147760214325644,
+       "mean_b": 0.26895784498368996,
+       "median_a": 0.09941296941542532,
+       "median_b": 0.15649463440047384,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 320743,
+       "n_b_used": 160372,
+       "stride_a": 3,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9493778381542808
+      },
+      "iod_15s": {
+       "gen_median": 5.078047335554286,
+       "gen_p10_p90": [
+        1.8177787395294869,
+        22.18248891531968
+       ],
+       "log10_median_ratio": 0.671210842147034,
+       "over_traces": {
+        "ks_d": 0.572972972972973,
+        "ks_p": 4.4223998351366694e-07,
+        "mean_a": 3.5356784359024633,
+        "mean_b": 8.092302131146356,
+        "median_a": 1.0826445717403166,
+        "median_b": 5.078047335554286,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 4.930046120150621
+       },
+       "real_median": 1.0826445717403166,
+       "real_p10_p90": [
+        0.75,
+        9.308314221630516
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2453133967952068,
+       "gen_p10_p90": [
+        1.0733491449987906,
+        2.3789725494471314
+       ],
+       "log10_median_ratio": 0.09482686852209138,
+       "over_traces": {
+        "ks_d": 0.5761261261261261,
+        "ks_p": 3.756901092434831e-07,
+        "mean_a": 1.1726534127344133,
+        "mean_b": 1.46810469513691,
+        "median_a": 1.001040829986613,
+        "median_b": 1.2453133967952068,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.32016662298545334
+       },
+       "real_median": 1.001040829986613,
+       "real_p10_p90": [
+        0.9833333333333336,
+        1.6028752489979077
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 17.029742878818787,
+       "gen_p10_p90": [
+        3.922368448424811,
+        85.14000246392061
+       ],
+       "log10_median_ratio": 1.0362314876618035,
+       "over_traces": {
+        "ks_d": 0.5891891891891892,
+        "ks_p": 1.7105792918351856e-07,
+        "mean_a": 11.11651466299137,
+        "mean_b": 29.13183627031115,
+        "median_a": 1.5666666666666664,
+        "median_b": 17.029742878818787,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 19.508828253018287
+       },
+       "real_median": 1.5666666666666664,
+       "real_p10_p90": [
+        0.0008177408177408221,
+        34.65237502220076
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 185,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8541103603603604,
+       "ks_p": 0.0,
+       "mean_a": 11.817725225225225,
+       "mean_b": 55.688715277777774,
+       "median_a": 0.0,
+       "median_b": 49.0,
+       "n_a": 44400,
+       "n_a_used": 44400,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 46.10881287537538
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8620345345345346,
+       "ks_p": 0.0,
+       "mean_a": 47.2709009009009,
+       "mean_b": 222.7548611111111,
+       "median_a": 1.0,
+       "median_b": 193.5,
+       "n_a": 11100,
+       "n_a_used": 11100,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 185.38566441441446
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.38084697911037224,
+       "gen_median": 0.8835774808525116,
+       "over_traces": {
+        "ks_d": 0.6488095238095237,
+        "ks_p": 0.0113562077522033,
+        "mean_a": 0.5545526696015506,
+        "mean_b": 0.8600732241031839,
+        "median_a": 0.5027305017421394,
+        "median_b": 0.8835774808525116,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.30552055450163323
+       },
+       "real_median": 0.5027305017421394
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.3944715156188233,
+       "gen_median": 0.6048587747214753,
+       "over_traces": {
+        "ks_d": 0.5833333333333334,
+        "ks_p": 0.03148797809531958,
+        "mean_a": 0.276522794073565,
+        "mean_b": 0.3374814527845024,
+        "median_a": 0.21038725910265202,
+        "median_b": 0.6048587747214753,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.32129852075811516
+       },
+       "real_median": 0.21038725910265202
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.02719150135672821,
+       "ks_p": 2.9836014620482906e-31,
+       "mean_a": 1.0,
+       "mean_b": 0.9993129626367492,
+       "median_a": 0.6867016464717499,
+       "median_b": 0.6377803178347234,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 320743,
+       "n_b_used": 160372,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.06993643453241276
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.12724844638934235,
+       "ks_p": 0.0,
+       "mean_a": 0.3679836029988718,
+       "mean_b": 0.26895784498368996,
+       "median_a": 0.22813460222755566,
+       "median_b": 0.15649463440047384,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 320743,
+       "n_b_used": 160372,
+       "stride_a": 1,
+       "stride_b": 2,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.0993963570648808
+      },
+      "iod_15s": {
+       "gen_median": 5.078047335554286,
+       "gen_p10_p90": [
+        1.8177787395294869,
+        22.18248891531968
+       ],
+       "log10_median_ratio": 0.5205244878239933,
+       "over_traces": {
+        "ks_d": 0.7916666666666667,
+        "ks_p": 0.0007035357424678894,
+        "mean_a": 1.669121480371991,
+        "mean_b": 8.092302131146356,
+        "median_a": 1.5316948673450608,
+        "median_b": 5.078047335554286,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 6.4231806507743645
+       },
+       "real_median": 1.5316948673450608,
+       "real_p10_p90": [
+        1.1911242211117863,
+        2.229319604202032
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.2453133967952068,
+       "gen_p10_p90": [
+        1.0733491449987906,
+        2.3789725494471314
+       ],
+       "log10_median_ratio": 0.07469706127839988,
+       "over_traces": {
+        "ks_d": 0.8333333333333334,
+        "ks_p": 0.0002662027133662284,
+        "mean_a": 1.0342594753516778,
+        "mean_b": 1.46810469513691,
+        "median_a": 1.048531782008663,
+        "median_b": 1.2453133967952068,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.43384521978523216
+       },
+       "real_median": 1.048531782008663,
+       "real_p10_p90": [
+        0.9828778829064819,
+        1.0675068689947533
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 17.029742878818787,
+       "gen_p10_p90": [
+        3.922368448424811,
+        85.14000246392061
+       ],
+       "log10_median_ratio": 0.7874083079329602,
+       "over_traces": {
+        "ks_d": 0.75,
+        "ks_p": 0.0016884857819229344,
+        "mean_a": 3.5262094616211255,
+        "mean_b": 29.13183627031115,
+        "median_a": 2.778432068575636,
+        "median_b": 17.029742878818787,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 24,
+        "n_b_used": 24,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 25.60562680869002
+       },
+       "real_median": 2.778432068575636,
+       "real_p10_p90": [
+        1.8959621100262745,
+        5.582657401318554
+       ]
+      },
+      "n_gen_traces": 24,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.2514632936507938,
+       "ks_p": 8.797871732047837e-73,
+       "mean_a": 40.75535714285714,
+       "mean_b": 55.688715277777774,
+       "median_a": 41.0,
+       "median_b": 49.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 5760,
+       "n_b_used": 5760,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 15.083209325396824
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.27628968253968267,
+       "ks_p": 2.2698920517594656e-22,
+       "mean_a": 163.02142857142857,
+       "mean_b": 222.7548611111111,
+       "median_a": 168.0,
+       "median_b": 193.5,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 1440,
+       "n_b_used": 1440,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 60.57688492063492
+      }
+     },
+     "worst_axes_all": [
+      [
+       "acf60_lag1",
+       0.8975903614457832
+      ],
+      [
+       "rate_per_60s_bin",
+       0.8620345345345346
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8541103603603604
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_1s",
+       0.8333333333333334
+      ],
+      [
+       "iod_15s",
+       0.7916666666666667
+      ],
+      [
+       "iod_60s",
+       0.75
+      ]
+     ]
+    },
+    "variable": {
+     "gen_mean_rate_rps": {
+      "max": 7.5725,
+      "median": 3.081666666666667,
+      "min": 0.9233333333333333
+     },
+     "n_gen_traces": 40,
+     "vs_all_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.6562483267675812,
+       "gen_median": 0.6390166883495021,
+       "over_traces": {
+        "ks_d": 0.6436746987951807,
+        "ks_p": 2.767089572200917e-13,
+        "mean_a": 0.07466785314010302,
+        "mean_b": 0.5511258210942814,
+        "median_a": -0.017231638418079093,
+        "median_b": 0.6390166883495021,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.47645796795417844
+       },
+       "real_median": -0.017231638418079093
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": 0.11994025003204158,
+       "gen_median": 0.10157866811113762,
+       "over_traces": {
+        "ks_d": 0.2506024096385542,
+        "ks_p": 0.028208494794679927,
+        "mean_a": 0.09457447191479779,
+        "mean_b": 0.14552923245168134,
+        "median_a": -0.018361581920903956,
+        "median_b": 0.10157866811113762,
+        "n_a": 166,
+        "n_a_used": 166,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.11307200125171894
+       },
+       "real_median": -0.018361581920903956
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.03952586525838203,
+       "ks_p": 9.604119337316404e-114,
+       "mean_a": 1.0008534140044871,
+       "mean_b": 1.0042351964713647,
+       "median_a": 0.6541727903312106,
+       "median_b": 0.5857035263227522,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 479166,
+       "n_b_used": 159722,
+       "stride_a": 3,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.09365490846477242
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.1431948883849996,
+       "ks_p": 0.0,
+       "mean_a": 1.1147760214325644,
+       "mean_b": 0.301628491089625,
+       "median_a": 0.09941296941542532,
+       "median_b": 0.15662288987044803,
+       "n_a": 524522,
+       "n_a_used": 174841,
+       "n_b": 479166,
+       "n_b_used": 159722,
+       "stride_a": 3,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.9386754990743899
+      },
+      "iod_15s": {
+       "gen_median": 7.565104533790743,
+       "gen_p10_p90": [
+        2.2373064312834923,
+        45.8624547150381
+       ],
+       "log10_median_ratio": 0.8443290307031348,
+       "over_traces": {
+        "ks_d": 0.6702702702702703,
+        "ks_p": 8.470754842520708e-15,
+        "mean_a": 3.5356784359024633,
+        "mean_b": 18.35073588286272,
+        "median_a": 1.0826445717403166,
+        "median_b": 7.565104533790743,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 14.815057446960257
+       },
+       "real_median": 1.0826445717403166,
+       "real_p10_p90": [
+        0.75,
+        9.308314221630516
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.444375391518915,
+       "gen_p10_p90": [
+        1.0954514312876236,
+        4.020906410970872
+       ],
+       "log10_median_ratio": 0.15922828890361693,
+       "over_traces": {
+        "ks_d": 0.6344594594594595,
+        "ks_p": 3.7976833375940885e-13,
+        "mean_a": 1.1726534127344133,
+        "mean_b": 2.1503107471860696,
+        "median_a": 1.001040829986613,
+        "median_b": 1.444375391518915,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.9776573344516564
+       },
+       "real_median": 1.001040829986613,
+       "real_p10_p90": [
+        0.9833333333333336,
+        1.6028752489979077
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 27.127711716860155,
+       "gen_p10_p90": [
+        6.053733608346909,
+        180.41104612317628
+       ],
+       "log10_median_ratio": 1.2384365583799075,
+       "over_traces": {
+        "ks_d": 0.664864864864865,
+        "ks_p": 1.5348058982266373e-14,
+        "mean_a": 11.11651466299137,
+        "mean_b": 70.40844425661177,
+        "median_a": 1.5666666666666664,
+        "median_b": 27.127711716860155,
+        "n_a": 185,
+        "n_a_used": 185,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 59.29192959362041
+       },
+       "real_median": 1.5666666666666664,
+       "real_p10_p90": [
+        0.0008177408177408221,
+        34.65237502220076
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 185,
+      "rate_per_15s_bin": {
+       "ks_d": 0.8375788288288288,
+       "ks_p": 0.0,
+       "mean_a": 11.817725225225225,
+       "mean_b": 49.917291666666664,
+       "median_a": 0.0,
+       "median_b": 42.0,
+       "n_a": 44400,
+       "n_a_used": 44400,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 38.09956644144144
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.8497747747747748,
+       "ks_p": 0.0,
+       "mean_a": 47.2709009009009,
+       "mean_b": 199.66916666666665,
+       "median_a": 1.0,
+       "median_b": 167.0,
+       "n_a": 11100,
+       "n_a_used": 11100,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 152.4015990990991
+      }
+     },
+     "vs_rate_matched_azure": {
+      "acf60_lag1": {
+       "difference_gen_minus_real": 0.1362861866073627,
+       "gen_median": 0.6390166883495021,
+       "over_traces": {
+        "ks_d": 0.17142857142857137,
+        "ks_p": 0.9798892851957621,
+        "mean_a": 0.5545526696015506,
+        "mean_b": 0.5511258210942814,
+        "median_a": 0.5027305017421394,
+        "median_b": 0.6390166883495021,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.06812361132286378
+       },
+       "real_median": 0.5027305017421394
+      },
+      "acf60_lag5": {
+       "difference_gen_minus_real": -0.1088085909915144,
+       "gen_median": 0.10157866811113762,
+       "over_traces": {
+        "ks_d": 0.3285714285714286,
+        "ks_p": 0.4408369881595604,
+        "mean_a": 0.276522794073565,
+        "mean_b": 0.14552923245168134,
+        "median_a": 0.21038725910265202,
+        "median_b": 0.10157866811113762,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 0.13225645730052607
+       },
+       "real_median": 0.21038725910265202
+      },
+      "interarrival_normalised": {
+       "ks_d": 0.056274918456948486,
+       "ks_p": 2.376095043146571e-132,
+       "mean_a": 1.0,
+       "mean_b": 1.0042351964713647,
+       "median_a": 0.6867016464717499,
+       "median_b": 0.5857035263227522,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 479166,
+       "n_b_used": 159722,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.12915970674419658
+      },
+      "interarrival_raw_s": {
+       "ks_d": 0.11928722068385411,
+       "ks_p": 0.0,
+       "mean_a": 0.3679836029988718,
+       "mean_b": 0.301628491089625,
+       "median_a": 0.22813460222755566,
+       "median_b": 0.15662288987044803,
+       "n_a": 68462,
+       "n_a_used": 68462,
+       "n_b": 479166,
+       "n_b_used": 159722,
+       "stride_a": 1,
+       "stride_b": 3,
+       "timescale_caveat": "SUB-MINUTE: the real side here is arrival-placement assumption A1, not recorded data. Read as a comparison between two models.",
+       "wasserstein": 0.07601292620311971
+      },
+      "iod_15s": {
+       "gen_median": 7.565104533790743,
+       "gen_p10_p90": [
+        2.2373064312834923,
+        45.8624547150381
+       ],
+       "log10_median_ratio": 0.6936426763800941,
+       "over_traces": {
+        "ks_d": 0.8571428571428571,
+        "ks_p": 2.6299261844593652e-05,
+        "mean_a": 1.669121480371991,
+        "mean_b": 18.35073588286272,
+        "median_a": 1.5316948673450608,
+        "median_b": 7.565104533790743,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 16.681614402490727
+       },
+       "real_median": 1.5316948673450608,
+       "real_p10_p90": [
+        1.1911242211117863,
+        2.229319604202032
+       ]
+      },
+      "iod_1s": {
+       "gen_median": 1.444375391518915,
+       "gen_p10_p90": [
+        1.0954514312876236,
+        4.020906410970872
+       ],
+       "log10_median_ratio": 0.1390984816599254,
+       "over_traces": {
+        "ks_d": 0.925,
+        "ks_p": 3.816096035491219e-06,
+        "mean_a": 1.0342594753516778,
+        "mean_b": 2.1503107471860696,
+        "median_a": 1.048531782008663,
+        "median_b": 1.444375391518915,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 1.1160512718343918
+       },
+       "real_median": 1.048531782008663,
+       "real_p10_p90": [
+        0.9828778829064819,
+        1.0675068689947533
+       ]
+      },
+      "iod_60s": {
+       "gen_median": 27.127711716860155,
+       "gen_p10_p90": [
+        6.053733608346909,
+        180.41104612317628
+       ],
+       "log10_median_ratio": 0.9896133786510642,
+       "over_traces": {
+        "ks_d": 0.8571428571428571,
+        "ks_p": 2.6299261844593652e-05,
+        "mean_a": 3.5262094616211255,
+        "mean_b": 70.40844425661177,
+        "median_a": 2.778432068575636,
+        "median_b": 27.127711716860155,
+        "n_a": 7,
+        "n_a_used": 7,
+        "n_b": 40,
+        "n_b_used": 40,
+        "stride_a": 1,
+        "stride_b": 1,
+        "wasserstein": 66.88223479499065
+       },
+       "real_median": 2.778432068575636,
+       "real_p10_p90": [
+        1.8959621100262745,
+        5.582657401318554
+       ]
+      },
+      "n_gen_traces": 40,
+      "n_real_traces": 7,
+      "rate_per_15s_bin": {
+       "ks_d": 0.15947916666666673,
+       "ks_p": 3.256653850378399e-32,
+       "mean_a": 40.75535714285714,
+       "mean_b": 49.917291666666664,
+       "median_a": 41.0,
+       "median_b": 42.0,
+       "n_a": 1680,
+       "n_a_used": 1680,
+       "n_b": 9600,
+       "n_b_used": 9600,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "SUB-MINUTE aggregation of the recorded counts under assumption A1; partially model-dependent.",
+       "wasserstein": 11.79190476190476
+      },
+      "rate_per_60s_bin": {
+       "ks_d": 0.17988095238095247,
+       "ks_p": 1.3845561073523268e-10,
+       "mean_a": 163.02142857142857,
+       "mean_b": 199.66916666666665,
+       "median_a": 168.0,
+       "median_b": 167.0,
+       "n_a": 420,
+       "n_a_used": 420,
+       "n_b": 2400,
+       "n_b_used": 2400,
+       "stride_a": 1,
+       "stride_b": 1,
+       "timescale_caveat": "AT the source's recording granularity: the real side is the recorded per-minute count series (aggregated to this bin), so this comparison is against data.",
+       "wasserstein": 48.789523809523786
+      }
+     },
+     "worst_axes_all": [
+      [
+       "rate_per_60s_bin",
+       0.8497747747747748
+      ],
+      [
+       "rate_per_15s_bin",
+       0.8375788288288288
+      ],
+      [
+       "iod_15s",
+       0.6702702702702703
+      ]
+     ],
+     "worst_axes_rate_matched": [
+      [
+       "iod_1s",
+       0.925
+      ],
+      [
+       "iod_15s",
+       0.8571428571428571
+      ],
+      [
+       "iod_60s",
+       0.8571428571428571
+      ]
+     ]
+    }
+   },
+   "n_azure_traces": 185,
+   "n_azure_traces_rate_matched": 7
+  }
+ },
+ "what_is_compared": "each synthetic family's pooled arrival statistics against the RECONSTRUCTED Azure replay traces of the same split"
+}
