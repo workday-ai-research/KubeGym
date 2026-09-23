@@ -1,0 +1,207 @@
+{
+  "schema": "kubegym-config-1",
+  "_README": [
+    "kubegym service-model config. Every physical constant carries its own `calibrated` flag,",
+    "`source` string and `required_for_claims` flag. The top-level `calibrated` is the AND over",
+    "every field marked `required_for_claims`; it is what every result row stamps. A single",
+    "uncalibrated required field makes the whole run non-reportable. That is deliberate.",
+    "PORTED VERBATIM from the source testbed's cluster_config.json (schema cluster-config-2).",
+    "Every field below that also existed there keeps its value and its `source` string",
+    "byte-for-byte; see `_port` for the provenance of the port itself."
+  ],
+  "_port": {
+    "ported_from": "cluster_config.json, schema cluster-config-2 (vLLM replica-autoscaling testbed)",
+    "source_sha256": "ce557d1fed3fc527cb7267f5921e86a2b4a033d4b818706405530b296025ebbb",
+    "fields_carried_over_verbatim": [
+      "chunked_prefill",
+      "class_predictor_accuracy",
+      "class_signal",
+      "control_interval_s",
+      "decode_batch_extrapolation_above_8",
+      "decode_step_time_s",
+      "gpu_cost_per_replica_hour_usd",
+      "kv_tokens_per_replica",
+      "max_num_seqs",
+      "metric_scrape_interval_s",
+      "n_replicas_max",
+      "n_replicas_min",
+      "output_length_distribution",
+      "preemption_policy",
+      "prefill_tokens_per_s",
+      "replica_cold_start_s",
+      "replica_teardown_s",
+      "router_policy",
+      "slo"
+    ],
+    "fields_added_by_the_port": [
+      "replica_bringup"
+    ],
+    "values_changed_by_the_port": [],
+    "calibration_upgrades_by_the_port": []
+  },
+  "calibrated": false,
+  "uncalibrated_required_fields": [
+    "decode_batch_extrapolation_above_8",
+    "output_length_distribution",
+    "prefill_tokens_per_s",
+    "slo"
+  ],
+  "calibration_note": "UNCALIBRATED OVERALL. Cold start, KV budget and the decode step-time model on batch<=8 are MEASURED on the GPU testbed (vLLM 0.25.1 / Qwen3-1.7B / single L40S 46GB). The per-class OUTPUT-LENGTH DISTRIBUTION is still a labelled placeholder from length_model.py, prefill throughput was never measured, and decode step time above batch 8 is an unmeasured affine extrapolation. No number produced by this simulator may be reported as an empirical result.",
+  "fields": {
+    "chunked_prefill": {
+      "value": false,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "NOT MODELLED. vLLM v1 enables chunked prefill by default; the simulator charges a whole-prompt prefill that stalls the replica's decode. This overstates the TBT spike caused by an admission and understates the TTFT of a long prompt under load."
+    },
+    "class_predictor_accuracy": {
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "Sensitivity knob, not a measurement. 1.0 = the controller reads thinking_mode as-is. Below 1.0 the class signal handed to belief-based controllers is corrupted with that per-request probability of being correct, standing in for a real prompt-length predictor's error."
+    },
+    "class_signal": {
+      "value": "thinking_mode",
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "The router genuinely observes `chat_template_kwargs.enable_thinking` on every request, so conditioning a belief on thinking mode uses no privileged information. CAVEAT, see controllers_report.md 6.2: in the emitted traces thinking_flip_prob=0.0, so thinking_mode is a NOISELESS proxy for the length class. Set class_predictor_accuracy < 1.0 to inject predictor error."
+    },
+    "control_interval_s": {
+      "value": 15.0,
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "Matches the Kubernetes HPA default sync period (--horizontal-pod-autoscaler-sync-period, default 15 s) so that the HPA baseline runs at its real cadence. All controllers are given the same decision cadence."
+    },
+    "decode_batch_extrapolation_above_8": {
+      "value": "affine",
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "PLACEHOLDER / UNVERIFIED. Throughput was measured only at batch 1, 4 and 8. Above batch 8 the simulator extrapolates the affine step-time model, which predicts near-linear aggregate throughput (e.g. 872 tok/s at batch 16, 1591 tok/s at batch 32). Real engines saturate; the affine extrapolation is therefore OPTIMISTIC about large batches and biases the simulator toward under-provisioning being cheap. Must be measured at batch 16/32/64 before any claim.",
+      "flagged_optimistic": true
+    },
+    "decode_step_time_s": {
+      "value": {
+        "a0_s": 0.01657539,
+        "a1_s_per_seq": 0.00011063
+      },
+      "calibrated": true,
+      "required_for_claims": true,
+      "source": "LEAST-SQUARES FIT to measured single-replica decode throughput from vLLM's own iteration logger: 60.3 / 232.6 / 460.2 tok/s at 1 / 4 / 8 concurrent requests. Model t_step(b) = a0 + a1*b seconds per scheduler step, where one step emits one token for each of the b running sequences. Max relative error on the three fitted points: 1.05%.",
+      "fit_points": {
+        "batch": [
+          1,
+          4,
+          8
+        ],
+        "tok_per_s": [
+          60.3,
+          232.6,
+          460.2
+        ]
+      },
+      "max_rel_err_on_fit_points": 0.0105,
+      "measured_batch_range": [
+        1,
+        8
+      ]
+    },
+    "gpu_cost_per_replica_hour_usd": {
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "NORMALISED UNIT, not a price quote. Cost is reported primarily as replica-seconds (GPU-seconds); the USD column is replica-hours x 1.0 so it is a pure rescaling. Substitute a real instance price only when quoting money."
+    },
+    "kv_tokens_per_replica": {
+      "value": 55200,
+      "calibrated": true,
+      "required_for_claims": true,
+      "source": "MEASURED on the GPU testbed: KV budget per replica at --gpu-memory-utilization 0.21, vLLM 0.25.1, Qwen3-1.7B."
+    },
+    "max_num_seqs": {
+      "value": 256,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER: vLLM's documented default max_num_seqs. Not read off the live server config. In practice KV pressure binds before this does at these sequence lengths."
+    },
+    "metric_scrape_interval_s": {
+      "value": 15.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "Design choice matching the control interval. On the real testbed this is the Prometheus scrape interval and introduces staleness the simulator currently models as zero."
+    },
+    "n_replicas_max": {
+      "value": 4,
+      "calibrated": true,
+      "required_for_claims": true,
+      "source": "GPU testbed track: 4 co-resident vLLM replicas on one L40S 46GB, each --gpu-memory-utilization 0.21, --max-model-len 8192.",
+      "note": "Hard ceiling of the physical testbed. The simulator will refuse a target above this unless --allow-hypothetical-replicas is passed, which stamps hypothetical:true."
+    },
+    "n_replicas_min": {
+      "value": 1,
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "Design choice: at least one replica must serve."
+    },
+    "output_length_distribution": {
+      "value": "length_model.py",
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "Delegated to length_model.py, which returns calibrated:false and the labelled placeholder lognormals until measured_lengths.json lands. THIS IS THE DOMINANT UNCALIBRATED INPUT: it sets the offered token load."
+    },
+    "preemption_policy": {
+      "value": "recompute",
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "Models vLLM's recompute-style preemption: a preempted sequence returns to the head of the waiting queue and re-pays prefill on its already-generated prefix. Output tokens are not lost (deterministic-decode assumption). vLLM's exact victim-selection order was NOT read from source; the simulator preempts the most-recently-admitted sequence."
+    },
+    "prefill_tokens_per_s": {
+      "value": 6000.0,
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "PLACEHOLDER, NOT MEASURED. Prompt-prefill throughput was never measured on the testbed. Governs TTFT and the decode stall a new admission causes. Any TTFT number from this simulator is placeholder-derived."
+    },
+    "replica_cold_start_s": {
+      "value": 31.9,
+      "calibrated": true,
+      "required_for_claims": true,
+      "source": "MEASURED, n=9: median 31.90 s to serving-ready, IQR [31.82, 32.40]. This is the actuation lag d.",
+      "iqr_s": [
+        31.82,
+        32.4
+      ],
+      "n": 9
+    },
+    "replica_teardown_s": {
+      "value": 0.54,
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "MEASURED but n=2 only (0.54 s for 1 replica, 1.31 s for 4 concurrent). TREAT AS AN UPPER BOUND / weak evidence.",
+      "weak_evidence": true,
+      "n": 2
+    },
+    "router_policy": {
+      "value": "least_running",
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER for the real router's balancing policy: dispatch to the READY replica with the fewest running+waiting requests. The real router's policy must be recorded and matched here before any claim."
+    },
+    "slo": {
+      "value": {
+        "ttft_p95_s": 2.0,
+        "tbt_p95_s": 0.05,
+        "ttft_hard_s": 5.0
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "DESIGN CHOICE pending calibration, not a measurement. tbt_p95_s = 0.05 s (20 tok/s per stream) sits above the measured single-stream 58 tok/s, so it is reachable; ttft targets are provisional and must be set from the measured single-replica capacity curve.",
+      "note": "These targets define the cost-SLO objective every controller is tuned against, so they must be identical across controllers (tune.py enforces this)."
+    },
+    "replica_bringup": {
+      "value": "sequential",
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "VERIFIED OPERATIONAL CONSTRAINT on the GPU testbed: starting several vLLM engines concurrently fails KV sizing, so replicas were brought up ONE AT A TIME. The pool therefore serialises boots: the i-th replica requested at t becomes ready at max(t, last_pending_ready) + replica_cold_start_s. This is a lifecycle policy, not a measured scalar; `calibrated: true` records that the sequential path is the one that was actually exercised, not that a timing was fitted.",
+      "note": "The source simulator booted replicas in PARALLEL (every replica requested at t ready at t + cold_start), which makes multi-replica scale-up look faster than the verified path, i.e. OPTIMISTIC. Set to 'parallel' to reproduce the source simulator exactly; the parity harness does. The two policies are identical whenever scale-up adds one replica at a time, which is the common case for every controller in the suite."
+    }
+  }
+}

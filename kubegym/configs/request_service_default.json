@@ -1,0 +1,119 @@
+{
+  "schema": "kubegym-config-1",
+  "_README": [
+    "Config for the GENERIC request-service model (kubegym/models/request_service.py).",
+    "EVERY CONSTANT IN THIS FILE IS A PLACEHOLDER. Nothing here was measured on any system.",
+    "The values are round, obviously-synthetic numbers so that an accidentally-unlabelled",
+    "result is easy to spot. The claims gate reports calibrated:false for every run using this",
+    "config and will keep doing so until each constant is replaced through",
+    "ProvenancedConfig.override(..., attest=<measurement description>).",
+    "This file is a modelling scaffold, not a calibrated artifact."
+  ],
+  "calibrated": false,
+  "uncalibrated_required_fields": [
+    "replica_cold_start_s",
+    "rs_max_concurrency",
+    "rs_service_time_distribution",
+    "slo"
+  ],
+  "calibration_note": "UNCALIBRATED, ENTIRELY. No constant in this config was measured. The request-service model exists so that a serverless/microservice workload corpus has a physics layer to land on and so that the ServiceModel seam is exercised by a model structurally unlike LLM decoding (no token stream, no growing memory footprint, no preemption). No number produced with this config may be reported as an empirical result. Cold start, per-replica concurrency and the service-time distribution are the three constants that would need real measurement (or a documented citation to a measured public dataset) before any claim.",
+  "fields": {
+    "n_replicas_min": {
+      "value": 1,
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "Design choice: at least one replica must serve. Not a measurement."
+    },
+    "n_replicas_max": {
+      "value": 20,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER. Arbitrary ceiling chosen so that a scale-out range exists for RL action spaces; it is NOT the capacity of any real platform. Unlike the LLM config's n_replicas_max=4, this is not a physical limit that was measured, so a target near it is not automatically hypothetical."
+    },
+    "replica_cold_start_s": {
+      "value": 2.0,
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "PLACEHOLDER, NOT MEASURED. A round 2 s stand-in for container cold start. Real serverless cold starts span roughly two orders of magnitude across runtimes and platforms, and the value dominates every scale-up decision, so this is the single most important constant to replace before any claim."
+    },
+    "replica_teardown_s": {
+      "value": 0.5,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER, NOT MEASURED. Not billed by default (see kubegym/core/replica.py), so it currently affects nothing; kept so the field exists when teardown billing is switched on."
+    },
+    "rs_max_concurrency": {
+      "value": 4,
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "PLACEHOLDER, NOT MEASURED. Requests served simultaneously per replica; the rest queue FIFO. Round number chosen to be obviously synthetic. This is the binding capacity constant of the model, analogous to kv_tokens_per_replica in the LLM model."
+    },
+    "rs_contention_slowdown": {
+      "value": 0.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER, NOT MEASURED. Per-request service rate is 1/(1 + slowdown*(b-1)) with b in service. The default 0.0 means concurrency slots are perfectly independent, so a loaded replica is as fast as an idle one. That is the OPTIMISTIC end: it makes under-provisioning look cheaper than it would be on real shared-CPU hardware. Set >0 for a pessimistic sensitivity arm.",
+      "flagged_optimistic": true
+    },
+    "rs_service_time_distribution": {
+      "value": {
+        "family": "lognormal",
+        "mu": 0.0,
+        "sigma": 1.0,
+        "min_s": 0.01,
+        "max_s": 600.0
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "PLACEHOLDER, NOT MEASURED. Lognormal with mu=0, sigma=1 on the natural-log scale of seconds (median 1.0 s, mean about 1.65 s, CV about 1.31) -- deliberately round parameters, not an estimate of any workload. Drawn once per request at episode build time so controller comparisons are paired. Tail heaviness (sigma) is the parameter that decides whether capacity planning is hard at all, so it must not be treated as an empirical choice. When a replay trace supplies a measured service_time_s per record, that value is used verbatim and this field is not consulted.",
+      "note": "The workload corpus phase is expected to replace this with measured per-function durations from a public trace, at which point the field's source string must name the trace, its version, and the extraction procedure."
+    },
+    "rs_queue_discipline": {
+      "value": "fifo",
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "Design choice, not a measurement: per-replica FIFO with an unbounded queue, no admission control, no timeouts, no drops. Real platforms shed load; this model does not, which makes queueing delay the only visible symptom of overload."
+    },
+    "router_policy": {
+      "value": "least_running",
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER for a real load balancer's policy: dispatch to the READY replica with the fewest running+waiting requests. See kubegym/core/router.py for the alternatives."
+    },
+    "control_interval_s": {
+      "value": 15.0,
+      "calibrated": true,
+      "required_for_claims": false,
+      "source": "Matches the Kubernetes HPA default sync period (--horizontal-pod-autoscaler-sync-period, default 15 s) so the HPA baseline runs at its real cadence. All controllers get the same decision cadence."
+    },
+    "metric_scrape_interval_s": {
+      "value": 15.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "Design choice matching the control interval. On a real platform this is the metrics scrape period and introduces staleness that this model currently treats as zero, which is OPTIMISTIC about the controller's information.",
+      "flagged_optimistic": true
+    },
+    "replica_bringup": {
+      "value": "parallel",
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "PLACEHOLDER / design choice. Container platforms start replicas concurrently, so parallel bring-up is the plausible default here -- unlike the LLM config, where concurrent engine init was verified to fail KV sizing and sequential bring-up is the verified path. Not measured."
+    },
+    "slo": {
+      "value": {
+        "latency_p95_s": 1.0,
+        "latency_hard_s": 5.0,
+        "queue_delay_p95_s": 0.5
+      },
+      "calibrated": false,
+      "required_for_claims": true,
+      "source": "DESIGN CHOICE pending calibration, not a measurement. Provisional targets so the cost-SLO objective is well defined. They must be identical across controllers in any comparison."
+    },
+    "cost_per_replica_hour_usd": {
+      "value": 1.0,
+      "calibrated": false,
+      "required_for_claims": false,
+      "source": "NORMALISED UNIT, not a price quote. Cost is reported primarily as replica-seconds; the USD column is replica-hours x 1.0, a pure rescaling. Substitute a real instance price only when quoting money."
+    }
+  }
+}
